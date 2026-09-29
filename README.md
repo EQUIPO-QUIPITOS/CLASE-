@@ -4,7 +4,7 @@
 
 Agencia digital que conecta micro y pequeños emprendimientos con nano influencers verificados y demuestra el retorno de cada campaña con códigos y enlaces únicos.
 
-> Enlace público: _pega aquí el enlace de GitHub Pages_
+> Enlace público: > Hoja de cálculo (base de datos del MVP): [ver hoja](https://docs.google.com/spreadsheets/d/1Y43if2kr41J8EeVmhEKu_hNu2dDx7uDJ3fBbrbph4cM/edit?usp=sharing)
 
 ---
 
