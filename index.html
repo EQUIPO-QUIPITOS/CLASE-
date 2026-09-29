@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pagas por clientes, no por alcance</title>
+  <meta name="description" content="Conectamos tu emprendimiento con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Chango&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="wrap"><span class="logo">Puente</span></header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Pagas por clientes, no por alcance.</h1>
+      <p>Conectamos tu emprendimiento con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña, con códigos y enlaces únicos.</p>
+    </section>
+
+    <ol class="steps">
+      <li><b>1. Te registras</b><span>Cuéntanos de tu negocio en menos de 3 minutos.</span></li>
+      <li><b>2. Elegimos creadores</b><span>Verificamos y emparejamos perfiles cercanos a tu público.</span></li>
+      <li><b>3. Ves tus resultados</b><span>Cada creador tiene su código y su enlace para medir ventas.</span></li>
+    </ol>
+
+    <section class="box" id="registro">
+      <div class="tabs" role="tablist">
+        <button type="button" class="active" role="tab" aria-selected="true" data-tab="emprendimiento">Soy emprendedor</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="creador">Soy creador</button>
+      </div>
+
+      <div class="panel" id="emprendimiento">
+        <form data-action="registrar_emprendimiento" data-cta="Registrar mi negocio">
+          <label>Nombre del negocio <input name="negocio" required maxlength="80"></label>
+          <label>Sector
+            <select name="sector" required>
+              <option value="">Selecciona</option>
+              <option>Comida y bebidas</option><option>Moda y accesorios</option>
+              <option>Belleza y cuidado personal</option><option>Hogar y decoración</option>
+              <option>Servicios</option><option>Otro</option>
+            </select>
+          </label>
+          <label>Ciudad <input name="ciudad" required maxlength="60"></label>
+          <label>Presupuesto mensual aproximado
+            <select name="presupuesto" required>
+              <option value="">Selecciona</option>
+              <option>Menos de 200.000 COP</option><option>200.000 a 500.000 COP</option>
+              <option>500.000 a 1.000.000 COP</option><option>Más de 1.000.000 COP</option>
+            </select>
+          </label>
+          <label class="full">Objetivo de la campaña
+            <select name="objetivo" required>
+              <option value="">Selecciona</option>
+              <option>Conseguir nuevos clientes</option><option>Dar a conocer mi marca</option>
+              <option>Lanzar un producto</option><option>Aumentar ventas en línea</option>
+            </select>
+          </label>
+          <label>Instagram o TikTok del negocio <input name="redes" placeholder="@minegocio" maxlength="80"></label>
+          <label>Enlace donde compran (web, tienda o WhatsApp) <input name="url_destino" type="url" placeholder="https://" required></label>
+          <label>WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required></label>
+          <label>Correo <input name="correo" type="email" required></label>
+          <label class="hp" aria-hidden="true">No llenar <input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="check full"><input type="checkbox" required> Acepto el tratamiento de mis datos para gestionar mi registro.</label>
+          <button type="submit">Registrar mi negocio</button>
+          <p class="status full" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="panel" id="creador" hidden>
+        <form data-action="registrar_creador" data-cta="Postularme como creador">
+          <label>Nombre <input name="nombre" required maxlength="80"></label>
+          <label>Red principal
+            <select name="red" required>
+              <option value="">Selecciona</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Otra</option>
+            </select>
+          </label>
+          <label>Usuario en esa red <input name="usuario_red" placeholder="@usuario" required maxlength="60"></label>
+          <label>Seguidores <input name="seguidores" type="number" min="0" required></label>
+          <label>Nicho o tema <input name="nicho" placeholder="Comida, moda, viajes…" required maxlength="60"></label>
+          <label>Ciudad <input name="ciudad" required maxlength="60"></label>
+          <label>Tarifa por publicación (COP) <input name="tarifa" type="number" min="0"></label>
+          <label>WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required></label>
+          <label class="full">Correo <input name="correo" type="email" required></label>
+          <label class="hp" aria-hidden="true">No llenar <input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="check full"><input type="checkbox" required> Acepto el tratamiento de mis datos para gestionar mi postulación.</label>
+          <button type="submit">Postularme como creador</button>
+          <p class="status full" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">Piloto en curso. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros.</footer>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
