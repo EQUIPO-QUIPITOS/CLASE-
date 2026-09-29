@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quipitos | Pagas por clientes, no por alcance</title>
+<meta name="description" content="Conectamos micro y pequeños emprendimientos con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Chango&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fff5f8;--ink:#0b4a5a;--muted:#3f6672;--crimson:#b80f52;--pink:#e6007e;--soft:#fde4ec;--gold:#ffc90e;--cyan:#00bce0;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:600 1.1rem/1.6 "Barlow Semi Condensed",system-ui,sans-serif}
+h1,h2,h3{font-family:"Chango","Barlow Semi Condensed",sans-serif;font-weight:400;line-height:1.15;margin:0}
+h2{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--crimson)}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+section{padding-block:3.5rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-block:1rem}
+.logo{font:400 1.9rem "Chango",sans-serif;text-decoration:none;letter-spacing:.02em}
+.p{color:var(--pink)}.g{color:var(--gold)}.c{color:var(--cyan)}
+nav{display:flex;align-items:center;gap:1.25rem}
+nav a{text-decoration:none;font-weight:700}
+nav a.nl{display:none}
+@media(min-width:48rem){nav a.nl{display:inline}}
+.btn{display:inline-block;font:400 1.05rem "Chango",sans-serif;padding:.75rem 1.4rem;border:3px solid var(--crimson);border-radius:999px;background:var(--gold);color:var(--crimson);text-decoration:none}
+.btn:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+.btn.alt{background:#fff}
+.hero{display:grid;gap:2rem;align-items:center;padding-block:2.5rem 4rem}
+@media(min-width:48rem){.hero{grid-template-columns:1.15fr .85fr}}
+.hero h1{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--crimson)}
+.hero p{font-size:1.3rem;color:var(--muted);margin-top:1rem;max-width:34rem}
+.acts{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.75rem}
+.burst{position:relative;width:min(100%,24rem);aspect-ratio:1;justify-self:center}
+.burst i{position:absolute;inset:0}
+.b1{background:var(--cyan);clip-path:polygon(50.0% 0.0%,57.5% 29.3%,82.1% 11.7%,69.1% 39.0%,99.2% 41.3%,71.7% 53.8%,93.3% 75.0%,64.1% 66.9%,67.1% 97.0%,50.0% 72.0%,32.9% 97.0%,35.9% 66.9%,6.7% 75.0%,28.3% 53.8%,0.8% 41.3%,30.9% 39.0%,17.9% 11.7%,42.5% 29.3%)}
+.b2{background:var(--gold);clip-path:polygon(57.2% 14.7%,58.9% 36.7%,80.0% 30.1%,65.7% 46.9%,85.3% 57.2%,63.3% 58.9%,69.9% 80.0%,53.1% 65.7%,42.8% 85.3%,41.1% 63.3%,20.0% 69.9%,34.3% 53.1%,14.7% 42.8%,36.7% 41.1%,30.1% 20.0%,46.9% 34.3%)}
+.b3{background:var(--pink);clip-path:polygon(59.3% 27.9%,58.3% 42.7%,73.1% 43.5%,60.8% 51.9%,69.5% 64.0%,55.3% 59.7%,51.2% 74.0%,45.7% 60.1%,32.0% 65.9%,39.4% 53.0%,26.4% 45.8%,41.1% 43.6%,38.5% 28.9%,49.5% 39.0%)}
+.two{display:grid;gap:2rem}
+@media(min-width:48rem){.two{grid-template-columns:1fr 1fr}}
+.lead{font-size:1.3rem;margin-top:1rem}
+.pain{list-style:none;margin:0;padding:0;display:grid;gap:1.25rem}
+.pain li{border-left:8px solid var(--pink);padding-left:1rem}
+.pain li:nth-child(2){border-color:var(--gold)}
+.pain li:nth-child(3){border-color:var(--cyan)}
+.pain b,.wins b,.steps b{display:block;font:400 1.15rem "Chango",sans-serif;color:var(--crimson)}
+.insight{background:var(--crimson);color:#fff}
+.insight h2{color:var(--gold)}
+.insight p{font-size:1.35rem;max-width:44rem;margin-top:1rem}
+.goals{background:var(--soft)}
+.wins{display:grid;gap:1.5rem;margin-top:2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.wins div{background:#fff;border:4px solid var(--crimson);border-radius:.5rem;padding:1.1rem}
+.wins span,.steps span{color:var(--muted)}
+.steps{display:grid;gap:1.5rem;margin:2rem 0 0;padding:0;list-style:none;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.steps li{border-top:8px solid var(--pink);padding-top:.75rem}
+.steps li:nth-child(2){border-color:var(--gold)}
+.steps li:nth-child(3){border-color:var(--cyan)}
+.pilot{margin-top:2rem;font-size:1.2rem;color:var(--crimson)}
+.cta{background:var(--gold);text-align:center}
+.cta h2{color:var(--crimson)}
+.cta p{margin:.75rem auto 1.5rem;max-width:34rem}
+.cta .acts{justify-content:center}
+.cta .btn{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+.cta .btn.alt{background:#fff;color:var(--crimson)}
+footer{padding-block:1.5rem;color:var(--muted);font-size:.95rem}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a class="logo" href="index.html" aria-label="Quipitos"><span class="p">QU</span><span class="g">IP</span><span class="p">!T</span><span class="c">OS</span></a>
+  <nav>
+    <a class="nl" href="#problema">El problema</a>
+    <a class="nl" href="#logramos">Qué logras</a>
+    <a class="nl" href="#como">Cómo funciona</a>
+    <a class="btn" href="registro.html#registro">Registrarme</a>
+  </nav>
+</header>
+
+<main>
+<section class="wrap hero">
+  <div>
+    <h1>Pagas por clientes, no por alcance.</h1>
+    <p>Somos una agencia digital que conecta tu emprendimiento con nano influencers verificados, y te mostramos cuántos clientes trajo cada campaña con códigos y enlaces únicos.</p>
+    <div class="acts">
+      <a class="btn" href="registro.html#registro">Registrar mi negocio</a>
+      <a class="btn alt" href="registro.html#creador">Soy creador</a>
+    </div>
+  </div>
+  <div class="burst" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+</section>
+
+<section id="problema" class="wrap">
+  <div class="two">
+    <div>
+      <h2>Los emprendimientos pequeños llegan tarde a un juego pensado para los grandes</h2>
+      <p class="lead">Los dueños de micro y pequeños negocios saben que las recomendaciones de creadores venden. Pero contratar agencias cuesta demasiado, gestionar creadores solos les quita horas que no tienen, y nadie les dice si lo que invirtieron trajo clientes.</p>
+    </div>
+    <ul class="pain">
+      <li><b>Agencias para grandes presupuestos</b><span>Las plataformas de influencers evolucionan hacia grandes marcas y métricas de alcance, y dejan fuera a los negocios pequeños.</span></li>
+      <li><b>Sin tiempo para buscar y verificar</b><span>Encontrar, revisar y coordinar creadores consume una jornada que un emprendedor ya dedica a operar.</span></li>
+      <li><b>Sin forma de medir</b><span>Publican, escriben a creadores o pagan publicidad genérica, con resultados inciertos.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="insight">
+  <div class="wrap">
+    <h2>Lo pequeño es una ventaja de precisión</h2>
+    <p>Lo que las grandes agencias descartan por pequeño es justo lo que da confianza. Los nano influencers tienen audiencias reducidas pero cercanas y creíbles, y por ser pequeñas son más fáciles de rastrear con códigos y enlaces únicos.</p>
+  </div>
+</section>
+
+<section id="logramos" class="goals">
+  <div class="wrap">
+    <h2>Lo que queremos lograr contigo</h2>
+    <p class="lead">Que llegues a tu público de forma auténtica, sin agencias costosas ni horas de trabajo extra, y con resultados claros de cada inversión.</p>
+    <div class="wins">
+      <div><b>Confianza y credibilidad</b><span>Perfiles de nano influencers verificados uno a uno.</span></div>
+      <div><b>Certeza de retorno</b><span>Códigos únicos, enlaces rastreables y un tablero de resultados.</span></div>
+      <div><b>Sencillez</b><span>Te registras con un formulario en pocos pasos y nosotros coordinamos.</span></div>
+      <div><b>Modelo accesible</b><span>Una comisión del 20 al 30 % por campaña gestionada.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="como" class="wrap">
+  <h2>Cómo funciona</h2>
+  <ol class="steps">
+    <li><b>1. Te registras</b><span>Cuéntanos de tu negocio y de tu objetivo en menos de 3 minutos.</span></li>
+    <li><b>2. Emparejamos</b><span>Elegimos creadores afines a tu público y coordinamos la campaña contigo por WhatsApp.</span></li>
+    <li><b>3. Ves tus resultados</b><span>Cada creador tiene su propio código y enlace, y tú ves cuántos clientes trajo.</span></li>
+  </ol>
+  <p class="pilot">Estamos en fase piloto: 3 a 5 emprendimientos, una campaña cada uno, durante 4 semanas.</p>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Que tu negocio estalle de ideas y de clientes</h2>
+    <p>Sé parte del piloto y demuestra con datos qué campañas te funcionan.</p>
+    <div class="acts">
+      <a class="btn" href="registro.html#registro">Registrar mi negocio</a>
+      <a class="btn alt" href="registro.html#creador">Soy creador</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">Quipitos. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros.</footer>
+</body>
+</html>
