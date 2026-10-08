@@ -154,13 +154,61 @@ footer a{color:var(--teal);font-weight:600}
           <h3><svg><use href="#i-store"/></svg>Información de tu negocio</h3>
           <div class="grid">
             <label>Nombre del negocio <input name="negocio" required maxlength="80" autocomplete="organization"></label>
-            <label>Ciudad <input name="ciudad" required maxlength="60" autocomplete="address-level2"></label>
+            <label>Municipio (Magdalena)
+              <select name="ciudad" required>
+                <option value="">Selecciona</option>
+                <option>Santa Marta</option>
+                <optgroup label="Otros municipios del Magdalena">
+                  <option>Algarrobo</option>
+                  <option>Aracataca</option>
+                  <option>Ariguaní (El Difícil)</option>
+                  <option>Cerro de San Antonio</option>
+                  <option>Chivolo</option>
+                  <option>Ciénaga</option>
+                  <option>Concordia</option>
+                  <option>El Banco</option>
+                  <option>El Piñón</option>
+                  <option>El Retén</option>
+                  <option>Fundación</option>
+                  <option>Guamal</option>
+                  <option>Nueva Granada</option>
+                  <option>Pedraza</option>
+                  <option>Pijiño del Carmen</option>
+                  <option>Pivijay</option>
+                  <option>Plato</option>
+                  <option>Puebloviejo</option>
+                  <option>Remolino</option>
+                  <option>Sabanas de San Ángel</option>
+                  <option>Salamina</option>
+                  <option>San Sebastián de Buenavista</option>
+                  <option>San Zenón</option>
+                  <option>Santa Ana</option>
+                  <option>Santa Bárbara de Pinto</option>
+                  <option>Sitionuevo</option>
+                  <option>Tenerife</option>
+                  <option>Zapayán</option>
+                  <option>Zona Bananera</option>
+                </optgroup>
+                <option>Otro (fuera del Magdalena)</option>
+              </select>
+            </label>
             <label>Sector
               <select name="sector" required>
                 <option value="">Selecciona</option>
-                <option>Comida y bebidas</option><option>Moda y accesorios</option>
-                <option>Belleza y cuidado personal</option><option>Hogar y decoración</option>
-                <option>Servicios</option><option>Otro</option>
+                <option>Restaurantes y comida</option>
+                <option>Cafés, bebidas y bares</option>
+                <option>Hoteles y hospedaje</option>
+                <option>Turismo, tours y actividades</option>
+                <option>Moda, ropa y accesorios</option>
+                <option>Artesanías y productos locales</option>
+                <option>Belleza y cuidado personal</option>
+                <option>Salud, bienestar y deporte</option>
+                <option>Hogar y decoración</option>
+                <option>Tecnología y servicios digitales</option>
+                <option>Educación y cursos</option>
+                <option>Eventos y entretenimiento</option>
+                <option>Servicios profesionales</option>
+                <option>Otro</option>
               </select>
             </label>
             <label>Número de WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required autocomplete="tel"></label>
@@ -203,7 +251,44 @@ footer a{color:var(--teal);font-weight:600}
           <h3><svg><use href="#i-user"/></svg>Información personal</h3>
           <div class="grid">
             <label>Nombre <input name="nombre" required maxlength="80" autocomplete="name"></label>
-            <label>Ciudad <input name="ciudad" required maxlength="60" autocomplete="address-level2"></label>
+            <label>Municipio (Magdalena)
+              <select name="ciudad" required>
+                <option value="">Selecciona</option>
+                <option>Santa Marta</option>
+                <optgroup label="Otros municipios del Magdalena">
+                  <option>Algarrobo</option>
+                  <option>Aracataca</option>
+                  <option>Ariguaní (El Difícil)</option>
+                  <option>Cerro de San Antonio</option>
+                  <option>Chivolo</option>
+                  <option>Ciénaga</option>
+                  <option>Concordia</option>
+                  <option>El Banco</option>
+                  <option>El Piñón</option>
+                  <option>El Retén</option>
+                  <option>Fundación</option>
+                  <option>Guamal</option>
+                  <option>Nueva Granada</option>
+                  <option>Pedraza</option>
+                  <option>Pijiño del Carmen</option>
+                  <option>Pivijay</option>
+                  <option>Plato</option>
+                  <option>Puebloviejo</option>
+                  <option>Remolino</option>
+                  <option>Sabanas de San Ángel</option>
+                  <option>Salamina</option>
+                  <option>San Sebastián de Buenavista</option>
+                  <option>San Zenón</option>
+                  <option>Santa Ana</option>
+                  <option>Santa Bárbara de Pinto</option>
+                  <option>Sitionuevo</option>
+                  <option>Tenerife</option>
+                  <option>Zapayán</option>
+                  <option>Zona Bananera</option>
+                </optgroup>
+                <option>Otro (fuera del Magdalena)</option>
+              </select>
+            </label>
             <label>Número de WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required autocomplete="tel"></label>
             <label>Correo <input name="correo" type="email" required autocomplete="email"></label>
           </div>
@@ -222,7 +307,29 @@ footer a{color:var(--teal);font-weight:600}
           <div class="grid" style="margin-top:1.5rem">
             <label>Usuario en esa red <input name="usuario_red" placeholder="@usuario" required maxlength="60"></label>
             <label>Seguidores <input name="seguidores" type="number" min="0" inputmode="numeric" required></label>
-            <label>Nicho o tema <input name="nicho" placeholder="Comida, moda, viajes…" required maxlength="60"></label>
+            <label>Nicho o tema
+              <select name="nicho" required>
+                <option value="">Selecciona</option>
+                <option>Comida y gastronomía</option>
+                <option>Viajes y turismo</option>
+                <option>Playa, naturaleza y aventura</option>
+                <option>Moda y estilo</option>
+                <option>Belleza y maquillaje</option>
+                <option>Fitness, salud y bienestar</option>
+                <option>Estilo de vida</option>
+                <option>Humor y entretenimiento</option>
+                <option>Música y baile</option>
+                <option>Arte, fotografía y diseño</option>
+                <option>Tecnología y videojuegos</option>
+                <option>Educación y tips</option>
+                <option>Maternidad y familia</option>
+                <option>Mascotas</option>
+                <option>Hogar y decoración</option>
+                <option>Deportes</option>
+                <option>Emprendimiento y negocios</option>
+                <option>Otro</option>
+              </select>
+            </label>
             <label>Tarifa por publicación (COP) <span class="opt">(opcional)</span> <input name="tarifa" type="number" min="0" inputmode="numeric"></label>
             <label class="hp" aria-hidden="true">No llenar <input name="website" tabindex="-1" autocomplete="off"></label>
             <label class="check full"><input type="checkbox" required> Acepto el tratamiento de mis datos para gestionar mi postulación.</label>
