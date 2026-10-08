@@ -52,10 +52,10 @@ nav .btn{padding:.6rem 1.6rem;font-size:1.05rem}
 .intro{display:grid;gap:2rem;align-items:center;padding-block:4rem 2rem}
 @media(min-width:56rem){.intro{grid-template-columns:1fr 1fr}}
 .intro-sec{position:relative;overflow:hidden}
-.intro-sec::before{content:"";position:absolute;left:-22vw;top:-30vw;width:72vw;height:58vw;border-radius:50%;background:#F3F7F2;z-index:0;pointer-events:none}
-@media(max-width:56rem){.intro-sec::before{left:-45vw;top:-70vw;width:150vw;height:130vw}}
-.intro{position:relative;z-index:1}
-.intro-art svg{width:100%;max-width:34rem;height:auto}
+.intro{position:relative}
+.intro-art{position:relative}
+.intro-art::before{content:"";position:absolute;--gut:max(0px,(100vw - 76rem)/2);left:calc(-62% - var(--gut));top:-115%;width:calc(158% + var(--gut));height:228%;border-radius:50%;background:#F3F7F2;z-index:0;pointer-events:none}
+.intro-art svg{position:relative;z-index:1;width:100%;max-width:34rem;height:auto}
 .intro-txt{text-align:right}
 @media(max-width:56rem){.intro-txt{text-align:left}.intro-txt p{margin-left:0}.hero{min-height:auto}.hero .wrap{padding-block:5rem 6rem}}
 .intro-txt h2{font-size:clamp(2.4rem,5vw,4rem);color:var(--green)}
