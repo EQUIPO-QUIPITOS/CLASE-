@@ -51,9 +51,11 @@ nav .btn{padding:.6rem 1.6rem;font-size:1.05rem}
 /* Qué hacemos */
 .intro{display:grid;gap:2rem;align-items:center;padding-block:4rem 2rem}
 @media(min-width:56rem){.intro{grid-template-columns:1fr 1fr}}
-.intro-art{position:relative}
-.intro-art::before{content:"";position:absolute;left:-30%;top:-40%;width:110%;aspect-ratio:1.4;border-radius:50%;background:#F3F7F2;z-index:0}
-.intro-art svg{position:relative;width:100%;max-width:36rem;height:auto}
+.intro-sec{position:relative;overflow:hidden}
+.intro-sec::before{content:"";position:absolute;left:-22vw;top:-30vw;width:72vw;height:58vw;border-radius:50%;background:#F3F7F2;z-index:0;pointer-events:none}
+@media(max-width:56rem){.intro-sec::before{left:-45vw;top:-70vw;width:150vw;height:130vw}}
+.intro{position:relative;z-index:1}
+.intro-art svg{width:100%;max-width:34rem;height:auto}
 .intro-txt{text-align:right}
 @media(max-width:56rem){.intro-txt{text-align:left}.intro-txt p{margin-left:0}.hero{min-height:auto}.hero .wrap{padding-block:5rem 6rem}}
 .intro-txt h2{font-size:clamp(2.4rem,5vw,4rem);color:var(--green)}
@@ -179,13 +181,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
   </div>
 </section>
 
-<section id="que-hacemos" class="wrap intro">
+<section id="que-hacemos" class="intro-sec"><div class="wrap intro">
   <div class="intro-art"><svg viewBox="0 0 260 140" aria-hidden="true"><g fill="#005260"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/></g><g fill="#70A312"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g><path fill="#00E4E8" d="M127.8 0.2 126.5 1.0 125.0 3.5 124.8 6.8 125.8 11.0 128.2 15.2 132.5 19.2 134.5 20.8 135.8 21.0 139.5 18.2 143.8 13.5 145.8 8.5 145.8 3.5 145.0 2.0 143.5 0.5 142.2 0.0 140.0 0.2 137.5 2.5 136.2 5.0 135.8 7.0 135.2 7.2 134.8 5.5 132.2 1.2 130.0 0.0Z"/><path fill="#00171F" fill-rule="evenodd" d="M109.0 30.8 106.8 32.5 101.2 56.0 101.5 58.0 103.0 59.8 104.2 60.2 117.8 63.2 120.2 63.0 121.8 61.8 122.2 60.8 127.2 38.8 127.2 36.2 126.0 34.5 124.2 33.8 111.0 30.8ZM110.5 32.8 112.5 32.8 122.5 35.0 123.5 35.5 124.8 37.0 124.8 39.2 120.8 57.0 120.0 58.5 118.5 59.5 116.5 59.5 106.8 57.2 105.5 56.8 104.2 55.0 104.2 53.2 108.5 34.8Z"/><path fill="#E3E4EA" d="M110.5 33.2 109.0 34.5 104.8 53.0 104.8 55.2 105.5 56.2 106.5 56.8 116.2 59.0 118.8 59.0 119.8 58.2 120.2 57.2 124.5 37.8 123.2 35.8 112.8 33.2Z"/></svg></div>
   <div class="intro-txt">
     <h2 class="script">Tú también tienes la oportunidad de crecer.</h2>
     <p>A veces, la idea de hacer un patrocinio suena como una gran inversión de dinero y tiempo, un lujo al que las microempresas no pueden acceder y que con los influencers solo pueden imaginar. Pero con <b>Hand in Hand</b>, el sueño de llegar a más personas está más cerca que nunca.</p>
   </div>
-</section>
+</div></section>
 
 <section class="wrap goals">
   <div>
