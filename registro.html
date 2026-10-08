@@ -427,15 +427,12 @@ footer a{color:var(--teal);font-weight:600}
       new FormData(form).forEach(function(v,k){if(k==="website")hp=String(v);else data[k]=String(v).trim()});
 
       btn.disabled=true;btn.textContent="Enviando…";say("");
-      fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:form.dataset.action,hp:hp,data:data})})
-        .then(function(r){return r.json()})
-        .then(function(res){
-          if(res&&res.ok){
-            form.reset();form.querySelectorAll(".filled").forEach(function(el){el.classList.remove("filled")});
-            say(form.id==="creador"?"¡Listo! Recibimos tu postulación. Te escribiremos por WhatsApp.":"¡Listo! Tu negocio quedó registrado. Te escribiremos por WhatsApp.","ok");
-          }else{
-            say("No pudimos guardar tu registro"+(res&&res.error?": "+res.error:"")+". Intenta de nuevo.","err");
-          }
+      /* "no-cors": Google guarda el registro pero no deja leer su respuesta
+         desde otra página; por eso no esperamos respuesta y damos el envío por hecho. */
+      fetch(API_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:form.dataset.action,hp:hp,data:data})})
+        .then(function(){
+          form.reset();form.querySelectorAll(".filled").forEach(function(el){el.classList.remove("filled")});
+          say(form.id==="creador"?"¡Listo! Recibimos tu postulación. Te escribiremos por WhatsApp.":"¡Listo! Tu negocio quedó registrado. Te escribiremos por WhatsApp.","ok");
         })
         .catch(function(){say("Hubo un problema de conexión. Revisa tu internet e inténtalo otra vez.","err")})
         .then(function(){btn.disabled=false;btn.innerHTML=label});
