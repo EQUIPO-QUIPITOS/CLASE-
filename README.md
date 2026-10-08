@@ -1,10 +1,12 @@
-# Quipitos
+# Hand in Hand
 
-**Pagas por clientes, no por alcance.**
+**Estamos aquí para darte una mano.**
 
 Agencia digital que conecta micro y pequeños emprendimientos con nano influencers verificados y demuestra el retorno de cada campaña con códigos y enlaces únicos.
 
-> Enlace público: > Hoja de cálculo (base de datos del MVP): [ver hoja](https://docs.google.com/spreadsheets/d/1Y43if2kr41J8EeVmhEKu_hNu2dDx7uDJ3fBbrbph4cM/edit?usp=sharing)
+> Enlace público: [equipo-quipitos.github.io/CLASE-](https://equipo-quipitos.github.io/CLASE-/)
+>
+> Hoja de cálculo (base de datos del MVP): [ver hoja](https://docs.google.com/spreadsheets/d/1Y43if2kr41J8EeVmhEKu_hNu2dDx7uDJ3fBbrbph4cM/edit?usp=sharing)
 
 ---
 
@@ -47,13 +49,25 @@ Se valida primero de forma manual, sin construir la plataforma completa.
 
 | Componente | Cómo funciona |
 |---|---|
-| Landing page | Explica el problema y la propuesta, con un tutorial guiado (`index.html`) |
-| Registro | Formulario para emprendimientos y otro para creadores (`registro.html`) |
-| Base de datos | Los registros llegan a una hoja de cálculo de Google |
+| Landing page | Explica la propuesta con la identidad visual Hand in Hand, con un tutorial guiado (`index.html`) |
+| Registro | Una página con dos pestañas: "Soy emprendedor" (verde) y "Soy un creador" (azul), con listas desplegables (`registro.html`) |
+| Base de datos | Los registros llegan a una hoja de cálculo de Google mediante Google Apps Script (`Code.gs`) |
+| Correo de bienvenida | Cada persona registrada recibe un correo de agradecimiento con los colores de la página, y el equipo recibe un aviso |
 | Curaduría | 15 a 20 nano influencers verificados manualmente, de 1 o 2 sectores |
 | Emparejamiento | Manual: el equipo cruza cada emprendimiento con creadores afines y coordina por WhatsApp |
 | Trazabilidad | Código único y enlace UTM por creador, con tablero en Sheets + Looker Studio |
 | Piloto | 3 a 5 emprendimientos, una campaña cada uno, durante 4 semanas |
+
+### Registro y base de datos
+
+El piloto se enfoca en el departamento del **Magdalena**, empezando por Santa Marta. Por eso el municipio, el sector y el nicho se eligen de listas desplegables, para que los datos lleguen escritos siempre igual y sea fácil cruzar negocios y creadores del mismo lugar.
+
+Cada formulario guarda una fila en su pestaña de la hoja. El script ubica cada dato según los títulos de la fila 1, y llena solo `id`, `fecha`, `estado` y `verificado`.
+
+| Pestaña | Columnas |
+|---|---|
+| Emprendimientos | `id`, `fecha`, `negocio`, `sector`, `ciudad` (municipio), `presupuesto`, `objetivo`, `tiempo_disponible`, `url_destino`, `whatsapp`, `correo`, `estado` |
+| Creadores | `id`, `fecha`, `nombre`, `red`, `usuario_red`, `seguidores`, `nicho`, `ciudad` (municipio), `tarifa`, `whatsapp`, `correo`, `verificado`, `estado` |
 
 ### Hipótesis a validar
 1. Los emprendimientos pequeños están dispuestos a pagar por campañas con retorno medible.
@@ -72,19 +86,20 @@ Con presupuestos pequeños, una comisión del 20 al 30 % deja poco ingreso por c
 ## 5. Estructura del proyecto
 
 ```
-├── assets/          configuración (config.js con la API_URL)
-├── index.html       página de inicio (estructura)
-├── styles.css       estilos de la página de inicio
-├── script.js        tutorial guiado de la página de inicio
-├── registro.html    formulario de registro
+├── assets/
+│   └── config.js    configuración (API_URL del Apps Script)
+├── index.html       página de inicio, con sus estilos y el tutorial guiado
+├── registro.html    formularios de emprendimientos y creadores, con sus estilos y el envío de datos
+├── Code.gs          copia del Google Apps Script (guarda registros y envía el correo de bienvenida)
 └── README.md        este documento
 ```
 
 ## 6. Tecnologías
 
 - **HTML**: estructura de las páginas.
-- **CSS**: colores, tipografías y diseño adaptable a celular.
-- **JavaScript**: tutorial guiado y envío de formularios.
+- **CSS**: colores (paleta Hand in Hand), tipografías Inter y Dancing Script, y diseño adaptable a celular. Va dentro de cada archivo HTML.
+- **JavaScript**: tutorial guiado, pestañas del registro y envío de formularios. Va dentro de cada archivo HTML.
+- **Google Apps Script**: recibe los formularios, los guarda en la hoja y envía los correos.
 - **Google Sheets**: base de datos de registros y seguimiento de campañas.
 - **GitHub Pages**: publicación del sitio.
 
