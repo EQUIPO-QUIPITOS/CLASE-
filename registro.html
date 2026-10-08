@@ -86,7 +86,7 @@ input[type=date].filled{color:var(--text)}
 .submit svg{width:1.4rem;height:1.4rem}
 .submit:hover{filter:brightness(1.05);transform:translateY(-2px)}
 .submit[disabled]{opacity:.6;cursor:wait;transform:none}
-.status{text-align:center;font-weight:700;font-size:1.1rem;margin-top:1rem;min-height:1.6em}
+.status{text-align:center;font-weight:700;font-size:1.1rem;margin:1rem auto 0;min-height:1.6em;max-width:40rem}
 .status.ok{color:#3c7a00}
 .status.err{color:#b3261e}
 
@@ -432,7 +432,7 @@ footer a{color:var(--teal);font-weight:600}
       fetch(API_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:form.dataset.action,hp:hp,data:data})})
         .then(function(){
           form.reset();form.querySelectorAll(".filled").forEach(function(el){el.classList.remove("filled")});
-          say(form.id==="creador"?"¡Listo! Recibimos tu postulación. Te escribiremos por WhatsApp.":"¡Listo! Tu negocio quedó registrado. Te escribiremos por WhatsApp.","ok");
+          say((form.id==="creador"?"¡Listo! Recibimos tu postulación.":"¡Listo! Tu negocio quedó registrado.")+" Te enviamos un correo de bienvenida; si no lo ves en unos minutos, revisa tu carpeta de spam o promociones.","ok");
         })
         .catch(function(){say("Hubo un problema de conexión. Revisa tu internet e inténtalo otra vez.","err")})
         .then(function(){btn.disabled=false;btn.innerHTML=label});
