@@ -91,9 +91,9 @@ function probar() {
     action: "registrar_emprendimiento",
     hp: "",
     data: {
-      negocio: "Negocio de prueba", sector: "Servicios", ciudad: "Ciudad de prueba",
+      negocio: "Negocio de prueba", sector: "Restaurantes y comida", ciudad: "Santa Marta",
       presupuesto: "200.000 a 500.000 COP", objetivo: "Conseguir nuevos clientes",
-      redes: "@prueba", url_destino: "https://ejemplo.com",
+      tiempo_disponible: "2026-12-01", url_destino: "@negocioprueba",
       whatsapp: "+57 300 000 0000", correo: "prueba@correo.com",
     },
   }) } };
@@ -107,7 +107,7 @@ function probarCreador() {
     hp: "",
     data: {
       nombre: "Creador de prueba", red: "Instagram", usuario_red: "@prueba",
-      seguidores: "5000", nicho: "Comida", ciudad: "Ciudad de prueba",
+      seguidores: "5000", nicho: "Comida y gastronomía", ciudad: "Santa Marta",
       tarifa: "50000", whatsapp: "+57 300 000 0000", correo: "prueba@correo.com",
     },
   }) } };
