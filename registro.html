@@ -1,100 +1,340 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pagas por clientes, no por alcance</title>
-  <meta name="description" content="Conectamos tu emprendimiento con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Chango&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regístrate | Hand in Hand</title>
+<meta name="description" content="Registra tu emprendimiento o postúlate como creador en Hand in Hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#E3E4EA;--card:#F3F4F7;--field:#FAFBFB;--line:#9CC7C2;--dark:#00171F;--teal:#005260;--deep:#00473F;--green:#70A312;--lime:#A4E322;--cyan:#00E4E8;--mint:#C5E0DD;--acc:#2A9D8F;--text:#1d2b30;--muted:#4f6a70;--off:#BFC2D0}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.5 "Inter",system-ui,sans-serif}
+h1,h2,h3,p{margin:0}
+a{color:inherit}
+svg{display:block}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+
+/* Encabezado */
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-block:.9rem}
+.logo{display:block;color:var(--teal)}
+.logo-svg{width:5rem;height:auto;fill:currentColor}
+nav{display:flex;gap:1.75rem}
+nav a{text-decoration:none;font-weight:600;font-size:.95rem;color:var(--teal)}
+nav a:hover{text-decoration:underline}
+@media(max-width:34rem){nav a:first-child{display:none}}
+
+/* Portada */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#00513F 0%,#002B26 100%);color:var(--bg);padding:3rem 0 7rem}
+.hero-bg{position:absolute;right:-4%;top:10%;width:min(58%,40rem);color:#fff;opacity:.17;pointer-events:none}
+.hero-bg svg{width:100%;height:auto;fill:currentColor}
+.hero .wrap{position:relative}
+.kicker{font:800 clamp(1.6rem,4vw,2.6rem)/1 "Inter",sans-serif;color:#C8F5DC;letter-spacing:.01em;margin-left:clamp(1rem,7vw,5rem)}
+.wordmark{font:900 clamp(3rem,9vw,6.4rem)/1 "Inter",sans-serif;letter-spacing:-.075em;white-space:nowrap}
+.wordmark i{font:700 .82em "Dancing Script",cursive;letter-spacing:-.02em;margin:0 .02em 0 .04em;font-style:normal}
+.quote{border-left:3px solid var(--bg);padding:.25rem 0 .25rem 1.25rem;margin-top:1.75rem;max-width:26rem}
+.quote p:first-child{font-style:italic;font-size:1.2rem}
+.quote p+p{font-style:italic;font-size:.85rem;opacity:.85;margin-top:.25rem}
+
+/* Selector ¿Qué eres? */
+.chooser{position:relative;margin-top:-4.5rem;background:var(--bg);border-radius:5rem 5rem 0 0;padding:1.25rem 1.5rem 2.5rem}
+@media(min-width:48rem){.chooser{padding:1.25rem 4rem 2.75rem}}
+@media(max-width:34rem){.chooser{border-radius:2.5rem 2.5rem 0 0}}
+.chooser h2{font:italic 700 1.8rem "Inter",sans-serif;color:var(--teal);margin-bottom:.75rem}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem}
+.tabs button{font:800 clamp(1.05rem,2.6vw,1.8rem) "Inter",sans-serif;padding:.8rem 1rem;border:0;border-radius:999px;background:var(--off);color:#F2F3F7;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.tabs button:hover{background:#aeb2c4}
+.tabs button[aria-selected="true"]{background:var(--lime);color:#1F3A07;box-shadow:0 8px 14px rgba(0,0,0,.28)}
+
+/* Formularios */
+.forms{background:var(--mint);padding:3.5rem 0 5rem}
+.box{background:var(--card);border-radius:1.25rem;padding:1.75rem 1.5rem 2rem;margin-bottom:2rem}
+@media(min-width:48rem){.box{padding:2rem 2.75rem 2.5rem}}
+.box h3{display:flex;align-items:center;gap:1rem;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;color:var(--deep);margin-bottom:1.25rem}
+.box h3 svg{width:3rem;height:3rem;flex:none;color:var(--deep)}
+.grid{display:grid;gap:1.1rem 2.5rem}
+@media(min-width:44rem){.grid{grid-template-columns:1fr 1fr}}
+.full{grid-column:1/-1}
+label,.lbl{display:block;font-weight:700;font-size:1.2rem;color:var(--deep)}
+.opt{font-weight:500;font-size:.95rem;color:var(--muted)}
+input,select{display:block;width:100%;margin-top:.5rem;font:600 1.05rem "Inter",sans-serif;color:var(--text);background:var(--field);border:1.5px solid var(--line);border-radius:999px;padding:.95rem 1.4rem;outline:none;transition:border-color .15s,box-shadow .15s}
+input::placeholder{color:var(--acc);opacity:.8}
+select{appearance:none;-webkit-appearance:none;color:var(--acc);cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232A9D8F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.2rem center;background-size:1.3rem;padding-right:3rem}
+select.filled{color:var(--text)}
+input:focus,select:focus{border-color:var(--acc);box-shadow:0 0 0 4px rgba(42,157,143,.18)}
+input[type=date]{color:var(--acc)}
+input[type=date].filled{color:var(--text)}
+
+/* Tarjetas de opción (objetivo / red) */
+.tiles{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr);margin-top:.75rem;border:0;padding:0}
+@media(min-width:44rem){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tiles legend{padding:0;margin-bottom:.75rem}
+.tile{position:relative;cursor:pointer;font-size:1.15rem}
+.tile input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.tile span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;min-height:9rem;height:100%;padding:1rem .75rem;text-align:center;background:var(--field);border:1.5px solid var(--line);border-radius:.6rem;color:var(--deep);font-weight:700;line-height:1.2;transition:background .15s,border-color .15s,transform .15s}
+.tile svg{width:2.8rem;height:2.8rem;color:var(--acc)}
+.tile:hover span{transform:translateY(-2px);border-color:var(--acc)}
+.tile input:checked+span{background:#E6F8C8;border-color:var(--green);box-shadow:inset 0 0 0 2px var(--green)}
+.tile input:focus-visible+span{outline:3px solid var(--cyan);outline-offset:3px}
+
+.check{display:flex;gap:.75rem;align-items:flex-start;font-weight:500;font-size:1rem;color:var(--text);margin-top:.5rem}
+.check input{width:1.3rem;height:1.3rem;margin:.1rem 0 0;flex:none;accent-color:var(--green);border-radius:.3rem}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.submit{display:flex;align-items:center;justify-content:center;gap:.75rem;width:min(100%,48rem);margin:2.5rem auto 0;font:800 1.3rem "Inter",sans-serif;color:#1F3A07;background:var(--lime);border:0;border-radius:999px;padding:1.1rem 2rem;cursor:pointer;transition:filter .15s,transform .15s}
+.submit svg{width:1.4rem;height:1.4rem}
+.submit:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.submit[disabled]{opacity:.6;cursor:wait;transform:none}
+.status{text-align:center;font-weight:700;font-size:1.1rem;margin-top:1rem;min-height:1.6em}
+.status.ok{color:#3c7a00}
+.status.err{color:#b3261e}
+
+
+/* ===== MODO CREADOR (azul) ===== */
+body.modo-creador .hero{background:linear-gradient(180deg,#00485C 0%,#001C26 100%)}
+body.modo-creador .tabs button[aria-selected="true"]{background:#48CAE4;color:#00303A}
+body.modo-creador .forms{background:#C6DADF}
+body.modo-creador .tile input:checked+span{background:#DDF6FB;border-color:#1BA9C4;box-shadow:inset 0 0 0 2px #1BA9C4}
+body.modo-creador .submit{background:#48CAE4;color:#00303A}
+body.modo-creador .check input{accent-color:#1BA9C4}
+body.modo-creador .status.ok{color:#00708A}
+footer{padding-block:2rem;color:var(--muted);font-size:.95rem;text-align:center}
+footer a{color:var(--teal);font-weight:600}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-  <header class="wrap"><span class="logo">Puente</span></header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h18v3H3zM2 7.5h20l-.6 4.5H2.6zM3.5 13.5h17V21h-3v-5h-5v3.5h-6V21h-3zM6.5 16h4v2h-4z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20.5 9.5A9 9 0 1 1 14.5 3.4"/><path d="M16.6 11a5 5 0 1 1-3.6-5"/><path d="M9 11.5l3 3 9-9"/></g></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="7" r="4.5"/><path d="M3 21c0-4.4 4-7.5 9-7.5s9 3.1 9 7.5z"/></g></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-8.5-5.3-8.5-11.2C3.5 6.6 5.9 4 9 4c1.3 0 2.3.5 3 1.6C12.7 4.5 13.7 4 15 4c3.1 0 5.5 2.6 5.5 5.8C20.5 15.7 12 21 12 21z"/></symbol>
+</svg>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Pagas por clientes, no por alcance.</h1>
-      <p>Conectamos tu emprendimiento con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña, con códigos y enlaces únicos.</p>
-    </section>
+<header class="wrap top">
+  <a class="logo" href="index.html" aria-label="Hand in Hand, inicio"><svg class="logo-svg" viewBox="0 0 206 140" aria-hidden="true"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/><g transform="translate(-50 0)"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g></svg></a>
+  <nav>
+    <a href="index.html#que-hacemos">¿Qué es lo que hacemos?</a>
+    <a href="index.html#como-funciona">¿Cómo funciona?</a>
+  </nav>
+</header>
 
-    <ol class="steps">
-      <li><b>1. Te registras</b><span>Cuéntanos de tu negocio en menos de 3 minutos.</span></li>
-      <li><b>2. Elegimos creadores</b><span>Verificamos y emparejamos perfiles cercanos a tu público.</span></li>
-      <li><b>3. Ves tus resultados</b><span>Cada creador tiene su código y su enlace para medir ventas.</span></li>
-    </ol>
-
-    <section class="box" id="registro">
-      <div class="tabs" role="tablist">
-        <button type="button" class="active" role="tab" aria-selected="true" data-tab="emprendimiento">Soy emprendedor</button>
-        <button type="button" role="tab" aria-selected="false" data-tab="creador">Soy creador</button>
+<main>
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"><svg class="logo-svg" viewBox="0 0 206 140" aria-hidden="true"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/><g transform="translate(-50 0)"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g></svg></div>
+    <div class="wrap">
+      <p class="kicker" id="kicker">EMPRENDEDORES</p>
+      <h1 class="wordmark" aria-label="Hand in Hand">Hand<i>in</i>Hand</h1>
+      <div class="quote">
+        <p id="quoteA">¡Encuentra al creador ideal!</p>
+        <p id="quoteB">Cuéntanos sobre tu negocio y qué quieres lograr con tu campaña.</p>
       </div>
+    </div>
+  </section>
 
-      <div class="panel" id="emprendimiento">
-        <form data-action="registrar_emprendimiento" data-cta="Registrar mi negocio">
-          <label>Nombre del negocio <input name="negocio" required maxlength="80"></label>
-          <label>Sector
-            <select name="sector" required>
-              <option value="">Selecciona</option>
-              <option>Comida y bebidas</option><option>Moda y accesorios</option>
-              <option>Belleza y cuidado personal</option><option>Hogar y decoración</option>
-              <option>Servicios</option><option>Otro</option>
-            </select>
-          </label>
-          <label>Ciudad <input name="ciudad" required maxlength="60"></label>
-          <label>Presupuesto mensual aproximado
-            <select name="presupuesto" required>
-              <option value="">Selecciona</option>
-              <option>Menos de 200.000 COP</option><option>200.000 a 500.000 COP</option>
-              <option>500.000 a 1.000.000 COP</option><option>Más de 1.000.000 COP</option>
-            </select>
-          </label>
-          <label class="full">Objetivo de la campaña
-            <select name="objetivo" required>
-              <option value="">Selecciona</option>
-              <option>Conseguir nuevos clientes</option><option>Dar a conocer mi marca</option>
-              <option>Lanzar un producto</option><option>Aumentar ventas en línea</option>
-            </select>
-          </label>
-          <label>Instagram o TikTok del negocio <input name="redes" placeholder="@minegocio" maxlength="80"></label>
-          <label>Enlace donde compran (web, tienda o WhatsApp) <input name="url_destino" type="url" placeholder="https://" required></label>
-          <label>WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required></label>
-          <label>Correo <input name="correo" type="email" required></label>
-          <label class="hp" aria-hidden="true">No llenar <input name="website" tabindex="-1" autocomplete="off"></label>
-          <label class="check full"><input type="checkbox" required> Acepto el tratamiento de mis datos para gestionar mi registro.</label>
-          <button type="submit">Registrar mi negocio</button>
-          <p class="status full" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-
-      <div class="panel" id="creador" hidden>
-        <form data-action="registrar_creador" data-cta="Postularme como creador">
-          <label>Nombre <input name="nombre" required maxlength="80"></label>
-          <label>Red principal
-            <select name="red" required>
-              <option value="">Selecciona</option><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Otra</option>
-            </select>
-          </label>
-          <label>Usuario en esa red <input name="usuario_red" placeholder="@usuario" required maxlength="60"></label>
-          <label>Seguidores <input name="seguidores" type="number" min="0" required></label>
-          <label>Nicho o tema <input name="nicho" placeholder="Comida, moda, viajes…" required maxlength="60"></label>
-          <label>Ciudad <input name="ciudad" required maxlength="60"></label>
-          <label>Tarifa por publicación (COP) <input name="tarifa" type="number" min="0"></label>
-          <label>WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required></label>
-          <label class="full">Correo <input name="correo" type="email" required></label>
-          <label class="hp" aria-hidden="true">No llenar <input name="website" tabindex="-1" autocomplete="off"></label>
-          <label class="check full"><input type="checkbox" required> Acepto el tratamiento de mis datos para gestionar mi postulación.</label>
-          <button type="submit">Postularme como creador</button>
-          <p class="status full" role="status" aria-live="polite"></p>
-        </form>
+  <div class="wrap">
+    <section class="chooser" id="registro">
+      <h2>¿Qué eres?</h2>
+      <div class="tabs" role="tablist" aria-label="Tipo de registro">
+        <button type="button" role="tab" id="tab-emprendedor" aria-controls="emprendedor" aria-selected="true" data-tab="emprendedor">Soy emprendedor</button>
+        <button type="button" role="tab" id="tab-creador" aria-controls="creador" aria-selected="false" data-tab="creador" tabindex="-1">Soy un creador</button>
       </div>
     </section>
-  </main>
+  </div>
 
-  <footer class="wrap">Piloto en curso. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros.</footer>
+  <div class="forms">
+    <div class="wrap">
 
-  <script src="assets/config.js"></script>
-  <script src="assets/app.js"></script>
+      <!-- ===== FORMULARIO EMPRENDEDORES → pestaña "Emprendimientos" ===== -->
+      <form id="emprendedor" role="tabpanel" aria-labelledby="tab-emprendedor" data-action="registrar_emprendimiento" novalidate>
+        <div class="box">
+          <h3><svg><use href="#i-store"/></svg>Información de tu negocio</h3>
+          <div class="grid">
+            <label>Nombre del negocio <input name="negocio" required maxlength="80" autocomplete="organization"></label>
+            <label>Ciudad <input name="ciudad" required maxlength="60" autocomplete="address-level2"></label>
+            <label>Sector
+              <select name="sector" required>
+                <option value="">Selecciona</option>
+                <option>Comida y bebidas</option><option>Moda y accesorios</option>
+                <option>Belleza y cuidado personal</option><option>Hogar y decoración</option>
+                <option>Servicios</option><option>Otro</option>
+              </select>
+            </label>
+            <label>Número de WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required autocomplete="tel"></label>
+            <label class="full">Correo <input name="correo" type="email" required autocomplete="email"></label>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3><svg><use href="#i-target"/></svg>Tu campaña</h3>
+          <fieldset class="tiles">
+            <legend class="lbl">¿Cuál es tu objetivo?</legend>
+            <label class="tile"><input type="radio" name="objetivo" value="Conseguir nuevos clientes" required><span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="7" r="3.5"/><circle cx="17" cy="8" r="2.6"/><path d="M2 20c0-3.6 3.1-6 7-6s7 2.4 7 6zM15.5 13.6c3.6-.4 6.5 1.6 6.5 5.4h-4.5c0-2-.8-3.9-2-5.4z"/></svg>Conseguir nuevos clientes</span></label>
+            <label class="tile"><input type="radio" name="objetivo" value="Dar a conocer mi marca"><span><svg><use href="#i-store"/></svg>Dar a conocer mi negocio</span></label>
+            <label class="tile"><input type="radio" name="objetivo" value="Lanzar un producto"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M5 7h14l-1 14H6z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>Lanzar un producto</span></label>
+            <label class="tile"><input type="radio" name="objetivo" value="Aumentar ventas en línea"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h3l2.5 12h11l2-8H6.3"/><circle cx="9" cy="19.5" r="1.5" fill="currentColor"/><circle cx="17" cy="19.5" r="1.5" fill="currentColor"/></svg>Aumentar ventas en línea</span></label>
+          </fieldset>
+
+          <div class="grid" style="margin-top:1.5rem">
+            <label>Presupuesto mensual
+              <select name="presupuesto" required>
+                <option value="">Selecciona</option>
+                <option>Menos de 200.000 COP</option><option>200.000 a 500.000 COP</option>
+                <option>500.000 a 1.000.000 COP</option><option>Más de 1.000.000 COP</option>
+              </select>
+            </label>
+            <label>Tiempo disponible <span class="opt">(¿hasta cuándo?)</span> <input name="tiempo_disponible" type="date"></label>
+            <label class="full">URL de sitio web o redes <input name="url_destino" placeholder="https://… o @minegocio" required maxlength="200"></label>
+            <label class="hp" aria-hidden="true">No llenar <input name="website" tabindex="-1" autocomplete="off"></label>
+            <label class="check full"><input type="checkbox" required> Acepto el tratamiento de mis datos para gestionar mi registro.</label>
+          </div>
+
+          <button class="submit" type="submit">Registrar mi negocio <svg><use href="#i-arrow"/></svg></button>
+          <p class="status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <!-- ===== FORMULARIO CREADORES → pestaña "Creadores" ===== -->
+      <form id="creador" role="tabpanel" aria-labelledby="tab-creador" data-action="registrar_creador" novalidate hidden>
+        <div class="box">
+          <h3><svg><use href="#i-user"/></svg>Información personal</h3>
+          <div class="grid">
+            <label>Nombre <input name="nombre" required maxlength="80" autocomplete="name"></label>
+            <label>Ciudad <input name="ciudad" required maxlength="60" autocomplete="address-level2"></label>
+            <label>Número de WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required autocomplete="tel"></label>
+            <label>Correo <input name="correo" type="email" required autocomplete="email"></label>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3><svg><use href="#i-heart"/></svg>Tu comunidad</h3>
+          <fieldset class="tiles">
+            <legend class="lbl">¿Cuál es tu red principal?</legend>
+            <label class="tile"><input type="radio" name="red" value="Instagram" required><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</span></label>
+            <label class="tile"><input type="radio" name="red" value="TikTok"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2h3.2c.3 2.4 1.8 4 4.3 4.3v3.3c-1.6 0-3-.5-4.3-1.3v7.1A6.6 6.6 0 1 1 10.6 9v3.4a3.2 3.2 0 1 0 3.4 3.2z"/></svg>TikTok</span></label>
+            <label class="tile"><input type="radio" name="red" value="YouTube"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.2c-.2-1.7-1-2.9-2.8-3.1C16.6 4.8 12 4.8 12 4.8s-4.6 0-7.2.3C3 5.3 2.2 6.5 2 8.2 1.8 9.6 1.8 12 1.8 12s0 2.4.2 3.8c.2 1.7 1 2.9 2.8 3.1 2.6.3 7.2.3 7.2.3s4.6 0 7.2-.3c1.8-.2 2.6-1.4 2.8-3.1.2-1.4.2-3.8.2-3.8s0-2.4-.2-3.8zM10 15.2V8.8l5.5 3.2z"/></svg>YouTube</span></label>
+            <label class="tile"><input type="radio" name="red" value="Otra"><span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg>Otra</span></label>
+          </fieldset>
+
+          <div class="grid" style="margin-top:1.5rem">
+            <label>Usuario en esa red <input name="usuario_red" placeholder="@usuario" required maxlength="60"></label>
+            <label>Seguidores <input name="seguidores" type="number" min="0" inputmode="numeric" required></label>
+            <label>Nicho o tema <input name="nicho" placeholder="Comida, moda, viajes…" required maxlength="60"></label>
+            <label>Tarifa por publicación (COP) <span class="opt">(opcional)</span> <input name="tarifa" type="number" min="0" inputmode="numeric"></label>
+            <label class="hp" aria-hidden="true">No llenar <input name="website" tabindex="-1" autocomplete="off"></label>
+            <label class="check full"><input type="checkbox" required> Acepto el tratamiento de mis datos para gestionar mi postulación.</label>
+          </div>
+
+          <button class="submit" type="submit">Postularme como creador <svg><use href="#i-arrow"/></svg></button>
+          <p class="status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</main>
+
+<footer class="wrap">Piloto en curso. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros. · ¿Dudas? <a href="mailto:equipoquipitosoficial@gmail.com">equipoquipitosoficial@gmail.com</a></footer>
+
+<!-- Tu archivo de siempre con la URL del Apps Script -->
+<script src="assets/config.js"></script>
+<script>
+(function(){
+  /* ============================================================
+     URL DE TU APPS SCRIPT
+     Esta página la toma sola de assets/config.js.
+     Si algún día falla, pega aquí tu URL (la que termina en /exec):
+     ============================================================ */
+  var API_URL_MANUAL = "";
+
+  function findApiUrl(){
+    if(API_URL_MANUAL) return API_URL_MANUAL;
+    var isUrl=function(v){return typeof v==="string"&&/^https:\/\/script\.google(usercontent)?\.com\//.test(v)};
+    var dig=function(v,depth){
+      if(isUrl(v)) return v;
+      if(v&&typeof v==="object"&&depth<3){for(var k in v){try{var r=dig(v[k],depth+1);if(r)return r}catch(e){}}}
+      return null;
+    };
+    var names=["CONFIG","config","Config","APP_CONFIG","API_URL","SCRIPT_URL","APPS_SCRIPT_URL","WEB_APP_URL","WEBAPP_URL","URL_API","API","ENDPOINT","GAS_URL","URL"];
+    for(var i=0;i<names.length;i++){
+      try{var v=(0,eval)("typeof "+names[i]+'!=="undefined"?'+names[i]+":undefined");var r=dig(v,0);if(r)return r}catch(e){}
+    }
+    for(var k in window){try{var r2=dig(window[k],1);if(r2)return r2}catch(e){}}
+    return "";
+  }
+  var API_URL=findApiUrl();
+
+  /* ---------- Pestañas ---------- */
+  var TEXT={
+    emprendedor:{kicker:"EMPRENDEDORES",a:"¡Encuentra al creador ideal!",b:"Cuéntanos sobre tu negocio y qué quieres lograr con tu campaña."},
+    creador:{kicker:"CREADORES",a:"¡Conecta con emprendimientos!",b:"Cuéntanos sobre ti y tu comunidad para proponerte campañas afines."}
+  };
+  var tabs=[].slice.call(document.querySelectorAll(".tabs [role=tab]"));
+  function select(name,focus){
+    tabs.forEach(function(t){
+      var on=t.dataset.tab===name;
+      t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;
+      document.getElementById(t.dataset.tab).hidden=!on;
+      if(on&&focus)t.focus();
+    });
+    document.body.classList.toggle("modo-creador",name==="creador");
+    var tx=TEXT[name];
+    document.getElementById("kicker").textContent=tx.kicker;
+    document.getElementById("quoteA").textContent=tx.a;
+    document.getElementById("quoteB").textContent=tx.b;
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener("click",function(){select(t.dataset.tab);history.replaceState(null,"","#"+t.dataset.tab)});
+    t.addEventListener("keydown",function(e){
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();var n=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];select(n.dataset.tab,true)}
+    });
+  });
+  var h=location.hash.replace("#","");
+  if(h==="creador")select("creador");else select("emprendedor");
+  if(h){setTimeout(function(){document.getElementById("registro").scrollIntoView({behavior:"smooth"})},150)}
+
+  /* Color del texto en selects y fecha cuando ya tienen valor */
+  document.querySelectorAll("select,input[type=date]").forEach(function(el){
+    var f=function(){el.classList.toggle("filled",!!el.value)};el.addEventListener("change",f);f();
+  });
+
+  /* ---------- Envío a Google Sheets ---------- */
+  document.querySelectorAll("form[data-action]").forEach(function(form){
+    var btn=form.querySelector(".submit"),status=form.querySelector(".status"),label=btn.innerHTML;
+    function say(msg,cls){status.textContent=msg;status.className="status "+(cls||"")}
+
+    form.addEventListener("submit",function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){
+        var bad=form.querySelector(":invalid");
+        say(bad&&bad.type==="radio"?"Elige una de las opciones de arriba.":"Revisa los campos marcados: falta información o hay un dato mal escrito.","err");
+        if(bad){bad.focus();if(bad.reportValidity)bad.reportValidity()}
+        return;
+      }
+      if(!API_URL){say("No se encontró la URL del servicio. Revisa assets/config.js.","err");return}
+
+      var data={},hp="";
+      new FormData(form).forEach(function(v,k){if(k==="website")hp=String(v);else data[k]=String(v).trim()});
+
+      btn.disabled=true;btn.textContent="Enviando…";say("");
+      fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:form.dataset.action,hp:hp,data:data})})
+        .then(function(r){return r.json()})
+        .then(function(res){
+          if(res&&res.ok){
+            form.reset();form.querySelectorAll(".filled").forEach(function(el){el.classList.remove("filled")});
+            say(form.id==="creador"?"¡Listo! Recibimos tu postulación. Te escribiremos por WhatsApp.":"¡Listo! Tu negocio quedó registrado. Te escribiremos por WhatsApp.","ok");
+          }else{
+            say("No pudimos guardar tu registro"+(res&&res.error?": "+res.error:"")+". Intenta de nuevo.","err");
+          }
+        })
+        .catch(function(){say("Hubo un problema de conexión. Revisa tu internet e inténtalo otra vez.","err")})
+        .then(function(){btn.disabled=false;btn.innerHTML=label});
+    });
+  });
+})();
+</script>
 </body>
 </html>

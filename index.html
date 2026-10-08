@@ -3,182 +3,295 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quipitos | Pagas por clientes, no por alcance</title>
+<title>Hand in Hand | Estamos aquí para darte una mano</title>
 <meta name="description" content="Conectamos micro y pequeños emprendimientos con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Chango&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#fff5f8;--ink:#0b4a5a;--muted:#3f6672;--crimson:#b80f52;--pink:#e6007e;--soft:#fde4ec;--gold:#ffc90e;--cyan:#00bce0;box-sizing:border-box}
-*,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--paper);color:var(--ink);font:600 1.1rem/1.6 "Barlow Semi Condensed",system-ui,sans-serif}
-h1,h2,h3{font-family:"Chango","Barlow Semi Condensed",sans-serif;font-weight:400;line-height:1.15;margin:0}
-h2{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--crimson)}
-p{margin:0}
+:root{--bg:#E3E4EA;--card:#F6F7FB;--dark:#00171F;--teal:#005260;--teal2:#003A40;--green:#70A312;--lime:#B5EA3C;--cyan:#00E4E8;--mint:#C5DFDF;--text:#1d2b30;--muted:#4f6a70}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1.05rem/1.55 "Inter",system-ui,sans-serif}
+h1,h2,h3,p{margin:0}
 a{color:inherit}
-.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
-section{padding-block:3.5rem}
-.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-block:1rem}
-.logo{font:400 1.9rem "Chango",sans-serif;text-decoration:none;letter-spacing:.02em}
-.p{color:var(--pink)}.g{color:var(--gold)}.c{color:var(--cyan)}
-nav{display:flex;align-items:center;gap:1.25rem}
-nav a{text-decoration:none;font-weight:700}
-nav a.nl{display:none}
-@media(min-width:48rem){nav a.nl{display:inline}}
-.btn{display:inline-block;font:400 1.05rem "Chango",sans-serif;padding:.75rem 1.4rem;border:3px solid var(--crimson);border-radius:999px;background:var(--gold);color:var(--crimson);text-decoration:none}
-.btn:hover{background:var(--pink);border-color:var(--pink);color:#fff}
-.btn.alt{background:#fff}
-.hero{display:grid;gap:2rem;align-items:center;padding-block:2.5rem 4rem}
-@media(min-width:48rem){.hero{grid-template-columns:1.15fr .85fr}}
-.hero h1{font-size:clamp(2.1rem,6vw,3.6rem);color:var(--crimson)}
-.hero p{font-size:1.3rem;color:var(--muted);margin-top:1rem;max-width:34rem}
-.acts{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.75rem}
-.burst{position:relative;width:min(100%,24rem);aspect-ratio:1;justify-self:center}
-.burst i{position:absolute;inset:0}
-.b1{background:var(--cyan);clip-path:polygon(50.0% 0.0%,57.5% 29.3%,82.1% 11.7%,69.1% 39.0%,99.2% 41.3%,71.7% 53.8%,93.3% 75.0%,64.1% 66.9%,67.1% 97.0%,50.0% 72.0%,32.9% 97.0%,35.9% 66.9%,6.7% 75.0%,28.3% 53.8%,0.8% 41.3%,30.9% 39.0%,17.9% 11.7%,42.5% 29.3%)}
-.b2{background:var(--gold);clip-path:polygon(57.2% 14.7%,58.9% 36.7%,80.0% 30.1%,65.7% 46.9%,85.3% 57.2%,63.3% 58.9%,69.9% 80.0%,53.1% 65.7%,42.8% 85.3%,41.1% 63.3%,20.0% 69.9%,34.3% 53.1%,14.7% 42.8%,36.7% 41.1%,30.1% 20.0%,46.9% 34.3%)}
-.b3{background:var(--pink);clip-path:polygon(59.3% 27.9%,58.3% 42.7%,73.1% 43.5%,60.8% 51.9%,69.5% 64.0%,55.3% 59.7%,51.2% 74.0%,45.7% 60.1%,32.0% 65.9%,39.4% 53.0%,26.4% 45.8%,41.1% 43.6%,38.5% 28.9%,49.5% 39.0%)}
-.two{display:grid;gap:2rem}
-@media(min-width:48rem){.two{grid-template-columns:1fr 1fr}}
-.lead{font-size:1.3rem;margin-top:1rem}
-.pain{list-style:none;margin:0;padding:0;display:grid;gap:1.25rem}
-.pain li{border-left:8px solid var(--pink);padding-left:1rem}
-.pain li:nth-child(2){border-color:var(--gold)}
-.pain li:nth-child(3){border-color:var(--cyan)}
-.pain b,.wins b,.steps b{display:block;font:400 1.15rem "Chango",sans-serif;color:var(--crimson)}
-.insight{background:var(--crimson);color:#fff}
-.insight h2{color:var(--gold)}
-.insight p{font-size:1.35rem;max-width:44rem;margin-top:1rem}
-.goals{background:var(--soft)}
-.wins{display:grid;gap:1.5rem;margin-top:2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
-.wins div{background:#fff;border:4px solid var(--crimson);border-radius:.5rem;padding:1.1rem}
-.wins span,.steps span{color:var(--muted)}
-.steps{display:grid;gap:1.5rem;margin:2rem 0 0;padding:0;list-style:none;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
-.steps li{border-top:8px solid var(--pink);padding-top:.75rem}
-.steps li:nth-child(2){border-color:var(--gold)}
-.steps li:nth-child(3){border-color:var(--cyan)}
-.pilot{margin-top:2rem;font-size:1.2rem;color:var(--crimson)}
-.cta{background:var(--gold);text-align:center}
-.cta h2{color:var(--crimson)}
-.cta p{margin:.75rem auto 1.5rem;max-width:34rem}
-.cta .acts{justify-content:center}
-.cta .btn{background:var(--crimson);color:#fff;border-color:var(--crimson)}
-.cta .btn.alt{background:#fff;color:var(--crimson)}
-footer{padding-block:1.5rem;color:var(--muted);font-size:.95rem}
-:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
-/* ===== TUTORIAL GUIADO ===== */
-footer{padding-bottom:5rem}
-.tour-fab{position:fixed;right:1rem;bottom:1rem;z-index:900;font:400 1rem "Chango",sans-serif;padding:.7rem 1.1rem;border:3px solid var(--crimson);border-radius:999px;background:var(--cyan);color:#fff;cursor:pointer;box-shadow:0 4px 0 var(--crimson)}
-.tour-fab:hover{background:var(--pink);border-color:var(--pink);box-shadow:0 4px 0 var(--crimson)}
-.tour-shield{position:fixed;inset:0;z-index:1000;background:transparent;display:none}
-.tour-spot{position:fixed;z-index:1001;display:none;border:4px solid var(--gold);border-radius:.9rem;box-shadow:0 0 0 100vmax rgba(11,74,90,.78);pointer-events:none;transition:top .3s,left .3s,width .3s,height .3s}
-.tour-spot::after{content:"";position:absolute;inset:-4px;border:4px solid var(--gold);border-radius:1rem;animation:tourPulse 1.4s ease-out infinite}
-@keyframes tourPulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
-.tour-card{position:fixed;z-index:1002;display:none;width:min(21rem,calc(100vw - 2rem));background:#fff;color:var(--ink);border:4px solid var(--crimson);border-radius:1rem;padding:1.1rem 1.1rem 1rem;box-shadow:0 8px 0 rgba(184,15,82,.25)}
-.tour-card::before{content:"";position:absolute;left:var(--ax,50%);width:1.1rem;height:1.1rem;background:#fff;border:4px solid var(--crimson);transform:translateX(-50%) rotate(45deg);display:none}
-.tour-card.below::before{display:block;top:-.7rem;border-right:0;border-bottom:0}
-.tour-card.above::before{display:block;bottom:-.7rem;border-left:0;border-top:0}
-.tour-count{font-size:.95rem;color:var(--muted)}
-.tour-card h3{font-size:1.25rem;color:var(--crimson);margin:.2rem 0 .5rem}
-.tour-card p{font-size:1.05rem;line-height:1.45}
-.tour-bar{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
-.tour-btn{font:400 .95rem "Chango",sans-serif;padding:.5rem 1rem;border:3px solid var(--crimson);border-radius:999px;background:var(--gold);color:var(--crimson);cursor:pointer}
-.tour-btn:hover{background:var(--pink);border-color:var(--pink);color:#fff}
-.tour-btn.ghost{background:#fff}
-.tour-skip{background:none;border:0;font:700 1rem "Barlow Semi Condensed",sans-serif;color:var(--muted);text-decoration:underline;cursor:pointer;padding:.25rem}
-.tour-dots{display:flex;gap:.35rem;margin-bottom:.4rem}
-.tour-dots i{width:.6rem;height:.6rem;border-radius:50%;background:var(--soft);border:2px solid var(--crimson)}
-.tour-dots i.on{background:var(--crimson)}
-.tour-welcome{position:fixed;inset:0;z-index:1003;display:none;align-items:center;justify-content:center;padding:1.25rem;background:rgba(11,74,90,.78)}
-.tour-welcome.open{display:flex}
-.tour-welcome div{background:#fff;border:4px solid var(--crimson);border-radius:1rem;padding:1.5rem;max-width:26rem;text-align:center}
-.tour-welcome h3{font-size:1.5rem;color:var(--crimson);margin-bottom:.6rem}
-.tour-welcome .tour-bar{justify-content:center}
-@media(prefers-reduced-motion:reduce){.tour-spot{transition:none}.tour-spot::after{animation:none}}
+img,svg{display:block}
+.wrap{max-width:76rem;margin:0 auto;padding:0 1.25rem}
+.script{font-family:"Dancing Script",cursive;font-weight:700;line-height:1.1}
 
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:.8rem;font:600 1.1rem "Inter",sans-serif;padding:.85rem 1.5rem;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s,filter .15s}
+.btn svg{width:1.25em;height:1.25em;flex:none}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn-lime{background:var(--lime);color:var(--dark);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.btn-cyan{background:var(--cyan);color:var(--dark);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.btn-teal{background:var(--teal);color:#fff}
+
+/* Encabezado */
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-block:1rem}
+.logo{display:block;color:var(--teal)}
+.logo-svg{width:5.5rem;height:auto;fill:currentColor}
+nav{display:flex;align-items:center;gap:2rem}
+nav a{text-decoration:none;font-weight:600;color:var(--teal)}
+nav a:hover{text-decoration:underline}
+nav .nl{display:none}
+@media(min-width:56rem){nav .nl{display:inline}}
+nav .btn{padding:.6rem 1.6rem;font-size:1.05rem}
+
+/* Portada */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#005257 0%,#00262B 100%);color:var(--bg);min-height:min(56rem,calc(100vh - 5rem));display:flex;align-items:center}
+.hero-bg{position:absolute;right:-6%;top:14%;width:min(62%,60rem);color:#fff;opacity:.18;pointer-events:none}
+.hero-bg svg{width:100%;height:auto;fill:currentColor}
+.hero .wrap{position:relative;width:100%;padding-block:4rem}
+.wordmark{font:900 clamp(3.2rem,10vw,8.5rem)/1 "Inter",sans-serif;letter-spacing:-.075em;white-space:nowrap}
+.wordmark i{font:700 .82em "Dancing Script",cursive;letter-spacing:-.02em;margin:0 .02em 0 .04em;font-style:normal}
+.hero p{font-size:clamp(1.2rem,2.4vw,2rem);font-weight:300;margin-top:1rem}
+.acts{display:flex;flex-wrap:wrap;gap:1.25rem;margin-top:3.5rem}
+
+/* Qué hacemos */
+.intro{display:grid;gap:2rem;align-items:center;padding-block:4rem 2rem}
+@media(min-width:56rem){.intro{grid-template-columns:1fr 1fr}}
+.intro-art{position:relative}
+.intro-art::before{content:"";position:absolute;left:-30%;top:-40%;width:110%;aspect-ratio:1.4;border-radius:50%;background:#F3F7F2;z-index:0}
+.intro-art svg{position:relative;width:100%;max-width:36rem;height:auto}
+.intro-txt{text-align:right}
+@media(max-width:56rem){.intro-txt{text-align:left}.intro-txt p{margin-left:0}.hero{min-height:auto}.hero .wrap{padding-block:5rem 6rem}}
+.intro-txt h2{font-size:clamp(2.4rem,5vw,4rem);color:var(--green)}
+.intro-txt p{margin-top:1.25rem;font-size:1.2rem;max-width:40rem;margin-left:auto}
+
+.goals{display:grid;gap:2rem;align-items:center;padding-block:3rem}
+@media(min-width:56rem){.goals{grid-template-columns:.8fr 1.2fr}}
+.goals h2{font-size:clamp(2.2rem,4.5vw,3.6rem);color:var(--teal)}
+.goals>div>p{margin-top:1rem;font-size:1.2rem}
+.cards{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+.card{background:var(--card);border-radius:1.5rem;padding:2rem 1.75rem}
+.blob{width:6rem;height:5.5rem;display:grid;place-items:center;margin:0 auto 1.5rem;border-radius:46% 54% 42% 58%/55% 45% 55% 45%}
+.blob svg{width:3rem;height:3rem;fill:none;stroke:var(--dark);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.card h3{text-align:center;font-size:1.5rem;font-weight:800;color:var(--teal)}
+.card p{margin-top:.75rem;color:var(--teal);opacity:.85}
+
+.both{background:var(--mint);border-radius:3rem;padding:2.5rem 1.5rem;margin-block:3rem 5rem}
+@media(min-width:56rem){.both{padding:3rem}}
+.both>h2{font-size:clamp(2.4rem,5vw,4rem);color:var(--teal);margin-bottom:2rem}
+.both-grid{display:grid;gap:1.5rem}
+@media(min-width:56rem){.both-grid{grid-template-columns:1fr 1fr}}
+.who{background:var(--card);border-radius:2.5rem;padding:2rem;display:grid;gap:1.5rem;grid-template-columns:7rem 1fr;align-items:start}
+.who svg.ico{width:100%;height:auto}
+.who h3{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--teal)}
+.who .q{font-weight:700;color:#0f7d78;margin-top:.75rem}
+.who p.d{color:var(--muted);font-size:1.2rem;margin-top:1.25rem}
+.who .btn{grid-column:1/-1;justify-self:center}
+@media(max-width:30rem){.who{grid-template-columns:1fr}.who svg.ico{width:6rem}}
+
+/* Cifras */
+.stats{background:linear-gradient(180deg,#00212B,#003647);color:var(--bg);border-radius:3rem;padding:3rem 2rem;display:grid;gap:2rem;align-items:center}
+@media(min-width:56rem){.stats{grid-template-columns:1fr 1fr;padding:4.5rem 6rem}}
+.stats h2{font-size:clamp(2.4rem,5vw,4rem)}
+.stats .n{text-align:right;font-size:1.4rem;font-weight:600}
+.stats .num{display:block;font-size:clamp(4rem,9vw,7rem);margin:.5rem 0}
+
+/* Cómo funciona */
+.how{background:var(--teal2);color:#fff;margin-top:5rem;padding-block:4rem}
+.how h2{text-align:center;font-size:clamp(2.6rem,5vw,4.2rem);color:var(--cyan)}
+.steps{list-style:none;margin:3rem 0 0;padding:0;display:grid;gap:2.5rem}
+@media(min-width:56rem){.steps{grid-template-columns:1fr auto 1fr auto 1fr;align-items:start}}
+.steps li{text-align:center}
+.steps .arr{display:none}
+@media(min-width:56rem){.steps .arr{display:block;margin-top:2.6rem}}
+.arr svg{width:3rem;height:3rem;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.badge{display:flex;align-items:center;justify-content:center;gap:1.25rem;margin-bottom:1.5rem}
+.badge b{width:6rem;height:6rem;border-radius:50%;background:#9BDCD6;color:var(--teal2);display:grid;place-items:center;font-size:2.2rem;font-weight:700}
+.badge svg{width:4.5rem;height:4.5rem;stroke:#9BDCD6;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.steps h3{font-size:clamp(1.6rem,2.3vw,2.2rem);font-weight:700;white-space:nowrap}
+.steps p{margin-top:.75rem;color:#cfe3e3;font-size:1.15rem;max-width:24rem;margin-inline:auto}
+
+/* Llamado final */
+.cta{background:linear-gradient(180deg,#007C80,#00989E 50%,#007C80);color:var(--bg);text-align:center;padding-block:4.5rem}
+.cta h2{font-size:clamp(2.6rem,5vw,4.2rem)}
+.cta p{font-size:1.4rem;font-weight:300}
+.cta .acts{justify-content:center;margin-top:2rem}
+
+/* Pie */
+footer{padding-block:3rem 6rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem}
+.help{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem 2.5rem}
+.help strong{color:var(--green);font-size:1.5rem;font-weight:600;text-align:right;line-height:1.3}
+.help a{font-size:1.4rem;text-decoration:none;padding-left:2.5rem;border-left:2px solid var(--dark)}
+.help a:hover{text-decoration:underline}
+@media(max-width:40rem){.help strong{text-align:left}.help a{padding-left:0;border:0;font-size:1.1rem}}
+.legal{width:100%;color:var(--muted);font-size:.9rem;margin-top:.5rem}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+
+/* ===== TUTORIAL GUIADO ===== */
+.tour-fab{position:fixed;right:1rem;bottom:1rem;z-index:900;font:600 1rem "Inter",sans-serif;padding:.75rem 1.2rem;border:0;border-radius:999px;background:var(--teal);color:#fff;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.tour-fab:hover{background:var(--green)}
+.tour-shield{position:fixed;inset:0;z-index:1000;display:none}
+.tour-spot{position:fixed;z-index:1001;display:none;border:4px solid var(--cyan);border-radius:1rem;box-shadow:0 0 0 100vmax rgba(0,23,31,.78);pointer-events:none;transition:top .3s,left .3s,width .3s,height .3s}
+.tour-spot::after{content:"";position:absolute;inset:-4px;border:4px solid var(--cyan);border-radius:1.1rem;animation:tourPulse 1.4s ease-out infinite}
+@keyframes tourPulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
+.tour-card{position:fixed;z-index:1002;display:none;width:min(21rem,calc(100vw - 2rem));background:var(--card);color:var(--text);border-radius:1.25rem;padding:1.2rem;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.tour-card::before{content:"";position:absolute;left:var(--ax,50%);width:1rem;height:1rem;background:var(--card);transform:translateX(-50%) rotate(45deg);display:none}
+.tour-card.below::before{display:block;top:-.5rem}
+.tour-card.above::before{display:block;bottom:-.5rem}
+.tour-count{font-size:.9rem;color:var(--muted)}
+.tour-card h3{font-size:1.2rem;font-weight:800;color:var(--teal);margin:.2rem 0 .4rem}
+.tour-card p{font-size:1rem;line-height:1.45}
+.tour-bar{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.tour-btn{font:600 .95rem "Inter",sans-serif;padding:.55rem 1.1rem;border:0;border-radius:999px;background:var(--lime);color:var(--dark);cursor:pointer}
+.tour-btn:hover{filter:brightness(1.05)}
+.tour-btn.ghost{background:#fff;box-shadow:inset 0 0 0 2px var(--teal);color:var(--teal)}
+.tour-skip{background:none;border:0;font:600 .95rem "Inter",sans-serif;color:var(--muted);text-decoration:underline;cursor:pointer;padding:.25rem}
+.tour-dots{display:flex;gap:.35rem;margin-bottom:.4rem}
+.tour-dots i{width:.55rem;height:.55rem;border-radius:50%;background:var(--mint)}
+.tour-dots i.on{background:var(--teal)}
+.tour-welcome{position:fixed;inset:0;z-index:1003;display:none;align-items:center;justify-content:center;padding:1.25rem;background:rgba(0,23,31,.78)}
+.tour-welcome.open{display:flex}
+.tour-welcome>div{background:var(--card);border-radius:1.5rem;padding:1.75rem;max-width:26rem;text-align:center}
+.tour-welcome h3{font-size:1.4rem;font-weight:800;color:var(--teal);margin-bottom:.6rem}
+.tour-welcome .tour-bar{justify-content:center}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tour-spot{transition:none}.tour-spot::after{animation:none}.btn{transition:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
 <header class="wrap top">
-  <a class="logo" href="index.html" aria-label="Quipitos"><span class="p">QU</span><span class="g">IP</span><span class="p">!T</span><span class="c">OS</span></a>
+  <a class="logo" href="index.html" aria-label="Hand in Hand, inicio"><svg class="logo-svg" viewBox="0 0 206 140" aria-hidden="true"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/><g transform="translate(-50 0)"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g></svg></a>
   <nav>
-    <a class="nl" href="#problema">El problema</a>
-    <a class="nl" href="#logramos">Qué logras</a>
-    <a class="nl" href="#como">Cómo funciona</a>
-    <a class="btn" href="registro.html#registro">Registrarme</a>
+    <a class="nl" href="#que-hacemos">¿Qué es lo que hacemos?</a>
+    <a class="nl" href="#como-funciona">¿Cómo funciona?</a>
+    <a class="btn btn-teal" href="registro.html">Regístrate ya</a>
   </nav>
 </header>
 
 <main>
-<section class="wrap hero">
-  <div>
-    <h1>Pagas por clientes, no por alcance.</h1>
-    <p>Somos una agencia digital que conecta tu emprendimiento con nano influencers verificados, y te mostramos cuántos clientes trajo cada campaña con códigos y enlaces únicos.</p>
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"><svg class="logo-svg" viewBox="0 0 206 140" aria-hidden="true"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/><g transform="translate(-50 0)"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g></svg></div>
+  <div class="wrap">
+    <h1 class="wordmark" aria-label="Hand in Hand">Hand<i>in</i>Hand</h1>
+    <p>Estamos aquí para darte una mano</p>
     <div class="acts">
-      <a class="btn" href="registro.html#registro">Registrar mi negocio</a>
-      <a class="btn alt" href="registro.html#creador">Soy creador</a>
+      <a class="btn btn-lime" href="registro.html#emprendedor">Tengo un emprendimiento <svg><use href="#arrow"/></svg></a>
+      <a class="btn btn-cyan" href="registro.html#creador">Soy un creador <svg><use href="#arrow"/></svg></a>
     </div>
-  </div>
-  <div class="burst" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
-</section>
-
-<section id="problema" class="wrap">
-  <div class="two">
-    <div>
-      <h2>Los emprendimientos pequeños llegan tarde a un juego pensado para los grandes</h2>
-      <p class="lead">Los dueños de micro y pequeños negocios saben que las recomendaciones de creadores venden. Pero contratar agencias cuesta demasiado, gestionar creadores solos les quita horas que no tienen, y nadie les dice si lo que invirtieron trajo clientes.</p>
-    </div>
-    <ul class="pain">
-      <li><b>Agencias para grandes presupuestos</b><span>Las plataformas de influencers evolucionan hacia grandes marcas y métricas de alcance, y dejan fuera a los negocios pequeños.</span></li>
-      <li><b>Sin tiempo para buscar y verificar</b><span>Encontrar, revisar y coordinar creadores consume una jornada que un emprendedor ya dedica a operar.</span></li>
-      <li><b>Sin forma de medir</b><span>Publican, escriben a creadores o pagan publicidad genérica, con resultados inciertos.</span></li>
-    </ul>
   </div>
 </section>
 
-<section class="insight">
+<section id="que-hacemos" class="wrap intro">
+  <div class="intro-art"><svg viewBox="0 0 260 140" aria-hidden="true"><g fill="#005260"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/></g><g fill="#70A312"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g><path fill="#00E4E8" d="M127.8 0.2 126.5 1.0 125.0 3.5 124.8 6.8 125.8 11.0 128.2 15.2 132.5 19.2 134.5 20.8 135.8 21.0 139.5 18.2 143.8 13.5 145.8 8.5 145.8 3.5 145.0 2.0 143.5 0.5 142.2 0.0 140.0 0.2 137.5 2.5 136.2 5.0 135.8 7.0 135.2 7.2 134.8 5.5 132.2 1.2 130.0 0.0Z"/><path fill="#00171F" fill-rule="evenodd" d="M109.0 30.8 106.8 32.5 101.2 56.0 101.5 58.0 103.0 59.8 104.2 60.2 117.8 63.2 120.2 63.0 121.8 61.8 122.2 60.8 127.2 38.8 127.2 36.2 126.0 34.5 124.2 33.8 111.0 30.8ZM110.5 32.8 112.5 32.8 122.5 35.0 123.5 35.5 124.8 37.0 124.8 39.2 120.8 57.0 120.0 58.5 118.5 59.5 116.5 59.5 106.8 57.2 105.5 56.8 104.2 55.0 104.2 53.2 108.5 34.8Z"/><path fill="#E3E4EA" d="M110.5 33.2 109.0 34.5 104.8 53.0 104.8 55.2 105.5 56.2 106.5 56.8 116.2 59.0 118.8 59.0 119.8 58.2 120.2 57.2 124.5 37.8 123.2 35.8 112.8 33.2Z"/></svg></div>
+  <div class="intro-txt">
+    <h2 class="script">Tú también tienes la oportunidad de crecer.</h2>
+    <p>A veces, la idea de hacer un patrocinio suena como una gran inversión de dinero y tiempo, un lujo al que las microempresas no pueden acceder y que con los influencers solo pueden imaginar. Pero con <b>Hand in Hand</b>, el sueño de llegar a más personas está más cerca que nunca.</p>
+  </div>
+</section>
+
+<section class="wrap goals">
+  <div>
+    <h2 class="script">Lo que queremos lograr contigo.</h2>
+    <p>Con <b>Hand in Hand</b> podrás conectar con emprendimientos o creadores con los mismos intereses que tú, sin agencias costosas ni horas de trabajo extra, y con resultados claros de cada inversión.</p>
+  </div>
+  <div class="cards">
+    <article class="card">
+      <div class="blob" style="background:#4FE6EA"><svg viewBox="0 0 24 24"><path d="M12 3c5 0 9 3.1 9 7s-4 7-9 7c-1 0-2-.1-2.9-.4L5 19l.9-3.6C4.1 14.1 3 12.2 3 10c0-3.9 4-7 9-7z"/><path d="M12 7v3.5M12 13.2v.1"/></svg></div>
+      <h3>Creíble</h3>
+      <p>Influencers y emprendimientos verificados.</p>
+    </article>
+    <article class="card">
+      <div class="blob" style="background:#9AC646"><svg viewBox="0 0 24 24"><path d="M2 8l4-2 5 2 3-2 4 1 4 1M2 8l1 6 5 5c.8.8 2 .8 2.8 0l6.4-6.4M22 8l-1 6M11 8l-3 3c-.6.6-.6 1.4 0 2 .6.6 1.4.6 2 0l2.5-2.2 4 4M9.5 15.5l1.5 1.5M12 13l2 2"/></svg></div>
+      <h3>Confiable</h3>
+      <p>Códigos únicos, enlaces rastreables y un tablero de resultados.</p>
+    </article>
+    <article class="card">
+      <div class="blob" style="background:#B5EA3C"><svg viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7 15l4-5 3 3 5-6"/></svg></div>
+      <h3>Accesible</h3>
+      <p>Una comisión del 20 al 30 % por campaña gestionada.</p>
+    </article>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="both">
+    <h2 class="script">Hecho para ambos</h2>
+    <div class="both-grid">
+      <article class="who">
+        <svg class="ico" viewBox="0 0 100 120" aria-hidden="true"><circle cx="38" cy="16" r="16" fill="#86CFDA"/><path d="M6 66c0-14 14-22 32-22s28 6 30 12H6z" fill="#86CFDA"/><rect x="26" y="48" width="66" height="8" fill="#005260"/><path d="M24 60h70l4 20H20z" fill="#005260"/><path d="M28 80h66v40h-10V92H44v16H28z" fill="#005260"/><rect x="34" y="92" width="22" height="14" fill="#F6F7FB"/></svg>
+        <div>
+          <h3>Emprendimientos</h3>
+          <p class="q">¿Tienes un negocio pero no sabes cómo llegar a más personas?</p>
+          <p class="d">Encuentra creadores que conecten con tu público y promociona tu producto de una forma auténtica.</p>
+        </div>
+        <a class="btn btn-teal" href="registro.html#emprendedor">Tengo un emprendimiento <svg><use href="#arrow"/></svg></a>
+      </article>
+      <article class="who">
+        <svg class="ico" viewBox="0 0 100 120" aria-hidden="true"><path d="M30 10c-12 2-20 12-20 26v18l-6 14 52-8-6-12-4-16C44 18 38 10 30 10z" fill="none" stroke="#005260" stroke-width="7" stroke-linejoin="round"/><circle cx="31" cy="6" r="4" fill="#005260"/><path d="M42 78c8 4 16 2 20-4" fill="none" stroke="#005260" stroke-width="5" stroke-linecap="round"/><circle cx="68" cy="58" r="17" fill="#66C9D9"/><path d="M38 120c0-18 14-26 32-26s28 8 28 26z" fill="#66C9D9"/></svg>
+        <div>
+          <h3>Creadores</h3>
+          <p class="q">¿Tienes una comunidad y quieres colaborar con marcas?</p>
+          <p class="d">Descubre emprendimientos que coincidan con tu contenido y encuentra nuevas oportunidades.</p>
+        </div>
+        <a class="btn btn-teal" href="registro.html#creador">Soy un creador <svg><use href="#arrow"/></svg></a>
+      </article>
+    </div>
+  </div>
+
+  <div class="stats">
+    <h2 class="script">Juzga por tu propia cuenta</h2>
+    <p class="n">Contamos con más de
+      <!-- CAMBIA ESTE NÚMERO por el total real de registros de tu hoja -->
+      <span class="num script" id="contador">20</span>
+      creadores y emprendimientos registrados</p>
+  </div>
+</section>
+
+<section id="como-funciona" class="how">
   <div class="wrap">
-    <h2>Lo pequeño es una ventaja de precisión</h2>
-    <p>Lo que las grandes agencias descartan por pequeño es justo lo que da confianza. Los nano influencers tienen audiencias reducidas pero cercanas y creíbles, y por ser pequeñas son más fáciles de rastrear con códigos y enlaces únicos.</p>
+    <h2 class="script">¿Cómo funciona?</h2>
+    <ol class="steps">
+      <li>
+        <div class="badge"><b>01</b><svg viewBox="0 0 24 24"><circle cx="14" cy="8" r="4"/><path d="M6 20c0-3.5 3.6-6 8-6s8 2.5 8 6zM4 6v6M1 9h6"/></svg></div>
+        <h3>Te registras</h3>
+        <p>Cuéntanos a qué te dedicas y qué buscas en menos de 3 minutos.</p>
+      </li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6"/></svg></li>
+      <li>
+        <div class="badge"><b>02</b><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1M5 2v2M2 5h2M19 20v2M20 19h2"/></svg></div>
+        <h3>Te emparejamos</h3>
+        <p>Elegimos creadores afines a tu público y coordinamos la campaña contigo por WhatsApp.</p>
+      </li>
+      <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6"/></svg></li>
+      <li>
+        <div class="badge"><b>03</b><svg viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7 15l4-5 3 3 5-6"/></svg></div>
+        <h3>Ten resultados</h3>
+        <p>Cada creador tiene su propio código y enlace, y tú ves cuántos clientes trajo.</p>
+      </li>
+    </ol>
   </div>
-</section>
-
-<section id="logramos" class="goals">
-  <div class="wrap">
-    <h2>Lo que queremos lograr contigo</h2>
-    <p class="lead">Que llegues a tu público de forma auténtica, sin agencias costosas ni horas de trabajo extra, y con resultados claros de cada inversión.</p>
-    <div class="wins">
-      <div><b>Confianza y credibilidad</b><span>Perfiles de nano influencers verificados uno a uno.</span></div>
-      <div><b>Certeza de retorno</b><span>Códigos únicos, enlaces rastreables y un tablero de resultados.</span></div>
-      <div><b>Sencillez</b><span>Te registras con un formulario en pocos pasos y nosotros coordinamos.</span></div>
-      <div><b>Modelo accesible</b><span>Una comisión del 20 al 30 % por campaña gestionada.</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="como" class="wrap">
-  <h2>Cómo funciona</h2>
-  <ol class="steps">
-    <li><b>1. Te registras</b><span>Cuéntanos de tu negocio y de tu objetivo en menos de 3 minutos.</span></li>
-    <li><b>2. Emparejamos</b><span>Elegimos creadores afines a tu público y coordinamos la campaña contigo por WhatsApp.</span></li>
-    <li><b>3. Ves tus resultados</b><span>Cada creador tiene su propio código y enlace, y tú ves cuántos clientes trajo.</span></li>
-  </ol>
-  <p class="pilot">Estamos en fase piloto: 3 a 5 emprendimientos, una campaña cada uno, durante 4 semanas.</p>
 </section>
 
 <section class="cta">
   <div class="wrap">
-    <h2>Que tu negocio estalle de ideas y de clientes</h2>
-    <p>Sé parte del piloto y demuestra con datos qué campañas te funcionan.</p>
+    <h2 class="script">¿Listo para conectar?</h2>
+    <p>Encuentra tu próxima colaboración</p>
     <div class="acts">
-      <a class="btn" href="registro.html#registro">Registrar mi negocio</a>
-      <a class="btn alt" href="registro.html#creador">Soy creador</a>
+      <a class="btn btn-lime" href="registro.html#emprendedor">Tengo un emprendimiento <svg><use href="#arrow"/></svg></a>
+      <a class="btn btn-cyan" href="registro.html#creador">Soy un creador <svg><use href="#arrow"/></svg></a>
     </div>
   </div>
 </section>
 </main>
 
-<footer class="wrap">Quipitos. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros.</footer>
+<footer>
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Hand in Hand, inicio"><svg class="logo-svg" viewBox="0 0 206 140" aria-hidden="true"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/><g transform="translate(-50 0)"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g></svg></a>
+    <div class="help">
+      <strong>¿Necesitas ayuda?<br>Contáctanos</strong>
+      <a href="mailto:equipoquipitosoficial@gmail.com">equipoquipitosoficial@gmail.com</a>
+    </div>
+    <p class="legal">Hand in Hand · Piloto en curso. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros.</p>
+  </div>
+</footer>
 
 <button class="tour-fab" id="tourFab" type="button" aria-label="Ver el tutorial guiado">¿Cómo uso esta página?</button>
 <div class="tour-shield" id="tourShield"></div>
@@ -210,114 +323,70 @@ footer{padding-bottom:5rem}
 <script>
 (function(){
   var STEPS=[
-    {sel:".hero h1",title:"Esto es Quipitos",text:"Conectamos tu emprendimiento con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña."},
-    {sel:".hero .acts a:first-child",title:"Si tienes un negocio, haz clic aquí",text:"El botón “Registrar mi negocio” abre el formulario. Llenarlo toma menos de 3 minutos."},
-    {sel:".hero .acts a.alt",title:"Si eres creador de contenido",text:"Haz clic en “Soy creador” para registrarte y recibir propuestas de negocios de tu zona."},
-    {sel:"header nav",title:"El menú de arriba",text:"Desde aquí saltas a cada parte de la página. El botón “Registrarme” también te lleva al formulario.",needs:"header nav a.nl"},
-    {sel:"#como .steps",title:"Así funciona, en 3 pasos",text:"Te registras, emparejamos tu negocio con creadores afines y ves los resultados de cada campaña."},
+    {sel:".hero .wordmark",title:"Esto es Hand in Hand",text:"Conectamos tu emprendimiento con nano influencers verificados y te mostramos cuántos clientes trajo cada campaña."},
+    {sel:".hero .btn-lime",title:"Si tienes un negocio, haz clic aquí",text:"El botón “Tengo un emprendimiento” abre el formulario. Llenarlo toma menos de 3 minutos."},
+    {sel:".hero .btn-cyan",title:"Si eres creador de contenido",text:"Haz clic en “Soy un creador” para registrarte y recibir propuestas de negocios afines a ti."},
+    {sel:"header nav",title:"El menú de arriba",text:"Desde aquí saltas a cada parte de la página. El botón “Regístrate ya” también te lleva al formulario.",needs:"header nav .nl"},
+    {sel:"#como-funciona .steps",title:"Así funciona, en 3 pasos",text:"Te registras, te emparejamos con perfiles afines y ves los resultados de cada campaña."},
     {sel:".cta .acts",title:"Listo para empezar",text:"Cuando quieras, haz clic en el botón que corresponda a tu caso. ¡Te esperamos en el piloto!"}
   ];
-  var KEY="quipitos_tour_visto";
+  var KEY="hih_tour_visto";
   var $=function(id){return document.getElementById(id)};
   var shield=$("tourShield"),spot=$("tourSpot"),card=$("tourCard"),welcome=$("tourWelcome");
   var list=[],idx=0,target=null,active=false,lastFocus=null,raf=0;
   var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
-
   function seen(){try{return localStorage.getItem(KEY)==="1"}catch(e){return false}}
   function markSeen(){try{localStorage.setItem(KEY,"1")}catch(e){}}
   function visible(el){return el&&el.getClientRects().length>0}
-
-  function buildList(){
-    list=STEPS.filter(function(s){
-      return visible(document.querySelector(s.sel))&&(!s.needs||visible(document.querySelector(s.needs)));
-    });
-  }
-
+  function buildList(){list=STEPS.filter(function(s){return visible(document.querySelector(s.sel))&&(!s.needs||visible(document.querySelector(s.needs)))})}
   function place(){
     if(!active||!target)return;
-    var r=target.getBoundingClientRect(),pad=8,vw=window.innerWidth,vh=window.innerHeight;
-    spot.style.top=(r.top-pad)+"px";
-    spot.style.left=(r.left-pad)+"px";
-    spot.style.width=(r.width+pad*2)+"px";
-    spot.style.height=(r.height+pad*2)+"px";
+    var r=target.getBoundingClientRect(),pad=8,vw=innerWidth,vh=innerHeight;
+    spot.style.top=(r.top-pad)+"px";spot.style.left=(r.left-pad)+"px";
+    spot.style.width=(r.width+pad*2)+"px";spot.style.height=(r.height+pad*2)+"px";
     var cw=card.offsetWidth,ch=card.offsetHeight,gap=18,top,cls="";
     var below=r.bottom+pad+gap,above=r.top-pad-gap-ch;
-    if(below+ch<=vh-8){top=below;cls="below"}
-    else if(above>=8){top=above;cls="above"}
-    else{top=vh-ch-12}
-    var left=r.left+r.width/2-cw/2;
-    left=Math.max(12,Math.min(left,vw-cw-12));
-    card.style.top=top+"px";
-    card.style.left=left+"px";
-    card.className="tour-card "+cls;
-    card.style.display="block";
-    var ax=r.left+r.width/2-left;
-    card.style.setProperty("--ax",Math.max(24,Math.min(ax,cw-24))+"px");
+    if(below+ch<=vh-8){top=below;cls="below"}else if(above>=8){top=above;cls="above"}else{top=vh-ch-12}
+    var left=Math.max(12,Math.min(r.left+r.width/2-cw/2,vw-cw-12));
+    card.style.top=top+"px";card.style.left=left+"px";card.className="tour-card "+cls;card.style.display="block";
+    card.style.setProperty("--ax",Math.max(24,Math.min(r.left+r.width/2-left,cw-24))+"px");
   }
-  function track(ms){
-    cancelAnimationFrame(raf);
-    var end=Date.now()+ms;
-    (function loop(){place();if(Date.now()<end)raf=requestAnimationFrame(loop)})();
-  }
-
+  function track(ms){cancelAnimationFrame(raf);var end=Date.now()+ms;(function loop(){place();if(Date.now()<end)raf=requestAnimationFrame(loop)})()}
   function show(i){
-    idx=i;var s=list[i];
-    target=document.querySelector(s.sel);
+    idx=i;var s=list[i];target=document.querySelector(s.sel);
     $("tourCount").textContent="Paso "+(i+1)+" de "+list.length;
-    $("tourTitle").textContent=s.title;
-    $("tourText").textContent=s.text;
+    $("tourTitle").textContent=s.title;$("tourText").textContent=s.text;
     $("tourPrev").style.visibility=i===0?"hidden":"visible";
     $("tourNext").textContent=i===list.length-1?"Terminar":"Siguiente";
     var dots="";for(var k=0;k<list.length;k++)dots+='<i'+(k===i?' class="on"':'')+'></i>';
     $("tourDots").innerHTML=dots;
     target.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});
-    spot.style.display="block";
-    track(reduce?100:800);
+    spot.style.display="block";track(reduce?100:800);
     $("tourNext").focus({preventScroll:true});
   }
-
-  function start(){
-    buildList();if(!list.length)return;
-    lastFocus=document.activeElement;
-    welcome.classList.remove("open");
-    active=true;shield.style.display="block";
-    show(0);
-  }
-  function end(){
-    active=false;cancelAnimationFrame(raf);
-    shield.style.display=spot.style.display=card.style.display="none";
-    markSeen();
-    if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
-  }
+  function start(){buildList();if(!list.length)return;lastFocus=document.activeElement;welcome.classList.remove("open");active=true;shield.style.display="block";show(0)}
+  function end(){active=false;cancelAnimationFrame(raf);shield.style.display=spot.style.display=card.style.display="none";markSeen();if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true})}
   function next(){idx<list.length-1?show(idx+1):end()}
   function prev(){if(idx>0)show(idx-1)}
-
   $("tourNext").addEventListener("click",next);
   $("tourPrev").addEventListener("click",prev);
   $("tourSkip").addEventListener("click",end);
   $("tourFab").addEventListener("click",start);
   $("tourYes").addEventListener("click",function(){markSeen();start()});
   $("tourNo").addEventListener("click",function(){markSeen();welcome.classList.remove("open")});
-  window.addEventListener("scroll",function(){if(active)place()},{passive:true});
-  window.addEventListener("resize",function(){if(active){buildList();place()}});
+  addEventListener("scroll",function(){if(active)place()},{passive:true});
+  addEventListener("resize",function(){if(active){buildList();place()}});
   document.addEventListener("keydown",function(e){
     if(active){
-      if(e.key==="Escape")end();
-      else if(e.key==="ArrowRight")next();
-      else if(e.key==="ArrowLeft")prev();
+      if(e.key==="Escape")end();else if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")prev();
       else if(e.key==="Tab"){
         var f=[$("tourSkip"),$("tourPrev"),$("tourNext")].filter(function(b){return b.style.visibility!=="hidden"});
-        var i=f.indexOf(document.activeElement);
-        e.preventDefault();
-        i=e.shiftKey?(i<=0?f.length-1:i-1):(i+1)%f.length;
-        f[i].focus();
+        var i=f.indexOf(document.activeElement);e.preventDefault();
+        i=e.shiftKey?(i<=0?f.length-1:i-1):(i+1)%f.length;f[i].focus();
       }
     }else if(welcome.classList.contains("open")&&e.key==="Escape"){markSeen();welcome.classList.remove("open")}
   });
-
-  if(!seen()){
-    setTimeout(function(){welcome.classList.add("open");$("tourYes").focus()},900);
-  }
+  if(!seen())setTimeout(function(){welcome.classList.add("open");$("tourYes").focus()},900);
 })();
 </script>
 </body>
