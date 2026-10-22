@@ -85,6 +85,38 @@ nav .btn{padding:.6rem 1.6rem;font-size:1.05rem}
 .who .btn{grid-column:1/-1;justify-self:center}
 @media(max-width:30rem){.who{grid-template-columns:1fr}.who svg.ico{width:6rem}}
 
+/* Problema y detalle por público */
+.problem,.detail,.faq{padding-block:3rem}
+.problem>h2,.detail>h2,.faq>h2{font-size:clamp(2.2rem,4.5vw,3.6rem);color:var(--teal)}
+.plead{margin-top:1rem;font-size:1.2rem;max-width:52rem;margin-bottom:2rem}
+.card.plain h3{text-align:left;font-size:1.3rem}
+.detail-grid{display:grid;gap:1.5rem}
+@media(min-width:56rem){.detail-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.panel{background:var(--card);border-radius:2.5rem;padding:2rem}
+.panel.biz{border-top:10px solid var(--lime)}
+.panel.cre{border-top:10px solid var(--cyan)}
+.panel h3{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--teal)}
+.panel .lead{margin-top:.75rem;color:var(--muted);font-size:1.1rem}
+.panel h4{margin:1.5rem 0 .6rem;font-size:1rem;font-weight:800;color:#0f7d78;text-transform:uppercase;letter-spacing:.05em}
+.panel ul{margin:0;padding:0;list-style:none;display:grid;gap:.6rem}
+.panel li{position:relative;padding-left:1.7rem}
+.panel li::before{content:"";position:absolute;left:0;top:.5em;width:.85rem;height:.85rem;border-radius:50%}
+.panel.biz li::before{background:var(--lime)}
+.panel.cre li::before{background:var(--cyan)}
+.panel .btn{margin-top:1.75rem}
+
+/* Preguntas frecuentes */
+.faq-list{display:grid;gap:.9rem;margin-top:1.5rem;max-width:56rem}
+.faq details{background:var(--card);border-radius:1.25rem;padding:1rem 1.4rem}
+.faq summary{cursor:pointer;font-weight:700;font-size:1.15rem;color:var(--teal)}
+.faq details[open] summary{margin-bottom:.6rem}
+.faq details p{color:var(--muted)}
+
+/* Piloto */
+.pilot{max-width:48rem;margin:3rem auto 0;text-align:center}
+.pilot h3{font-size:1.6rem;font-weight:800;color:var(--lime)}
+.pilot p{margin-top:.6rem;color:#cfe3e3;font-size:1.15rem}
+
 /* Cifras */
 .stats{background:linear-gradient(180deg,#00212B,#003647);color:var(--bg);border-radius:3rem;padding:3rem 2rem;display:grid;gap:2rem;align-items:center}
 @media(min-width:56rem){.stats{grid-template-columns:1fr 1fr;padding:4.5rem 6rem}}
@@ -163,7 +195,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
   <a class="logo" href="index.html" aria-label="Hand in Hand, inicio"><svg class="logo-svg" viewBox="0 0 206 140" aria-hidden="true"><path d="M104.5 41.2 103.5 41.5 99.5 44.2 92.5 48.2 82.8 53.0 67.8 58.5 57.2 61.2 46.0 63.2 31.2 64.5 22.8 64.5 15.0 64.0 10.8 63.2 9.8 63.5 6.8 78.8 7.0 79.5 18.5 80.8 30.2 81.0 42.2 80.2 49.2 79.2 49.8 80.5 51.0 87.2 51.5 92.5 51.5 100.5 51.0 105.5 49.8 111.8 44.2 113.2 35.0 116.5 28.2 119.5 19.5 124.2 19.8 125.2 27.8 138.2 28.5 138.2 38.2 133.0 44.5 130.5 53.8 127.8 62.0 126.2 68.0 125.8 74.8 125.8 80.5 126.2 88.5 127.8 96.5 130.5 97.5 130.5 104.5 116.8 104.5 116.0 96.0 112.8 89.0 111.0 80.8 109.8 73.5 109.5 72.2 109.0 73.0 102.2 73.0 90.5 72.2 83.5 70.5 75.0 71.0 74.5 75.8 73.2 87.8 68.8 103.5 61.0 103.8 60.2 102.8 59.8 101.2 57.8 101.2 55.2Z"/><circle cx="53.5" cy="41.8" r="13.3"/><g transform="translate(-50 0)"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g></svg></a>
   <nav>
     <a class="nl" href="#que-hacemos">¿Qué es lo que hacemos?</a>
+    <a class="nl" href="#para-cada-uno">Para cada perfil</a>
     <a class="nl" href="#como-funciona">¿Cómo funciona?</a>
+    <a class="nl" href="#preguntas">Preguntas</a>
     <a class="btn btn-teal" href="registro.html">Regístrate ya</a>
   </nav>
 </header>
@@ -186,29 +220,106 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
   <div class="intro-txt">
     <h2 class="script">Tú también tienes la oportunidad de crecer.</h2>
     <p>A veces, la idea de hacer un patrocinio suena como una gran inversión de dinero y tiempo, un lujo al que las microempresas no pueden acceder y que con los influencers solo pueden imaginar. Pero con <b>Hand in Hand</b>, el sueño de llegar a más personas está más cerca que nunca.</p>
+    <p><b>Hand in Hand</b> es una agencia digital para micro y pequeños emprendimientos. Hacemos tres cosas: <b>verificamos</b> a nano influencers, es decir, creadores con comunidades pequeñas pero cercanas y creíbles; los <b>emparejamos</b> con negocios que encajan con su contenido y su público; y <b>medimos</b> cada campaña con códigos únicos y enlaces rastreables, para que ambas partes sepan qué resultado se logró.</p>
+    <p>Las grandes agencias y plataformas están pensadas para marcas con presupuestos enormes y miden alcance. Nosotros hacemos lo contrario: trabajamos a la medida de los negocios pequeños y de los creadores pequeños, y medimos clientes, no solo visualizaciones.</p>
   </div>
 </div></section>
+
+<section class="wrap problem" id="problema">
+  <h2 class="script">El problema que queremos resolver</h2>
+  <p class="plead">Los dueños de micro y pequeños negocios saben que la recomendación de una persona cercana vende más que un anuncio. Pero llegar a esas voces cuesta demasiado, toma demasiado tiempo y casi nunca se puede medir. Del otro lado, muchos creadores con comunidades pequeñas no saben cómo llegar a los negocios de su ciudad. Hand in Hand existe para unir a ambos.</p>
+  <div class="cards">
+    <article class="card plain">
+      <h3>Las agencias no son para ti</h3>
+      <p>Las agencias y plataformas de influencers están pensadas para grandes presupuestos y métricas de alcance. Un emprendimiento pequeño rara vez encaja en ese modelo.</p>
+    </article>
+    <article class="card plain">
+      <h3>No alcanza el tiempo</h3>
+      <p>Buscar, verificar y coordinar creadores por tu cuenta consume horas que un emprendedor necesita para producir, atender y vender.</p>
+    </article>
+    <article class="card plain">
+      <h3>No sabes si funcionó</h3>
+      <p>Publicar por tu cuenta, escribirle directamente a creadores o pagar publicidad genérica deja resultados inciertos: no hay forma clara de saber qué trajo clientes.</p>
+    </article>
+  </div>
+</section>
 
 <section class="wrap goals">
   <div>
     <h2 class="script">Lo que queremos lograr contigo.</h2>
     <p>Con <b>Hand in Hand</b> podrás conectar con emprendimientos o creadores con los mismos intereses que tú, sin agencias costosas ni horas de trabajo extra, y con resultados claros de cada inversión.</p>
+    <p>Queremos que un negocio pequeño pueda hacer lo que antes solo hacían las marcas grandes: llegar a su público a través de voces creíbles y saber con certeza qué le funcionó.</p>
   </div>
   <div class="cards">
     <article class="card">
       <div class="blob" style="background:#4FE6EA"><svg viewBox="0 0 24 24"><path d="M12 3c5 0 9 3.1 9 7s-4 7-9 7c-1 0-2-.1-2.9-.4L5 19l.9-3.6C4.1 14.1 3 12.2 3 10c0-3.9 4-7 9-7z"/><path d="M12 7v3.5M12 13.2v.1"/></svg></div>
       <h3>Creíble</h3>
-      <p>Influencers y emprendimientos verificados.</p>
+      <p>Revisamos manualmente cada perfil antes de recomendarlo. Trabajamos con nano influencers: comunidades pequeñas, pero cercanas y que confían en lo que recomiendan.</p>
     </article>
     <article class="card">
       <div class="blob" style="background:#9AC646"><svg viewBox="0 0 24 24"><path d="M2 8l4-2 5 2 3-2 4 1 4 1M2 8l1 6 5 5c.8.8 2 .8 2.8 0l6.4-6.4M22 8l-1 6M11 8l-3 3c-.6.6-.6 1.4 0 2 .6.6 1.4.6 2 0l2.5-2.2 4 4M9.5 15.5l1.5 1.5M12 13l2 2"/></svg></div>
       <h3>Confiable</h3>
-      <p>Códigos únicos, enlaces rastreables y un tablero de resultados.</p>
+      <p>Cada creador tiene un código único y un enlace rastreable. Así vemos cuántos clientes llegaron gracias a cada publicación, y los resultados quedan en un tablero.</p>
     </article>
     <article class="card">
       <div class="blob" style="background:#B5EA3C"><svg viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7 15l4-5 3 3 5-6"/></svg></div>
       <h3>Accesible</h3>
-      <p>Una comisión del 20 al 30 % por campaña gestionada.</p>
+      <p>Sin contratos de agencia ni presupuestos de marca grande. Cobramos una comisión del 20 al 30 % por campaña gestionada y tú no inviertes horas buscando creadores.</p>
+    </article>
+  </div>
+</section>
+
+<section class="wrap detail" id="para-cada-uno">
+  <h2 class="script">Qué hacemos por cada uno</h2>
+  <p class="plead">Hand in Hand trabaja con dos públicos que se necesitan. Esto es lo que hacemos por ti, lo que te pedimos y lo que recibes, según quién seas.</p>
+  <div class="detail-grid">
+    <article class="panel biz">
+      <h3>Si tienes un emprendimiento</h3>
+      <p class="lead">Somos el puente entre tu negocio y las voces que tu público ya escucha. No tienes que buscar, verificar ni negociar con creadores uno por uno: nosotros nos encargamos, y tú ves qué resultado dio cada campaña.</p>
+      <h4>Lo que hacemos por ti</h4>
+      <ul>
+        <li>Buscamos y verificamos manualmente a nano influencers de tu sector y de tu municipio.</li>
+        <li>Te proponemos creadores afines a tu producto y a tu público, y coordinamos la campaña contigo por WhatsApp.</li>
+        <li>Le damos a cada creador un código único y un enlace rastreable, para atribuirle las ventas o consultas que genere.</li>
+        <li>Te mostramos los resultados en un tablero: clics, usos del código y retorno de cada campaña.</li>
+      </ul>
+      <h4>Lo que te pedimos</h4>
+      <ul>
+        <li>Registrarte con el formulario: datos del negocio, sector, municipio, presupuesto aproximado, objetivo de la campaña, tiempo disponible y el enlace donde te compran (web, tienda o WhatsApp).</li>
+        <li>Responder nuestra propuesta de creadores y acordar la campaña.</li>
+        <li>Si vendes por WhatsApp o en el local, avisarnos cuando alguien use el código del creador.</li>
+      </ul>
+      <h4>Lo que recibes</h4>
+      <ul>
+        <li>Voces cercanas y creíbles que le hablan a tu público, en lugar de publicidad genérica.</li>
+        <li>Claridad sobre qué campaña trajo clientes y cuál no.</li>
+        <li>Un modelo accesible: comisión del 20 al 30 % por campaña gestionada, sin pagar una agencia tradicional.</li>
+      </ul>
+      <a class="btn btn-lime" href="registro.html#emprendedor">Tengo un emprendimiento <svg><use href="#arrow"/></svg></a>
+    </article>
+    <article class="panel cre">
+      <h3>Si eres creador de contenido</h3>
+      <p class="lead">Tu comunidad pequeña es tu fortaleza: te conoce, te cree y te responde. Te conectamos con negocios locales que encajan con tu contenido, para que colabores con marcas reales y tu influencia se pueda demostrar con datos.</p>
+      <h4>Lo que hacemos por ti</h4>
+      <ul>
+        <li>Verificamos tu perfil para que los negocios confíen en ti desde el primer mensaje.</li>
+        <li>Te emparejamos con emprendimientos que coinciden con tu nicho, tu municipio y tu audiencia.</li>
+        <li>Coordinamos contigo la campaña por WhatsApp, para que sepas qué se espera de ti antes de publicar.</li>
+        <li>Te damos un código único y un enlace propio que muestran cuántos clientes llegaron por ti.</li>
+      </ul>
+      <h4>Lo que te pedimos</h4>
+      <ul>
+        <li>Registrarte con el formulario: tu nombre, red principal y usuario, número de seguidores, nicho, municipio, tarifa por publicación y WhatsApp.</li>
+        <li>Revisar las propuestas que te enviemos y decidir si te interesan.</li>
+        <li>Compartir tu código y tu enlace único en las publicaciones de la campaña.</li>
+      </ul>
+      <h4>Lo que recibes</h4>
+      <ul>
+        <li>Colaboraciones con emprendimientos reales, sin necesidad de tener cientos de miles de seguidores.</li>
+        <li>Resultados demostrables: tu aporte queda registrado con tu propio código y enlace.</li>
+        <li>Un perfil verificado que te da credibilidad frente a los negocios.</li>
+      </ul>
+      <a class="btn btn-cyan" href="registro.html#creador">Soy un creador <svg><use href="#arrow"/></svg></a>
     </article>
   </div>
 </section>
@@ -240,9 +351,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
 
   <div class="stats">
     <h2>Juzga por tu propia cuenta</h2>
-    <p class="n">Sé de los
-      <span class="num">primeros</span>
-      emprendimientos y creadores del piloto en Santa Marta y el Magdalena</p>
+    <p class="n">Únete a los
+      <span class="num">27</span>
+      emprendimientos y creadores ya registrados en el piloto en Santa Marta y el Magdalena</p>
   </div>
 </section>
 
@@ -253,21 +364,55 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
       <li>
         <div class="badge"><b>01</b><svg viewBox="0 0 24 24"><circle cx="14" cy="8" r="4"/><path d="M6 20c0-3.5 3.6-6 8-6s8 2.5 8 6zM4 6v6M1 9h6"/></svg></div>
         <h3>Te registras</h3>
-        <p>Cuéntanos a qué te dedicas y qué buscas en menos de 3 minutos.</p>
+        <p>Llenas el formulario en menos de 3 minutos. Si tienes un negocio, nos cuentas qué vendes, dónde estás, tu presupuesto y qué quieres lograr. Si eres creador, nos dices tu red, tu nicho, tu audiencia y tu tarifa. Después recibes un correo de confirmación.</p>
       </li>
       <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6"/></svg></li>
       <li>
         <div class="badge"><b>02</b><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1M5 2v2M2 5h2M19 20v2M20 19h2"/></svg></div>
         <h3>Te emparejamos</h3>
-        <p>Elegimos creadores afines a tu público y coordinamos la campaña contigo por WhatsApp.</p>
+        <p>Revisamos cada perfil a mano y cruzamos negocios y creadores del mismo sector y municipio. Luego te escribimos por WhatsApp con una propuesta clara, para que decidas si aceptas.</p>
       </li>
       <li class="arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6"/></svg></li>
       <li>
         <div class="badge"><b>03</b><svg viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7 15l4-5 3 3 5-6"/></svg></div>
         <h3>Ten resultados</h3>
-        <p>Cada creador tiene su propio código y enlace, y tú ves cuántos clientes trajo.</p>
+        <p>Cada creador comparte su código único y su enlace rastreable. Con ellos medimos clics, usos del código y ventas o consultas, y te mostramos el resultado de la campaña en un tablero.</p>
       </li>
     </ol>
+    <div class="pilot">
+      <h3>Estamos en fase de piloto</h3>
+      <p>Empezamos en Santa Marta y el Magdalena con 3 a 5 emprendimientos, una campaña cada uno, durante 4 semanas, junto a 15 a 20 nano influencers verificados de uno o dos sectores. Ser parte del piloto significa ser de los primeros en probar el servicio y ayudarnos a mejorarlo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap faq" id="preguntas">
+  <h2 class="script">Preguntas frecuentes</h2>
+  <div class="faq-list">
+    <details>
+      <summary>¿Qué es un nano influencer?</summary>
+      <p>Es un creador de contenido con una comunidad pequeña, normalmente de entre 1.000 y 10.000 seguidores. Su audiencia es más reducida que la de un influencer famoso, pero suele ser más cercana, conversa con él y confía en sus recomendaciones.</p>
+    </details>
+    <details>
+      <summary>¿Cómo verifican a los creadores?</summary>
+      <p>Revisamos manualmente cada perfil antes de recomendarlo: que la cuenta sea real, que el contenido y la comunidad correspondan a lo que se declara en el formulario, y que su nicho encaje con los negocios del piloto.</p>
+    </details>
+    <details>
+      <summary>¿Cómo sé si una campaña funcionó?</summary>
+      <p>Cada creador recibe un código de descuento único y un enlace propio. Cuando alguien entra por ese enlace o usa ese código, queda registrado y lo asociamos a ese creador. Así puedes ver cuántos clics y cuántas ventas o consultas trajo cada campaña, sin adivinar.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto cuesta?</summary>
+      <p>Cobramos una comisión del 20 al 30 % por campaña gestionada, sin pagar una agencia tradicional. En el formulario indicas un presupuesto aproximado, y el detalle de cada campaña lo definimos contigo antes de empezar.</p>
+    </details>
+    <details>
+      <summary>¿Qué pasa después de registrarme?</summary>
+      <p>Recibes un correo de agradecimiento y nuestro equipo revisa tu información. Después te escribimos por WhatsApp para contarte los siguientes pasos: una propuesta de creadores si tienes un negocio, o una propuesta de colaboración si eres creador.</p>
+    </details>
+    <details>
+      <summary>¿Dónde funciona el servicio?</summary>
+      <p>El piloto se desarrolla en Santa Marta y el departamento del Magdalena. Por eso el formulario te pide elegir tu municipio, para emparejar negocios y creadores del mismo lugar.</p>
+    </details>
   </div>
 </section>
 
@@ -328,6 +473,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
     {sel:".hero .btn-lime",title:"Si tienes un negocio, haz clic aquí",text:"El botón “Tengo un emprendimiento” abre el formulario. Llenarlo toma menos de 3 minutos."},
     {sel:".hero .btn-cyan",title:"Si eres creador de contenido",text:"Haz clic en “Soy un creador” para registrarte y recibir propuestas de negocios afines a ti."},
     {sel:"header nav",title:"El menú de arriba",text:"Desde aquí saltas a cada parte de la página. El botón “Regístrate ya” también te lleva al formulario.",needs:"header nav .nl"},
+    {sel:"#para-cada-uno .detail-grid",title:"Qué hacemos por cada perfil",text:"Aquí te explicamos, para emprendimientos y para creadores, qué hacemos, qué te pedimos y qué recibes."},
     {sel:"#como-funciona .steps",title:"Así funciona, en 3 pasos",text:"Te registras, te emparejamos con perfiles afines y ves los resultados de cada campaña."},
     {sel:".cta .acts",title:"Listo para empezar",text:"Cuando quieras, haz clic en el botón que corresponda a tu caso. ¡Te esperamos en el piloto!"}
   ];
