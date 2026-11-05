@@ -202,7 +202,43 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
 @keyframes vSlideR{from{transform:translateX(170px);opacity:0}to{transform:none;opacity:1}}
 @keyframes vRise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes vFloat{from{transform:translateY(0)}to{transform:translateY(-12px)}}
-@media(prefers-reduced-motion:reduce){.vstage *,.scene.on{animation:none!important}}
+
+/* Movimiento de los personajes (usa variables para respetar pausa/póster dentro de <use>) */
+.vstage{--ps:running}
+.vstage.paused{--ps:paused}
+.sway,.head,.armL,.armR,.legA,.legB,.phone,.hairA,.hairB,.hop,.cheerL,.cheerR,.blink,.beat{animation-play-state:var(--ps,running)}
+.sway{animation:vSway 1.7s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.head{animation:vHead 1.1s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.armL{animation:vArmL 1.3s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.armR{animation:vArmR 1.3s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.legA{animation:vStepA .45s linear 2}
+.legB{animation:vStepB .45s linear 2}
+.phone{animation:vPhone 1.2s ease-in-out infinite alternate}
+.hairA{animation:vHairA 1.5s ease-in-out infinite alternate}
+.hairB{animation:vHairB 1.5s ease-in-out infinite alternate .3s}
+.hop{animation:vHop .62s cubic-bezier(.4,0,.6,1) infinite alternate;animation-delay:var(--d,0s)}
+.cheerL{animation:vCheerL .31s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.cheerR{animation:vCheerR .31s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.blink{animation:vBlink 3.6s infinite;animation-delay:var(--d,0s)}
+.beat{animation:vBeat .8s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes vSway{from{transform:rotate(-2.4deg) translateY(0)}to{transform:rotate(2.4deg) translateY(4px)}}
+@keyframes vHead{from{transform:rotate(calc(-4deg + var(--sad,0)*10deg))}to{transform:rotate(calc(4deg + var(--sad,0)*3deg))}}
+@keyframes vArmL{from{transform:rotate(calc(5deg + var(--sad,0)*-6deg))}to{transform:rotate(-9deg)}}
+@keyframes vArmR{from{transform:rotate(calc(-5deg - var(--hap,0)*125deg))}to{transform:rotate(calc(9deg - var(--hap,0)*160deg))}}
+@keyframes vStepA{0%,100%{transform:rotate(calc(var(--st,0)*-22deg))}50%{transform:rotate(calc(var(--st,0)*22deg))}}
+@keyframes vStepB{0%,100%{transform:rotate(calc(var(--st,0)*22deg))}50%{transform:rotate(calc(var(--st,0)*-22deg))}}
+@keyframes vPhone{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+@keyframes vHairA{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+@keyframes vHairB{from{transform:rotate(4deg)}to{transform:rotate(-5deg)}}
+@keyframes vHop{from{transform:translateY(0)}to{transform:translateY(-16px)}}
+@keyframes vCheerL{from{transform:rotate(18deg)}to{transform:rotate(-24deg)}}
+@keyframes vCheerR{from{transform:rotate(-18deg)}to{transform:rotate(24deg)}}
+@keyframes vBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes vBeat{from{transform:scale(1)}to{transform:scale(1.5)}}
+@keyframes vBob{from{translate:0 0}to{translate:0 -6px}}
+.vstage .pop{animation:vPop .55s cubic-bezier(.3,1.6,.5,1) both,vBob 1.8s ease-in-out infinite alternate}
+.vstage .float{animation-duration:1.5s}
+@media(prefers-reduced-motion:reduce){.vstage *,.scene.on,.sway,.head,.armL,.armR,.legA,.legB,.phone,.hairA,.hairB,.hop,.cheerL,.cheerR,.blink,.beat{animation:none!important}}
 
 /* ===== TUTORIAL GUIADO ===== */
 .tour-fab{position:fixed;right:1rem;bottom:1rem;z-index:900;font:600 1rem "Inter",sans-serif;padding:.75rem 1.2rem;border:0;border-radius:999px;background:var(--teal);color:#fff;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.25)}
@@ -243,78 +279,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
     <g id="hihR"><path d="M154.5 40.8 146.0 53.2 145.8 54.5 156.2 61.0 167.5 66.8 177.0 70.8 184.0 73.2 188.8 74.5 189.2 75.0 187.8 82.0 186.8 90.5 186.8 102.2 187.5 109.0 186.2 109.5 181.8 109.5 175.0 110.2 168.5 111.5 159.2 114.2 155.2 116.0 155.2 116.8 162.2 130.5 163.2 130.5 170.2 128.0 179.2 126.2 185.0 125.8 195.8 126.0 205.0 127.5 215.2 130.5 221.5 133.0 230.8 138.0 232.0 138.2 240.0 125.2 240.2 124.2 232.5 120.0 224.8 116.5 215.5 113.2 210.0 111.8 208.8 105.5 208.2 100.5 208.5 89.2 210.0 80.5 210.5 79.2 223.8 80.8 241.2 80.8 252.8 79.5 253.0 78.8 250.0 63.5 249.2 63.2 245.0 64.0 238.0 64.5 227.2 64.5 211.8 63.0 199.2 60.5 184.5 56.0 177.0 53.0 167.2 48.2 159.0 43.5 155.5 41.0Z"/><circle cx="206.2" cy="41.8" r="13.2"/></g>
 
     <!-- Emprendedora: --sad / --hap cambian la expresión -->
-    <g id="chEmp">
-      <rect x="-24" y="-98" width="20" height="94" rx="9" fill="#00171F"/>
-      <rect x="4" y="-98" width="20" height="94" rx="9" fill="#00171F"/>
-      <ellipse cx="-16" cy="-3" rx="17" ry="7" fill="#E3E4EA"/>
-      <ellipse cx="16" cy="-3" rx="17" ry="7" fill="#E3E4EA"/>
-      <path d="M-40 -198 Q0 -214 40 -198 L50 -94 L-50 -94 Z" fill="#005260"/>
-      <path d="M-30 -158 H30 L42 -94 H-42 Z" fill="#B5EA3C"/>
-      <rect x="-14" y="-134" width="28" height="22" rx="6" fill="#9AC646"/>
-      <path d="M-21 -204 L-25 -158 M21 -204 L25 -158" stroke="#B5EA3C" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <path d="M-36 -194 Q-62 -150 -52 -112" stroke="#005260" stroke-width="18" fill="none" stroke-linecap="round"/>
-      <path d="M36 -194 Q62 -150 52 -112" stroke="#005260" stroke-width="18" fill="none" stroke-linecap="round"/>
-      <circle cx="-52" cy="-102" r="10" fill="#C98B62"/>
-      <circle cx="52" cy="-102" r="10" fill="#C98B62"/>
-      <rect x="-9" y="-222" width="18" height="26" rx="6" fill="#C98B62"/>
-      <circle cx="0" cy="-290" r="15" fill="#2B1A12"/>
-      <circle cx="0" cy="-252" r="36" fill="#2B1A12"/>
-      <ellipse cx="0" cy="-244" rx="29" ry="31" fill="#C98B62"/>
-      <path d="M-31 -250 Q-22 -284 6 -278 Q28 -272 31 -250 Q14 -266 -4 -265 Q-22 -264 -31 -250Z" fill="#2B1A12"/>
-      <circle cx="-11" cy="-243" r="3.2" fill="#00171F"/>
-      <circle cx="11" cy="-243" r="3.2" fill="#00171F"/>
-      <circle cx="-19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/>
-      <circle cx="19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/>
-      <g style="opacity:var(--sad,0)">
-        <path d="M-19 -254 L-6 -259 M19 -254 L6 -259" stroke="#00171F" stroke-width="2.6" stroke-linecap="round" fill="none"/>
-        <path d="M-8 -226 Q0 -233 8 -226" stroke="#00171F" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-      </g>
-      <g style="opacity:var(--hap,1)">
-        <path d="M-18 -257 Q-12 -261 -6 -257 M6 -257 Q12 -261 18 -257" stroke="#00171F" stroke-width="2.6" stroke-linecap="round" fill="none"/>
-        <path d="M-10 -230 Q0 -218 10 -230 Z" fill="#fff" stroke="#00171F" stroke-width="2.4" stroke-linejoin="round"/>
-      </g>
-    </g>
+    <g id="chEmp"><g transform="translate(-14,-98)"><g class="legA"><rect x="-10" y="0" width="20" height="94" rx="9" fill="#00171F"/><ellipse cx="-2" cy="95" rx="17" ry="7" fill="#E3E4EA"/></g></g><g transform="translate(14,-98)"><g class="legB"><rect x="-10" y="0" width="20" height="94" rx="9" fill="#00171F"/><ellipse cx="2" cy="95" rx="17" ry="7" fill="#E3E4EA"/></g></g><g transform="translate(0,-98)"><g class="sway"><g transform="translate(0,98)"><path d="M-40 -198 Q0 -214 40 -198 L50 -94 L-50 -94 Z" fill="#005260"/><path d="M-30 -158 H30 L42 -94 H-42 Z" fill="#B5EA3C"/><rect x="-14" y="-134" width="28" height="22" rx="6" fill="#9AC646"/><path d="M-21 -204 L-25 -158 M21 -204 L25 -158" stroke="#B5EA3C" stroke-width="6" fill="none" stroke-linecap="round"/><g transform="translate(-36,-194)"><g class="armL"><g transform="translate(36,194)"><path d="M-36 -194 Q-62 -150 -52 -112" stroke="#005260" stroke-width="18" fill="none" stroke-linecap="round"/><circle cx="-52" cy="-102" r="10" fill="#C98B62"/></g></g></g><g transform="translate(36,-194)"><g class="armR"><g transform="translate(-36,194)"><path d="M36 -194 Q62 -150 52 -112" stroke="#005260" stroke-width="18" fill="none" stroke-linecap="round"/><circle cx="52" cy="-102" r="10" fill="#C98B62"/></g></g></g><g transform="translate(0,-222)"><g class="head"><g transform="translate(0,222)"><rect x="-9" y="-222" width="18" height="26" rx="6" fill="#C98B62"/><circle cx="0" cy="-290" r="15" fill="#2B1A12"/><circle cx="0" cy="-252" r="36" fill="#2B1A12"/><ellipse cx="0" cy="-244" rx="29" ry="31" fill="#C98B62"/><path d="M-31 -250 Q-22 -284 6 -278 Q28 -272 31 -250 Q14 -266 -4 -265 Q-22 -264 -31 -250Z" fill="#2B1A12"/><g transform="translate(0,-243)"><g class="blink"><circle cx="-11" cy="0" r="3.2" fill="#00171F"/><circle cx="11" cy="0" r="3.2" fill="#00171F"/></g></g><circle cx="-19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/><circle cx="19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/><g style="opacity:var(--sad,0)"><path d="M-19 -254 L-6 -259 M19 -254 L6 -259" stroke="#00171F" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M-8 -226 Q0 -233 8 -226" stroke="#00171F" stroke-width="2.8" fill="none" stroke-linecap="round"/></g><g style="opacity:var(--hap,1)"><path d="M-18 -257 Q-12 -261 -6 -257 M6 -257 Q12 -261 18 -257" stroke="#00171F" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M-10 -230 Q0 -218 10 -230 Z" fill="#fff" stroke="#00171F" stroke-width="2.4" stroke-linejoin="round"/></g></g></g></g></g></g></g></g>
 
-    <!-- Creadora con el celular -->
-    <g id="chCre">
-      <path d="M-40 -252 Q-44 -306 0 -306 Q44 -306 40 -252 L46 -146 Q0 -134 -46 -146 Z" fill="#3A2216"/>
-      <rect x="-24" y="-98" width="20" height="94" rx="9" fill="#00171F"/>
-      <rect x="4" y="-98" width="20" height="94" rx="9" fill="#00171F"/>
-      <ellipse cx="-16" cy="-3" rx="17" ry="7" fill="#E3E4EA"/>
-      <ellipse cx="16" cy="-3" rx="17" ry="7" fill="#E3E4EA"/>
-      <path d="M-40 -198 Q0 -214 40 -198 L48 -98 L-48 -98 Z" fill="#70A312"/>
-      <rect x="-48" y="-106" width="96" height="10" rx="4" fill="#005260"/>
-      <path d="M-36 -190 Q-60 -146 -16 -134" stroke="#EBB896" stroke-width="14" fill="none" stroke-linecap="round"/>
-      <path d="M36 -190 Q60 -146 16 -134" stroke="#EBB896" stroke-width="14" fill="none" stroke-linecap="round"/>
-      <circle cx="-38" cy="-192" r="13" fill="#70A312"/>
-      <circle cx="38" cy="-192" r="13" fill="#70A312"/>
-      <rect x="-9" y="-222" width="18" height="26" rx="6" fill="#EBB896"/>
-      <ellipse cx="0" cy="-244" rx="29" ry="31" fill="#EBB896"/>
-      <path d="M-33 -246 Q-30 -286 4 -282 Q34 -278 33 -246 Q18 -268 -2 -266 Q-22 -264 -33 -246Z" fill="#3A2216"/>
-      <path d="M-32 -248 Q-46 -200 -42 -148 L-28 -148 Q-30 -196 -22 -228Z" fill="#3A2216"/>
-      <path d="M32 -248 Q46 -200 42 -148 L28 -148 Q30 -196 22 -228Z" fill="#3A2216"/>
-      <path d="M-17 -243 Q-11 -249 -5 -243 M5 -243 Q11 -249 17 -243" stroke="#00171F" stroke-width="2.8" fill="none" stroke-linecap="round"/>
-      <circle cx="-19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/>
-      <circle cx="19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/>
-      <path d="M-10 -230 Q0 -218 10 -230 Z" fill="#fff" stroke="#00171F" stroke-width="2.4" stroke-linejoin="round"/>
-      <circle cx="30" cy="-234" r="3" fill="#fff"/>
-      <rect x="-14" y="-172" width="28" height="48" rx="6" fill="#E3E4EA" stroke="#00171F" stroke-width="4"/>
-      <rect x="-9" y="-166" width="18" height="30" rx="3" fill="#00E4E8"/>
-      <use href="#ic-heart" x="-6" y="-158" width="12" height="12" fill="#fff"/>
-      <circle cx="-15" cy="-134" r="8" fill="#EBB896"/>
-      <circle cx="15" cy="-134" r="8" fill="#EBB896"/>
-    </g>
+    <g id="chCre"><g transform="translate(-14,-98)"><g class="legA"><rect x="-10" y="0" width="20" height="94" rx="9" fill="#00171F"/><ellipse cx="-2" cy="95" rx="17" ry="7" fill="#E3E4EA"/></g></g><g transform="translate(14,-98)"><g class="legB"><rect x="-10" y="0" width="20" height="94" rx="9" fill="#00171F"/><ellipse cx="2" cy="95" rx="17" ry="7" fill="#E3E4EA"/></g></g><g transform="translate(0,-98)"><g class="sway"><g transform="translate(0,98)"><path d="M-40 -252 Q-44 -306 0 -306 Q44 -306 40 -252 L46 -146 Q0 -134 -46 -146 Z" fill="#3A2216"/><path d="M-40 -198 Q0 -214 40 -198 L48 -98 L-48 -98 Z" fill="#70A312"/><rect x="-48" y="-106" width="96" height="10" rx="4" fill="#005260"/><circle cx="-38" cy="-192" r="13" fill="#70A312"/><circle cx="38" cy="-192" r="13" fill="#70A312"/><g transform="translate(0,-190)"><g class="phone"><g transform="translate(0,190)"><path d="M-36 -190 Q-60 -146 -16 -134" stroke="#EBB896" stroke-width="14" fill="none" stroke-linecap="round"/><path d="M36 -190 Q60 -146 16 -134" stroke="#EBB896" stroke-width="14" fill="none" stroke-linecap="round"/><rect x="-14" y="-172" width="28" height="48" rx="6" fill="#E3E4EA" stroke="#00171F" stroke-width="4"/><rect x="-9" y="-166" width="18" height="30" rx="3" fill="#00E4E8"/><use href="#ic-heart" x="-6" y="-158" width="12" height="12" fill="#fff" class="beat"/><circle cx="-15" cy="-134" r="8" fill="#EBB896"/><circle cx="15" cy="-134" r="8" fill="#EBB896"/></g></g></g><g transform="translate(0,-222)"><g class="head"><g transform="translate(0,222)"><rect x="-9" y="-222" width="18" height="26" rx="6" fill="#EBB896"/><ellipse cx="0" cy="-244" rx="29" ry="31" fill="#EBB896"/><path d="M-33 -246 Q-30 -286 4 -282 Q34 -278 33 -246 Q18 -268 -2 -266 Q-22 -264 -33 -246Z" fill="#3A2216"/><g transform="translate(-30,-240)"><g class="hairA"><g transform="translate(30,240)"><path d="M-32 -248 Q-46 -200 -42 -148 L-28 -148 Q-30 -196 -22 -228Z" fill="#3A2216"/></g></g></g><g transform="translate(30,-240)"><g class="hairB"><g transform="translate(-30,240)"><path d="M32 -248 Q46 -200 42 -148 L28 -148 Q30 -196 22 -228Z" fill="#3A2216"/></g></g></g><path d="M-17 -243 Q-11 -249 -5 -243 M5 -243 Q11 -249 17 -243" stroke="#00171F" stroke-width="2.8" fill="none" stroke-linecap="round"/><circle cx="-19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/><circle cx="19" cy="-233" r="5" fill="#E58A7A" opacity=".5"/><path d="M-10 -230 Q0 -218 10 -230 Z" fill="#fff" stroke="#00171F" stroke-width="2.4" stroke-linejoin="round"/><circle cx="30" cy="-234" r="3" fill="#fff"/></g></g></g></g></g></g></g>
 
-    <!-- Persona de la comunidad: --c ropa, --sk piel, --h pelo -->
-    <g id="chFan">
-      <path d="M-30 0 Q-30 -36 0 -36 Q30 -36 30 0Z" style="fill:var(--c,#005260)"/>
-      <rect x="-6" y="-46" width="12" height="14" rx="4" style="fill:var(--sk,#E8B08A)"/>
-      <circle cx="0" cy="-58" r="17" style="fill:var(--sk,#E8B08A)"/>
-      <path d="M-18 -58 Q-18 -78 0 -78 Q18 -78 18 -58 Q6 -66 -18 -58Z" style="fill:var(--h,#2B1A12)"/>
-      <circle cx="-6" cy="-56" r="2" fill="#00171F"/>
-      <circle cx="6" cy="-56" r="2" fill="#00171F"/>
-      <path d="M-6 -49 Q0 -44 6 -49" stroke="#00171F" stroke-width="2" fill="none" stroke-linecap="round"/>
-    </g>
+    <g id="chFan"><g class="hop"><g transform="translate(-24,-30)"><g class="cheerL"><path d="M0 0 L-12 -22" style="stroke:var(--sk,#E8B08A)" stroke-width="8" fill="none" stroke-linecap="round"/></g></g><g transform="translate(24,-30)"><g class="cheerR"><path d="M0 0 L12 -22" style="stroke:var(--sk,#E8B08A)" stroke-width="8" fill="none" stroke-linecap="round"/></g></g><path d="M-30 0 Q-30 -36 0 -36 Q30 -36 30 0Z" style="fill:var(--c,#005260)"/><rect x="-6" y="-46" width="12" height="14" rx="4" style="fill:var(--sk,#E8B08A)"/><circle cx="0" cy="-58" r="17" style="fill:var(--sk,#E8B08A)"/><path d="M-18 -58 Q-18 -78 0 -78 Q18 -78 18 -58 Q6 -66 -18 -58Z" style="fill:var(--h,#2B1A12)"/><circle cx="-6" cy="-56" r="2" fill="#00171F"/><circle cx="6" cy="-56" r="2" fill="#00171F"/><path d="M-6 -49 Q0 -44 6 -49" stroke="#00171F" stroke-width="2" fill="none" stroke-linecap="round"/></g></g>
 
     <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.4-8-11a4.5 4.5 0 0 1 8-2.6A4.5 4.5 0 0 1 20 10c0 5.6-8 11-8 11z"/></symbol>
   </defs>
@@ -378,7 +347,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
     <rect width="960" height="540" fill="#F3F7F2"/>
     <circle cx="480" cy="310" r="260" fill="#E6F4B9"/>
     <rect y="470" width="960" height="70" fill="#C9DFA0"/>
-    <g transform="translate(130,470) scale(.95)"><use href="#chFan" style="--c:#005260;--sk:#C98B62;--h:#2B1A12"/></g><g transform="translate(130,350)"><g class="float" style="animation-delay:1.0s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#70A312"/></g></g><g transform="translate(230,470) scale(.95)"><use href="#chFan" style="--c:#70A312;--sk:#EBB896;--h:#6B3F26"/></g><g transform="translate(230,350)"><g class="float" style="animation-delay:1.5s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#00E4E8"/></g></g><g transform="translate(650,470) scale(.95)"><use href="#chFan" style="--c:#00E4E8;--sk:#A8704A;--h:#1A1A1A"/></g><g transform="translate(650,350)"><g class="float" style="animation-delay:2.0s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#005260"/></g></g><g transform="translate(750,470) scale(.95)"><use href="#chFan" style="--c:#B5EA3C;--sk:#F0C3A5;--h:#8A5A2B"/></g><g transform="translate(750,350)"><g class="float" style="animation-delay:2.5s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#70A312"/></g></g><g transform="translate(850,470) scale(.95)"><use href="#chFan" style="--c:#005260;--sk:#D9A07A;--h:#2B1A12"/></g><g transform="translate(850,350)"><g class="float" style="animation-delay:3.0s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#00E4E8"/></g></g>
+    <g transform="translate(130,470) scale(.95)"><use href="#chFan" style="--d:-0.40s;--c:#005260;--sk:#C98B62;--h:#2B1A12"/></g><g transform="translate(130,350)"><g class="float" style="animation-delay:1.0s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#70A312"/></g></g><g transform="translate(230,470) scale(.95)"><use href="#chFan" style="--d:-0.81s;--c:#70A312;--sk:#EBB896;--h:#6B3F26"/></g><g transform="translate(230,350)"><g class="float" style="animation-delay:1.5s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#00E4E8"/></g></g><g transform="translate(650,470) scale(.95)"><use href="#chFan" style="--d:-1.21s;--c:#00E4E8;--sk:#A8704A;--h:#1A1A1A"/></g><g transform="translate(650,350)"><g class="float" style="animation-delay:2.0s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#005260"/></g></g><g transform="translate(750,470) scale(.95)"><use href="#chFan" style="--d:-1.61s;--c:#B5EA3C;--sk:#F0C3A5;--h:#8A5A2B"/></g><g transform="translate(750,350)"><g class="float" style="animation-delay:2.5s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#70A312"/></g></g><g transform="translate(850,470) scale(.95)"><use href="#chFan" style="--d:-2.02s;--c:#005260;--sk:#D9A07A;--h:#2B1A12"/></g><g transform="translate(850,350)"><g class="float" style="animation-delay:3.0s"><use href="#ic-heart" x="-17" y="-17" width="34" height="34" fill="#00E4E8"/></g></g>
     <g transform="translate(430,470)"><g class="fade"><use href="#chCre"/></g></g>
     <g transform="translate(430,112)"><g class="pop" style="animation-delay:.5s"><rect x="-112" y="-24" width="224" height="48" rx="24" fill="#005260"/><text x="0" y="7" font-size="20" fill="#B5EA3C" text-anchor="middle" style="font-weight:800">Nano influencer</text></g></g>
   </g>
@@ -388,8 +357,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
     <rect width="960" height="540" fill="url(#vgTeal)"/>
     <circle cx="480" cy="230" r="250" fill="#fff" opacity=".06"/>
     <rect y="470" width="960" height="70" fill="#00323A"/>
-    <g transform="translate(230,470) scale(.95)"><g class="slideL"><use href="#chEmp" style="--sad:0;--hap:1"/></g></g>
-    <g transform="translate(730,470) scale(.95)"><g class="slideR"><use href="#chCre"/></g></g>
+    <g transform="translate(230,470) scale(.95)"><g class="slideL"><use href="#chEmp" style="--sad:0;--hap:1;--st:1"/></g></g>
+    <g transform="translate(730,470) scale(.95)"><g class="slideR"><use href="#chCre" style="--st:1;--d:-.6s"/></g></g>
     <path d="M292 250 Q362 214 396 214" stroke="#B5EA3C" stroke-width="4" stroke-dasharray="3 10" stroke-linecap="round" fill="none" class="fade" style="animation-delay:1.6s"/>
     <path d="M668 250 Q598 214 564 214" stroke="#B5EA3C" stroke-width="4" stroke-dasharray="3 10" stroke-linecap="round" fill="none" class="fade" style="animation-delay:1.6s"/>
     <g transform="translate(480,214)"><g class="pop" style="animation-delay:1s"><circle r="86" fill="#B5EA3C"/><g transform="translate(-62,-42) scale(.6)"><use href="#hihL" fill="#005260"/><use href="#hihR" fill="#005260" transform="translate(-50 0)"/></g></g></g>
@@ -425,8 +394,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
   <g class="scene">
     <rect width="960" height="540" fill="url(#vgCyan)"/>
     <circle cx="480" cy="260" r="280" fill="#fff" opacity=".07"/>
-    <g transform="translate(110,470) scale(.62)"><g class="slideL"><use href="#chEmp" style="--sad:0;--hap:1"/></g></g>
-    <g transform="translate(850,470) scale(.62)"><g class="slideR"><use href="#chCre"/></g></g>
+    <g transform="translate(110,470) scale(.62)"><g class="slideL"><use href="#chEmp" style="--sad:0;--hap:1;--st:1"/></g></g>
+    <g transform="translate(850,470) scale(.62)"><g class="slideR"><use href="#chCre" style="--st:1;--d:-.6s"/></g></g>
     <g transform="translate(346,44) scale(1.3)"><g class="pop"><use href="#hihL" fill="#E3E4EA"/><use href="#hihR" fill="#B5EA3C" transform="translate(-50 0)"/></g></g>
     <text x="480" y="300" font-size="76" fill="#E3E4EA" text-anchor="middle" class="fade" style="font-weight:900;letter-spacing:-.04em;animation-delay:.4s">Hand in Hand</text>
     <text x="480" y="346" font-size="28" fill="#E3E4EA" text-anchor="middle" class="fade" style="font-weight:400;animation-delay:.9s">Estamos aquí para darte una mano</text>
