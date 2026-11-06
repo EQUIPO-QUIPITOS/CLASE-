@@ -83,14 +83,14 @@ Hand in Hand cobra una **comisión del 30 %** sobre cada campaña gestionada. El
 |---|---|---|---|---|---|
 | 1 | Campaña básica | 1 reel de 1 minuto + menciones en historias en carrusel (3 fotos), con código único y enlace rastreable | $300.000 | $90.000 | $210.000 |
 | 2 | Básico + feed | Todo lo de la campaña básica + publicación en el feed con 3 fotos | $550.000 | $165.000 | $385.000 |
-| 3 | Paquete | 2 videos de 3 minutos + menciones en historias con 6 fotos, con código único y enlace rastreable | $1.240.000 | $372.000 | $868.000 |
+| 3 | Paquete | 2 videos de 3 minutos + menciones en historias + publicación en el feed con 6 fotos, con código único y enlace rastreable | $1.240.000 | $372.000 | $868.000 |
 
 El contenido del creador (video, historias y feed) no es un costo de Hand in Hand: se paga con el 70 % del creador. Los ingresos de la empresa son solo la comisión.
 
 ## 5. Mercado y competencia
 
 - **Tamaño del mercado:** en 2025 la inversión en publicidad digital en Colombia fue de **$3,04 billones** (IAB Colombia, reportado por [Forbes Colombia](https://forbes.co/tecnologia/inversion-en-publicidad-digital-en-colombia-supero-los-3-billones-en-2025-segun-estudio), 30 de marzo de 2026).
-- **Participación proyectada:** con ingresos de $70.578.000 en el año 1 (la comisión del 30 %), Hand in Hand representaría cerca del **0,0023 %** de ese mercado.
+- **Participación proyectada:** con ingresos de $65.088.000 en el año 1 (la comisión del 30 %), Hand in Hand representaría cerca del **0,0021 %** de ese mercado.
 - **Competencia o productos similares:** Influee (plataforma de autoservicio), agencias locales de community manager y Kerawa Creativa. Precio promedio del mercado: unos $387.000; la campaña básica ($300.000) queda cerca de un **22 % por debajo**.
 - **Diferencia:** ninguno verifica creadores de la misma ciudad, gestiona la campaña y mide ventas con código único.
 
@@ -136,15 +136,15 @@ Los emprendimientos pequeños tienen presupuestos muy ajustados (en el formulari
 
 ## 7. Proyección financiera (resumen)
 
-Proyección de 12 meses desde enero de 2027, con ventas del mes 1 de 20 campañas básicas, 8 de "básico + feed" y 2 paquetes, creciendo cada mes un 5 %, 8 % y 3 %.
+Proyección de 12 meses desde enero de 2027, con ventas del mes 1 de 20 campañas básicas, 8 de "básico + feed" y 2 paquetes, creciendo cada mes un 6 %, 8 % y 4 %.
 
 | Indicador | Valor |
 |---|---|
-| Ingresos del año 1 (comisión del 30 %) | $70.578.000 |
-| Utilidad líquida del año 1 | $19,1 millones (margen líquido ≈ 27 %) |
-| Punto de equilibrio mensual | ≈ $4,0 millones de ingresos (unas 32 campañas al mes) |
+| Ingresos del año 1 (comisión del 30 %) | $65.088.000 |
+| Utilidad líquida del año 1 | $14,2 millones (margen líquido ≈ 22 %) |
+| Punto de equilibrio mensual | ≈ $3,96 millones de ingresos (unas 31 campañas al mes) |
 | Inversión de arranque en efectivo | $185.000 (registro en Cámara de Comercio y desarrollo inicial), cubierta con un aporte de $600.000 de los socios |
-| Caja final mínima | $184.000 (en los primeros meses la caja es ajustada) |
+| Caja final mínima | $184.234 (en los primeros meses la caja es ajustada) |
 | Semáforo | Verde |
 
 Un año de proyección no basta para decir si el negocio es viable a largo plazo. Las cifras completas están en el archivo de Excel de costos.
