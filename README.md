@@ -38,22 +38,71 @@ Una agencia digital, apoyada en una plataforma web puente, que conecta a emprend
 
 | Característica | Atributo |
 |---|---|
-| Confianza y credibilidad | Perfiles verificados de nano influencers |
-| Certeza de retorno | Códigos únicos, enlaces UTM y tablero de métricas |
+| Confianza y credibilidad | Perfiles verificados de nano influencers de la misma ciudad |
+| Certeza de retorno | Código único, enlace rastreable (UTM) y tablero de métricas |
 | Sencillez | Registro con formulario en pocos pasos |
-| Modelo accesible | Comisión del 20 al 30 % por campaña gestionada |
+| Modelo accesible | Campañas con precio fijo desde $300.000, sin contratos con agencias |
 
-## 4. MVP
+### Para quién (dos lados)
+
+- **Emprendedores:** dueños de micro y pequeños emprendimientos del Magdalena, sin presupuesto para agencia ni tiempo para medir. Pagan por campañas cuyo resultado pueden comprobar.
+- **Creadores:** nano influencers del Magdalena con comunidades pequeñas pero reales, que quieren monetizar su contenido y demostrar lo que venden.
+
+### Categorías de enfoque
+
+Hand in Hand atiende **cualquier** micro o pequeño emprendimiento del Magdalena, pero empieza con tres categorías principales para concentrar el piloto sin cerrarse a otras:
+
+| Categoría principal | Negocios | Creadores afines |
+|---|---|---|
+| Moda | Ropa y accesorios | Moda y estilo |
+| Comida | Restaurantes y comida | Comida y gastronomía |
+| Maquillaje | Belleza y cuidado personal | Belleza y maquillaje |
+
+Los demás sectores (cafés, hoteles, turismo, artesanías, etc.) siguen disponibles en el formulario de registro.
+
+### ¿Cómo funcionan el código único y el enlace rastreable?
+
+Es la forma de demostrar que una campaña sí vendió, y lo que nos diferencia de plataformas que solo dan acceso a creadores.
+
+- **Enlace rastreable:** un link propio de cada creador. Cuando alguien entra por él, queda registrado que llegó por ese creador; así se cuentan los **clics**.
+- **Código único:** un código de descuento propio de cada creador. El cliente lo usa al comprar en el local o por WhatsApp; así se cuentan las **compras**, incluso las que no ocurren en internet.
+
+Paso a paso:
+1. El creador publica la campaña del negocio y comparte su enlace y su código.
+2. Un seguidor entra por el enlace o dice el código al comprar.
+3. El enlace cuenta los clics solo; el emprendedor avisa cuando alguien usa el código.
+4. El tablero muestra cuántos clics y compras trajo cada creador y el retorno de la campaña.
+
+Así el emprendedor sabe cuántos clientes llegaron y puede decidir si repite, y el creador demuestra lo que vendió.
+
+## 4. Productos y precios
+
+| # | Producto | Qué incluye | Precio |
+|---|---|---|---|
+| 1 | Campaña básica | 1 reel de 1 minuto + menciones en historias en carrusel (3 fotos), con código único y enlace rastreable | $300.000 |
+| 2 | Básico + feed | Todo lo de la campaña básica + publicación en el feed con 3 fotos | $550.000 |
+| 3 | Paquete | 2 videos de 3 minutos + menciones en historias con 6 fotos, con código único y enlace rastreable | $1.240.000 |
+
+En el costeo, el contenido del creador (video y menciones en historias) se cuenta como costo de cada campaña.
+
+## 5. Mercado y competencia
+
+- **Tamaño del mercado:** en 2025 la inversión en publicidad digital en Colombia fue de **$3,04 billones** (IAB Colombia, reportado por [Forbes Colombia](https://forbes.co/tecnologia/inversion-en-publicidad-digital-en-colombia-supero-los-3-billones-en-2025-segun-estudio), 30 de marzo de 2026).
+- **Participación proyectada:** con ingresos de $210.960.000 en el año 1, Hand in Hand representaría cerca del **0,007 %** de ese mercado.
+- **Competencia o productos similares:** Influee (plataforma de autoservicio), agencias locales de community manager y Kerawa Creativa. Precio promedio del mercado: unos $387.000; la campaña básica ($300.000) queda cerca de un **22 % por debajo**.
+- **Diferencia:** ninguno verifica creadores de la misma ciudad, gestiona la campaña y mide ventas con código único.
+
+## 6. MVP
 
 Se valida primero de forma manual, sin construir la plataforma completa.
 
 | Componente | Cómo funciona |
 |---|---|
-| Landing page | Explica la propuesta con la identidad visual Hand in Hand, con un tutorial guiado (`index.html`) |
+| Landing page | Explica la propuesta con la identidad visual Hand in Hand, con un video animado de 30 segundos con música y un tutorial guiado (`index.html`) |
 | Registro | Una página con dos pestañas: "Soy emprendedor" (verde) y "Soy un creador" (azul), con listas desplegables (`registro.html`) |
 | Base de datos | Los registros llegan a una hoja de cálculo de Google mediante Google Apps Script (`Code.gs`) |
 | Correo de bienvenida | Cada persona registrada recibe un correo de agradecimiento con los colores de la página, y el equipo recibe un aviso |
-| Curaduría | 15 a 20 nano influencers verificados manualmente, de 1 o 2 sectores |
+| Curaduría | 15 a 20 nano influencers verificados manualmente, empezando por las categorías de moda, comida y maquillaje |
 | Emparejamiento | Manual: el equipo cruza cada emprendimiento con creadores afines y coordina por WhatsApp |
 | Trazabilidad | Código único y enlace UTM por creador, con tablero en Sheets + Looker Studio |
 | Piloto | 3 a 5 emprendimientos, una campaña cada uno, durante 4 semanas |
@@ -78,31 +127,46 @@ Cada formulario guarda una fila en su pestaña de la hoja. El script ubica cada 
 - Más del 50 % de las propuestas se concreta en colaboración.
 - Cada campaña muestra ventas o consultas atribuidas por código.
 - Más del 70 % de los emprendimientos repetiría.
-- Al menos la mitad acepta el esquema de comisión.
+- Al menos la mitad acepta los precios por campaña.
 
 ### Riesgo principal
-Con presupuestos pequeños, una comisión del 20 al 30 % deja poco ingreso por campaña. En el piloto se probará también una tarifa mínima o paquetes de varias campañas.
+Los emprendimientos pequeños tienen presupuestos muy ajustados (en el formulario, muchos elegirán "menos de $200.000"). En el piloto se probará si pagan la campaña básica de $300.000 y si prefieren el paquete con más contenido.
 
-## 5. Estructura del proyecto
+## 7. Proyección financiera (resumen)
+
+Proyección de 12 meses desde enero de 2027, con ventas del mes 1 de 20 campañas básicas, 8 de "básico + feed" y 2 paquetes, creciendo cada mes un 5 %, 8 % y 3 %.
+
+| Indicador | Valor |
+|---|---|
+| Ingresos del año 1 | $210.960.000 |
+| Utilidad líquida del año 1 | $48,4 millones (margen líquido ≈ 23 %) |
+| Punto de equilibrio mensual | ≈ $9,6 millones (unas 22 campañas al mes) |
+| Inversión de arranque en efectivo | $185.000 (registro en Cámara de Comercio y desarrollo inicial) |
+| Caja final mínima | $1,5 millones |
+| Semáforo | Verde |
+
+Un año de proyección no basta para decir si el negocio es viable a largo plazo. Las cifras completas están en el archivo de Excel de costos.
+
+## 8. Estructura del proyecto
 
 ```
 ├── assets/
 │   └── config.js    configuración (API_URL del Apps Script)
-├── index.html       página de inicio, con sus estilos y el tutorial guiado
+├── index.html       página de inicio, con sus estilos, el video con música y el tutorial guiado
 ├── registro.html    formularios de emprendimientos y creadores, con sus estilos y el envío de datos
 ├── Code.gs          copia del Google Apps Script (guarda registros y envía el correo de bienvenida)
 └── README.md        este documento
 ```
 
-## 6. Tecnologías
+## 9. Tecnologías
 
 - **HTML**: estructura de las páginas.
-- **CSS**: colores (paleta Hand in Hand), tipografías Inter y Dancing Script, y diseño adaptable a celular. Va dentro de cada archivo HTML.
-- **JavaScript**: tutorial guiado, pestañas del registro y envío de formularios. Va dentro de cada archivo HTML.
+- **CSS**: colores (paleta Hand in Hand), tipografías Inter y Momo Signature, y diseño adaptable a celular. Va dentro de cada archivo HTML.
+- **JavaScript**: tutorial guiado, video animado, pestañas del registro y envío de formularios. Va dentro de cada archivo HTML.
 - **Google Apps Script**: recibe los formularios, los guarda en la hoja y envía los correos.
 - **Google Sheets**: base de datos de registros y seguimiento de campañas.
 - **GitHub Pages**: publicación del sitio.
 
 ## Equipo
 
-Equipo Quipitos
+Equipo Quipitos: Sara Jassan, Luciana Ardila y Miguel Castro. Diseño Digital, Universidad Sergio Arboleda, Santa Marta.
