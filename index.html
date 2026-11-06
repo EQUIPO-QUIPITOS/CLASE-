@@ -321,6 +321,28 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
 .pk-more[hidden]{display:none}
 .pk-more a{color:var(--pk-name);font-weight:700}
 @media(prefers-reduced-motion:reduce){.pk-res{animation:none}.pk,.pk-in{transition:none}}
+
+/* Paquetes */
+.pkgs{padding-block:3rem 1rem}
+.pkgs>h2{text-align:center}
+.pkgs .plead{max-width:46rem;margin:0 auto 2rem;text-align:center}
+.pkg-grid{display:grid;gap:1.3rem;grid-template-columns:1fr}
+@media(min-width:56rem){.pkg-grid{grid-template-columns:repeat(3,1fr)}}
+.pkg{background:var(--card);border-radius:2rem;padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:.9rem;border-top:.6rem solid var(--lime);box-shadow:0 8px 22px rgba(0,23,31,.08)}
+.pkg:nth-child(2){border-top-color:var(--cyan)}
+.pkg:nth-child(3){border-top-color:var(--teal)}
+.pkg h3{margin:0;font:800 1.45rem/1.1 "Inter",sans-serif;color:var(--dark)}
+.pkg .pr{font:800 2.1rem/1 "Inter",sans-serif;color:var(--teal);margin:0}
+.pkg .pr small{display:block;margin-top:.35rem;font:600 .9rem "Inter",sans-serif;color:var(--muted)}
+.pkg .for{margin:0;color:var(--muted);font-size:.98rem;line-height:1.45}
+.pkg ul{margin:0;padding:0;list-style:none;display:grid;gap:.55rem}
+.pkg li{position:relative;padding-left:1.5rem;line-height:1.4}
+.pkg li::before{content:"";position:absolute;left:0;top:.5rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--lime)}
+.pkg:nth-child(2) li::before{background:var(--cyan)}
+.pkg:nth-child(3) li::before{background:var(--teal)}
+.pkg .split{margin-top:auto;padding:.8rem 1rem;border-radius:1rem;background:rgba(0,82,96,.08);font-size:.95rem;line-height:1.4}
+.pkgs-cta{display:flex;flex-direction:column;align-items:center;gap:.8rem;margin-top:1.8rem;text-align:center}
+.pkgs-cta p{margin:0;color:var(--muted);max-width:40rem}
 </style>
 </head>
 <body>
@@ -528,6 +550,52 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
       <h3>No sabes si funcionó</h3>
       <p>Publicar por tu cuenta, escribirle directamente a creadores o pagar publicidad genérica deja resultados inciertos: no hay forma clara de saber qué trajo clientes.</p>
     </article>
+  </div>
+</section>
+
+<section class="wrap pkgs" id="paquetes">
+  <h2 class="script">Nuestros paquetes</h2>
+  <p class="plead">Tres opciones para que elijas según lo que necesita tu negocio. Todas incluyen un nano influencer verificado de tu ciudad, un código único y un enlace rastreable para medir resultados.</p>
+  <div class="pkg-grid">
+    <article class="pkg">
+      <h3>Campaña básica</h3>
+      <p class="pr">$300.000<small>por campaña</small></p>
+      <p class="for">Para emprendimientos que quieren probar su primera campaña.</p>
+      <ul>
+        <li>1 reel de 1 minuto</li>
+        <li>Mención en historias en carrusel (3 fotos)</li>
+        <li>Código único y enlace rastreable</li>
+        <li>Resultados en un tablero: clics y usos del código</li>
+      </ul>
+      <p class="split">Del precio, el <strong>70 % ($210.000)</strong> es del creador y el <strong>30 % ($90.000)</strong> es la comisión de Hand in Hand.</p>
+    </article>
+    <article class="pkg">
+      <h3>Básico + feed</h3>
+      <p class="pr">$550.000<small>por campaña</small></p>
+      <p class="for">Para emprendimientos que ya venden por redes y quieren más alcance.</p>
+      <ul>
+        <li>Todo lo de la campaña básica</li>
+        <li>Publicación en el feed del perfil con 3 fotos</li>
+        <li>Más presencia y más tiempo visible</li>
+        <li>Resultados en un tablero: clics y usos del código</li>
+      </ul>
+      <p class="split">Del precio, el <strong>70 % ($385.000)</strong> es del creador y el <strong>30 % ($165.000)</strong> es la comisión de Hand in Hand.</p>
+    </article>
+    <article class="pkg">
+      <h3>Paquete</h3>
+      <p class="pr">$1.240.000<small>por campaña</small></p>
+      <p class="for">Para emprendimientos con presupuesto para campañas más grandes y constantes.</p>
+      <ul>
+        <li>2 reels de 3 minutos</li>
+        <li>Mención en historias</li>
+        <li>Publicación en el feed con 6 fotos</li>
+        <li>Código único y enlace rastreable, con resultados en un tablero</li>
+      </ul>
+      <p class="split">Del precio, el <strong>70 % ($868.000)</strong> es del creador y el <strong>30 % ($372.000)</strong> es la comisión de Hand in Hand.</p>
+    </article>
+  </div>
+  <div class="pkgs-cta">
+    <p>Así, el emprendimiento llega a más personas con una voz cercana y el creador recibe el 70 % del precio por producir su propio contenido. Hand in Hand pone el puente, la verificación y la medición para los dos.</p>
   </div>
 </section>
 
