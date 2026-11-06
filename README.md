@@ -41,12 +41,12 @@ Una agencia digital, apoyada en una plataforma web puente, que conecta a emprend
 | Confianza y credibilidad | Perfiles verificados de nano influencers de la misma ciudad |
 | Certeza de retorno | Código único, enlace rastreable (UTM) y tablero de métricas |
 | Sencillez | Registro con formulario en pocos pasos |
-| Modelo accesible | Campañas con precio fijo desde $300.000, sin contratos con agencias |
+| Modelo accesible | Comisión del 30 % por campaña gestionada (el 70 % es del creador); campañas desde $300.000, sin contratos con agencias |
 
 ### Para quién (dos lados)
 
 - **Emprendedores:** dueños de micro y pequeños emprendimientos del Magdalena, sin presupuesto para agencia ni tiempo para medir. Pagan por campañas cuyo resultado pueden comprobar.
-- **Creadores:** nano influencers del Magdalena con comunidades pequeñas pero reales, que quieren monetizar su contenido y demostrar lo que venden.
+- **Creadores:** nano influencers del Magdalena con comunidades pequeñas pero reales, que quieren monetizar su contenido y demostrar lo que venden. Reciben el 70 % del precio de cada campaña.
 
 ### Categorías de enfoque
 
@@ -75,20 +75,22 @@ Paso a paso:
 
 Así el emprendedor sabe cuántos clientes llegaron y puede decidir si repite, y el creador demuestra lo que vendió.
 
-## 4. Productos y precios
+## 4. Productos, precios y comisión
 
-| # | Producto | Qué incluye | Precio |
-|---|---|---|---|
-| 1 | Campaña básica | 1 reel de 1 minuto + menciones en historias en carrusel (3 fotos), con código único y enlace rastreable | $300.000 |
-| 2 | Básico + feed | Todo lo de la campaña básica + publicación en el feed con 3 fotos | $550.000 |
-| 3 | Paquete | 2 videos de 3 minutos + menciones en historias con 6 fotos, con código único y enlace rastreable | $1.240.000 |
+Hand in Hand cobra una **comisión del 30 %** sobre cada campaña gestionada. El 70 % restante es del nano influencer, que produce su propio contenido.
 
-En el costeo, el contenido del creador (video y menciones en historias) se cuenta como costo de cada campaña.
+| # | Producto | Qué incluye | Precio al cliente | Recibe Hand in Hand (30 %) | Recibe el creador (70 %) |
+|---|---|---|---|---|---|
+| 1 | Campaña básica | 1 reel de 1 minuto + menciones en historias en carrusel (3 fotos), con código único y enlace rastreable | $300.000 | $90.000 | $210.000 |
+| 2 | Básico + feed | Todo lo de la campaña básica + publicación en el feed con 3 fotos | $550.000 | $165.000 | $385.000 |
+| 3 | Paquete | 2 videos de 3 minutos + menciones en historias con 6 fotos, con código único y enlace rastreable | $1.240.000 | $372.000 | $868.000 |
+
+El contenido del creador (video, historias y feed) no es un costo de Hand in Hand: se paga con el 70 % del creador. Los ingresos de la empresa son solo la comisión.
 
 ## 5. Mercado y competencia
 
 - **Tamaño del mercado:** en 2025 la inversión en publicidad digital en Colombia fue de **$3,04 billones** (IAB Colombia, reportado por [Forbes Colombia](https://forbes.co/tecnologia/inversion-en-publicidad-digital-en-colombia-supero-los-3-billones-en-2025-segun-estudio), 30 de marzo de 2026).
-- **Participación proyectada:** con ingresos de $210.960.000 en el año 1, Hand in Hand representaría cerca del **0,007 %** de ese mercado.
+- **Participación proyectada:** con ingresos de $70.578.000 en el año 1 (la comisión del 30 %), Hand in Hand representaría cerca del **0,0023 %** de ese mercado.
 - **Competencia o productos similares:** Influee (plataforma de autoservicio), agencias locales de community manager y Kerawa Creativa. Precio promedio del mercado: unos $387.000; la campaña básica ($300.000) queda cerca de un **22 % por debajo**.
 - **Diferencia:** ninguno verifica creadores de la misma ciudad, gestiona la campaña y mide ventas con código único.
 
@@ -127,10 +129,10 @@ Cada formulario guarda una fila en su pestaña de la hoja. El script ubica cada 
 - Más del 50 % de las propuestas se concreta en colaboración.
 - Cada campaña muestra ventas o consultas atribuidas por código.
 - Más del 70 % de los emprendimientos repetiría.
-- Al menos la mitad acepta los precios por campaña.
+- Al menos la mitad acepta la comisión del 30 % y los precios por campaña.
 
 ### Riesgo principal
-Los emprendimientos pequeños tienen presupuestos muy ajustados (en el formulario, muchos elegirán "menos de $200.000"). En el piloto se probará si pagan la campaña básica de $300.000 y si prefieren el paquete con más contenido.
+Los emprendimientos pequeños tienen presupuestos muy ajustados (en el formulario, muchos elegirán "menos de $200.000"). Además, con una comisión del 30 %, una campaña básica deja $90.000 a Hand in Hand, por lo que el negocio depende del volumen de campañas. En el piloto se probará si pagan la campaña básica de $300.000 y si prefieren el paquete con más contenido.
 
 ## 7. Proyección financiera (resumen)
 
@@ -138,11 +140,11 @@ Proyección de 12 meses desde enero de 2027, con ventas del mes 1 de 20 campaña
 
 | Indicador | Valor |
 |---|---|
-| Ingresos del año 1 | $210.960.000 |
-| Utilidad líquida del año 1 | $48,4 millones (margen líquido ≈ 23 %) |
-| Punto de equilibrio mensual | ≈ $9,6 millones (unas 22 campañas al mes) |
-| Inversión de arranque en efectivo | $185.000 (registro en Cámara de Comercio y desarrollo inicial) |
-| Caja final mínima | $1,5 millones |
+| Ingresos del año 1 (comisión del 30 %) | $70.578.000 |
+| Utilidad líquida del año 1 | $19,1 millones (margen líquido ≈ 27 %) |
+| Punto de equilibrio mensual | ≈ $4,0 millones de ingresos (unas 32 campañas al mes) |
+| Inversión de arranque en efectivo | $185.000 (registro en Cámara de Comercio y desarrollo inicial), cubierta con un aporte de $600.000 de los socios |
+| Caja final mínima | $184.000 (en los primeros meses la caja es ajustada) |
 | Semáforo | Verde |
 
 Un año de proyección no basta para decir si el negocio es viable a largo plazo. Las cifras completas están en el archivo de Excel de costos.
