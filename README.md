@@ -100,7 +100,7 @@ Se valida primero de forma manual, sin construir la plataforma completa.
 
 | Componente | Cómo funciona |
 |---|---|
-| Landing page | Explica la propuesta con la identidad visual Hand in Hand, con un video animado de 30 segundos con música y un tutorial guiado (`index.html`) |
+| Landing page | Explica la propuesta con la identidad visual Hand in Hand, con un video animado de 30 segundos con música y un tutorial guiado. Los botones «Tengo un emprendimiento» y «Soy un creador» abren, justo debajo del video y los botones de inicio, una ventana emergente con el menú de categorías (moda, comida y maquillaje) y listas de creadores o emprendimientos de ejemplo. La ventana incluye un panel «¿Quieres descubrir más? ¡Regístrate ahora!» con las opciones de emprendedor o creador, que llevan a la página de registro. Los botones «Registrar mi emprendimiento» y «Registrarme como creador» de los paneles de la página también llevan directo al registro (`index.html`) |
 | Registro | Una página con dos pestañas: "Soy emprendedor" (verde) y "Soy un creador" (azul), con listas desplegables (`registro.html`) |
 | Base de datos | Los registros llegan a una hoja de cálculo de Google mediante Google Apps Script (`Code.gs`) |
 | Correo de bienvenida | Cada persona registrada recibe un correo de agradecimiento con los colores de la página, y el equipo recibe un aviso |
