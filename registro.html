@@ -103,6 +103,37 @@ footer{padding-block:2rem;color:var(--muted);font-size:.95rem;text-align:center}
 footer a{color:var(--teal);font-weight:600}
 :focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== Recomendaciones (MVP) ===== */
+#matches{margin-top:2rem}
+#matches[hidden]{display:none}
+.mt-title{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;color:var(--deep);margin-bottom:.4rem}
+.mt-sub{color:var(--muted);margin-bottom:1.4rem}
+.mt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15.5rem,1fr));gap:1rem}
+.mt-card{background:#fff;border:2px solid var(--mint);border-radius:1.1rem;padding:1.1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.35rem;text-align:left}
+.mt-card.sel{border-color:var(--green);box-shadow:0 0 0 3px rgba(164,227,34,.35)}
+.mt-name{font-weight:800;font-size:1.15rem;color:var(--deep)}
+.mt-meta{color:var(--muted);font-size:.92rem}
+.mt-tag{align-self:flex-start;font-size:.78rem;font-weight:700;background:var(--mint);color:var(--deep);border-radius:999px;padding:.2rem .65rem}
+.mt-tag.top{background:var(--lime);color:#1F3A07}
+.mt-btn{margin-top:auto;padding:.7rem 1rem;border:0;border-radius:999px;font:700 .95rem "Inter",sans-serif;background:var(--teal);color:#fff;cursor:pointer}
+.mt-btn:hover{filter:brightness(1.12)}
+.mt-btn[disabled]{opacity:.55;cursor:default}
+.mt-pkgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.8rem;margin:1rem 0}
+.mt-pkg{background:#fff;border:2px solid var(--mint);border-radius:1rem;padding:1rem;cursor:pointer;display:block}
+.mt-pkg{position:relative}
+.mt-pkg input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.mt-pkg.on{border-color:var(--green);box-shadow:0 0 0 3px rgba(164,227,34,.35)}
+.mt-pkg b{display:block;color:var(--deep)}
+.mt-pkg small{display:block;color:var(--muted);margin-top:.2rem}
+.mt-step{margin-top:1.6rem}
+.mt-note{background:var(--mint);border-radius:.9rem;padding:.9rem 1.1rem;font-weight:600;color:var(--deep);margin:.6rem 0 1rem}
+.mt-send{display:block;width:100%;max-width:24rem;margin:1rem 0 0;padding:1rem 1.4rem;border:0;border-radius:999px;font:800 1.1rem "Inter",sans-serif;background:var(--lime);color:#1F3A07;cursor:pointer}
+.mt-send[disabled]{opacity:.6;cursor:wait}
+.mt-err{color:#b3261e;font-weight:700;margin-top:.8rem}
+.mt-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.6rem;margin:1.2rem 0;padding:0;list-style:none}
+.mt-track li{background:#fff;border:2px dashed var(--line);border-radius:.9rem;padding:.8rem;font-weight:700;color:var(--muted);text-align:center}
+.mt-track li.done{border:2px solid var(--green);color:var(--deep);background:#F1FBD8}
 </style>
 </head>
 <body>
@@ -279,11 +310,13 @@ footer a{color:var(--teal);font-weight:600}
         </div>
       </form>
 
+      <section id="matches" class="box" hidden aria-live="polite"></section>
+
     </div>
   </div>
 </main>
 
-<footer class="wrap">Piloto en curso. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros. · ¿Dudas? <a href="mailto:equipoquipitosoficial@gmail.com">equipoquipitosoficial@gmail.com</a></footer>
+<footer class="wrap">Hand in Hand · Santa Marta. Usamos tus datos solo para gestionar campañas y no los compartimos con terceros. · ¿Dudas? <a href="mailto:equipoquipitosoficial@gmail.com">equipoquipitosoficial@gmail.com</a></footer>
 
 <!-- Tu archivo de siempre con la URL del Apps Script -->
 <script src="assets/config.js"></script>
@@ -347,6 +380,98 @@ footer a{color:var(--teal);font-weight:600}
     var f=function(){el.classList.toggle("filled",!!el.value)};el.addEventListener("change",f);f();
   });
 
+
+  /* ---------- Recomendaciones y solicitud (MVP) ---------- */
+  var PKGS=[
+    {k:"basica",n:"Campaña básica",p:300000,d:"1 reel de 1 minuto + historias (3 fotos)"},
+    {k:"feed",n:"Básico + feed",p:550000,d:"Campaña básica + publicación en el feed (3 fotos)"},
+    {k:"completo",n:"Paquete completo",p:1240000,d:"2 videos de 3 min + historias + feed (6 fotos)"}
+  ];
+  var money=function(n){return "$"+String(n).replace(/\B(?=(\d{3})+(?!\d))/g,".")};
+  var esc=function(t){return String(t==null?"":t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+  var box=document.getElementById("matches");
+
+  function api(params){
+    var q=Object.keys(params).map(function(k){return k+"="+encodeURIComponent(params[k])}).join("&");
+    return fetch(API_URL+(API_URL.indexOf("?")<0?"?":"&")+q).then(function(r){return r.json()});
+  }
+
+  function showMatches(kind,data){
+    var full=(kind==="emprendedor"?data.sector:data.nicho)||"";
+    var cat=full.split(":")[0].trim();
+    var esEmp=kind==="emprendedor";
+    box.hidden=false;
+    box.innerHTML='<h3 class="mt-title">Buscando…</h3>';
+    box.scrollIntoView({behavior:"smooth",block:"start"});
+    if(!API_URL){box.innerHTML='<p class="mt-err">No se encontró la URL del servicio.</p>';return}
+
+    api({action:"recomendaciones",tipo:kind,categoria:cat,sub:full}).then(function(res){
+      if(!res.ok)throw new Error(res.error);
+      if(!res.items.length){
+        box.innerHTML='<h3 class="mt-title">¡Gracias por registrarte!</h3><p class="mt-sub">'+
+          (res.sinCategoria?"Todavía no trabajamos tu categoría, pero te avisamos apenas lleguemos a ella.":
+          (esEmp?"Aún no tenemos creadores verificados de "+esc(cat)+" disponibles.":"Aún no hay emprendimientos de "+esc(cat)+" buscando creadores.")+" Te escribiremos por WhatsApp cuando haya una opción para ti.")+"</p>";
+        return;
+      }
+      box.innerHTML=(esEmp
+        ?'<h3 class="mt-title">Según lo que elegiste, estos creadores son los más acordes a tu negocio</h3><p class="mt-sub">Creadores verificados de Santa Marta en '+esc(cat)+'. Elige uno para continuar.</p>'
+        :'<h3 class="mt-title">Estos emprendimientos de Santa Marta buscan creadores de '+esc(cat)+'</h3><p class="mt-sub">Pulsa «Me interesa» y le avisamos al negocio.</p>')
+        +'<div class="mt-grid"></div><div class="mt-step" hidden></div>';
+      var grid=box.querySelector(".mt-grid");
+      res.items.forEach(function(it){
+        var c=document.createElement("div");c.className="mt-card";
+        c.innerHTML=(it.afin?'<span class="mt-tag top">Misma especialidad</span>':'<span class="mt-tag">'+esc(cat)+'</span>')+
+          '<div class="mt-name">'+esc(it.nombre)+'</div>'+
+          (esEmp?'<div class="mt-meta">'+esc(it.usuario)+' · '+esc(it.red)+'</div><div class="mt-meta">'+esc(it.seguidores)+' seguidores</div><div class="mt-meta">'+esc(it.area)+'</div>'
+                :'<div class="mt-meta">'+esc(it.area)+'</div><div class="mt-meta">Busca: '+esc(it.objetivo||"—")+'</div><div class="mt-meta">Presupuesto: '+esc(it.presupuesto||"—")+'</div>')+
+          '<button type="button" class="mt-btn">'+(esEmp?"Elegir este creador":"Me interesa")+'</button>';
+        var b=c.querySelector(".mt-btn");
+        b.addEventListener("click",function(){
+          if(esEmp){
+            grid.querySelectorAll(".mt-card").forEach(function(x){x.classList.remove("sel")});c.classList.add("sel");
+            pickPackage(it,data);
+          }else{
+            b.disabled=true;b.textContent="Enviando…";
+            api({action:"mostrar_interes",correo:data.correo,emprendimiento_id:it.id}).then(function(r){
+              if(!r.ok)throw new Error(r.error);b.textContent="¡Listo! Avisamos al negocio";
+            }).catch(function(){b.disabled=false;b.textContent="Reintentar"});
+          }
+        });
+        grid.appendChild(c);
+      });
+    }).catch(function(){
+      box.innerHTML='<p class="mt-err">No pudimos cargar las recomendaciones. Tu registro sí quedó guardado; te escribiremos por WhatsApp.</p>';
+    });
+  }
+
+  function pickPackage(creator,data){
+    var step=box.querySelector(".mt-step");step.hidden=false;
+    step.innerHTML='<h3 class="mt-title">Elige tu paquete con '+esc(creator.nombre)+'</h3><div class="mt-pkgs"></div><div class="mt-note" hidden></div><button type="button" class="mt-send" disabled>Enviar solicitud</button><p class="mt-err" hidden></p>';
+    var wrap=step.querySelector(".mt-pkgs"),note=step.querySelector(".mt-note"),send=step.querySelector(".mt-send"),err=step.querySelector(".mt-err"),chosen=null;
+    PKGS.forEach(function(p){
+      var l=document.createElement("label");l.className="mt-pkg";
+      l.innerHTML='<input type="radio" name="pkg"><b>'+p.n+' · '+money(p.p)+'</b><small>'+p.d+'</small>';
+      l.querySelector("input").addEventListener("change",function(){
+        chosen=p;wrap.querySelectorAll(".mt-pkg").forEach(function(x){x.classList.remove("on")});l.classList.add("on");
+        note.hidden=false;note.textContent="Del total, el creador recibe el 70 % ("+money(Math.round(p.p*.7))+") y Hand in Hand el 30 % ("+money(Math.round(p.p*.3))+").";
+        send.disabled=false;
+      });
+      wrap.appendChild(l);
+    });
+    step.scrollIntoView({behavior:"smooth",block:"nearest"});
+    send.addEventListener("click",function(){
+      if(!chosen)return;
+      send.disabled=true;send.textContent="Enviando…";err.hidden=true;
+      api({action:"crear_solicitud",correo:data.correo,creador_id:creator.id,paquete:chosen.k}).then(function(r){
+        if(!r.ok)throw new Error(r.error);
+        box.innerHTML='<h3 class="mt-title">¡Solicitud enviada!</h3><p class="mt-sub">Le pedimos a <b>'+esc(creator.nombre)+'</b> la campaña «'+chosen.n+'» ('+money(chosen.p)+'). Te enviamos un correo de confirmación y te avisamos apenas responda.</p>'+
+          '<ul class="mt-track"><li class="done">Solicitud enviada</li><li>Creador acepta</li><li>Contenido en producción</li><li>Publicado y medido</li></ul>';
+      }).catch(function(e){
+        send.disabled=false;send.textContent="Enviar solicitud";err.hidden=false;err.textContent="No se pudo enviar la solicitud. Inténtalo de nuevo.";
+      });
+    });
+  }
+
   /* ---------- Envío a Google Sheets ---------- */
   document.querySelectorAll("form[data-action]").forEach(function(form){
     var btn=form.querySelector(".submit"),status=form.querySelector(".status"),label=btn.innerHTML;
@@ -372,6 +497,7 @@ footer a{color:var(--teal);font-weight:600}
         .then(function(){
           form.reset();form.querySelectorAll(".filled").forEach(function(el){el.classList.remove("filled")});
           say((form.id==="creador"?"¡Listo! Recibimos tu postulación.":"¡Listo! Tu negocio quedó registrado.")+" Te enviamos un correo de bienvenida; si no lo ves en unos minutos, revisa tu carpeta de spam o promociones.","ok");
+          showMatches(form.id,data);
         })
         .catch(function(){say("Hubo un problema de conexión. Revisa tu internet e inténtalo otra vez.","err")})
         .then(function(){btn.disabled=false;btn.innerHTML=label});
