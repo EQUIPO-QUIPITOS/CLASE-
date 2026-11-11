@@ -164,20 +164,23 @@ footer a{color:var(--teal);font-weight:600}
             <label>Sector
               <select name="sector" required>
                 <option value="">Selecciona</option>
-                <option>Restaurantes y comida</option>
-                <option>Cafés, bebidas y bares</option>
-                <option>Hoteles y hospedaje</option>
-                <option>Turismo, tours y actividades</option>
-                <option>Moda, ropa y accesorios</option>
-                <option>Artesanías y productos locales</option>
-                <option>Belleza y cuidado personal</option>
-                <option>Salud, bienestar y deporte</option>
-                <option>Hogar y decoración</option>
-                <option>Tecnología y servicios digitales</option>
-                <option>Educación y cursos</option>
-                <option>Eventos y entretenimiento</option>
-                <option>Servicios profesionales</option>
-                <option>Otro</option>
+                <optgroup label="COMIDA">
+                  <option>Comida: restaurantes y comida rápida</option>
+                  <option>Comida: cafés, postres y bebidas</option>
+                  <option>Comida: bares y gastronomía local</option>
+                </optgroup>
+                <optgroup label="MODA">
+                  <option>Moda: ropa y accesorios</option>
+                  <option>Moda: calzado y bolsos</option>
+                  <option>Moda: joyería y bisutería</option>
+                  <option>Moda: artesanías y moda local</option>
+                </optgroup>
+                <optgroup label="MAQUILLAJE">
+                  <option>Maquillaje: maquillaje y cosméticos</option>
+                  <option>Maquillaje: cuidado de piel y belleza</option>
+                  <option>Maquillaje: peluquería, uñas y estética</option>
+                </optgroup>
+                <option>Otra categoría (te avisamos cuando lleguemos a ella)</option>
               </select>
             </label>
             <label>Número de WhatsApp <input name="whatsapp" type="tel" placeholder="+57 300 000 0000" required autocomplete="tel"></label>
@@ -248,24 +251,22 @@ footer a{color:var(--teal);font-weight:600}
             <label>Nicho o tema
               <select name="nicho" required>
                 <option value="">Selecciona</option>
-                <option>Comida y gastronomía</option>
-                <option>Viajes y turismo</option>
-                <option>Playa, naturaleza y aventura</option>
-                <option>Moda y estilo</option>
-                <option>Belleza y maquillaje</option>
-                <option>Fitness, salud y bienestar</option>
-                <option>Estilo de vida</option>
-                <option>Humor y entretenimiento</option>
-                <option>Música y baile</option>
-                <option>Arte, fotografía y diseño</option>
-                <option>Tecnología y videojuegos</option>
-                <option>Educación y tips</option>
-                <option>Maternidad y familia</option>
-                <option>Mascotas</option>
-                <option>Hogar y decoración</option>
-                <option>Deportes</option>
-                <option>Emprendimiento y negocios</option>
-                <option>Otro</option>
+                <optgroup label="COMIDA">
+                  <option>Comida: comida y gastronomía</option>
+                  <option>Comida: cafés y postres</option>
+                  <option>Comida: reseñas de restaurantes</option>
+                </optgroup>
+                <optgroup label="MODA">
+                  <option>Moda: moda y ropa</option>
+                  <option>Moda: estilo y outfits</option>
+                  <option>Moda: accesorios y joyería</option>
+                </optgroup>
+                <optgroup label="MAQUILLAJE">
+                  <option>Maquillaje: maquillaje</option>
+                  <option>Maquillaje: cuidado de piel y belleza</option>
+                  <option>Maquillaje: peinados y uñas</option>
+                </optgroup>
+                <option>Otra categoría (te avisamos cuando lleguemos a ella)</option>
               </select>
             </label>
             <label>Tarifa por publicación (COP) <span class="opt">(opcional)</span> <input name="tarifa" type="number" min="0" inputmode="numeric"></label>
