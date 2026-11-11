@@ -118,7 +118,7 @@ function plantillaBienvenida(esCreador, nombre, data) {
   const saludo = nombre ? "¡Hola, " + esc(nombre) + "!" : "¡Hola!";
 
   const intro = esCreador
-    ? "Gracias por postularte como creador y por confiar en nosotros. Nos encanta que quieras crecer de la mano de los emprendimientos del Magdalena."
+    ? "Gracias por postularte como creador y por confiar en nosotros. Nos encanta que quieras crecer de la mano de los emprendimientos de Santa Marta."
     : "Gracias por registrar tu negocio y por confiar en nosotros. Estamos felices de darte una mano para llegar a más personas.";
 
   const pasos = esCreador
@@ -234,4 +234,3 @@ function probarCorreos() {
   });
   Logger.log("Correos de prueba enviados a " + yo);
 }
-
