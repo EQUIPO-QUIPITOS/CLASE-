@@ -256,7 +256,7 @@ function probarCorreos() {
 
 // Frase secreta para firmar los enlaces "Aceptar / Rechazar" de los correos.
 // Cámbiala por cualquier frase tuya (solo tú debes conocerla).
-const SECRETO = "hand-in-hand-cambia-esta-frase";
+const SECRETO = "quipitos 2026";
 
 const CATEGORIAS = ["Comida", "Moda", "Maquillaje"];
 
@@ -383,25 +383,35 @@ function crearSolicitud(p) {
   const base = ScriptApp.getService().getUrl();
   const enlace = (r) => base + "?action=responder&id=" + fila.id + "&r=" + r + "&t=" + firmar(fila.id);
 
+  const detalles = [
+    ["Negocio", emp.negocio],
+    ["Creador", cre.nombre + " (" + cre.usuario_red + ")"],
+    ["Paquete", paquete.nombre],
+    ["Valor", dinero(paquete.precio) + " COP"],
+    ["Para el creador (70 %)", dinero(paquete.pago) + " COP"],
+    ["Hand in Hand (30 %)", dinero(paquete.comision) + " COP"],
+  ];
+
   // 1) Confirmación para el emprendedor
   enviarCorreo(emp.correo, "Tu solicitud fue enviada: " + cre.nombre, "¡Tu solicitud va en camino!", [
     "Le enviaste una solicitud a <b>" + esc(cre.nombre) + "</b> (" + esc(cre.usuario_red) + ").",
-    "Paquete: <b>" + esc(paquete.nombre) + "</b> · " + dinero(paquete.precio) + " COP.",
-    "El creador recibe el " + "70 % (" + dinero(paquete.pago) + ") y Hand in Hand el 30 % (" + dinero(paquete.comision) + ").",
     "Te avisamos por correo apenas el creador responda.",
-  ]);
+  ], null, { etiqueta: "EMPRENDEDORES", detalles: detalles });
 
   // 2) Aviso al creador con botones para aceptar o rechazar
   if (cre.correo) {
     enviarCorreo(cre.correo, "Nueva solicitud de " + emp.negocio, "¡Tienes una solicitud!", [
-      "<b>" + esc(emp.negocio) + "</b> (" + esc(emp.sector) + ") quiere trabajar contigo.",
-      "Paquete: <b>" + esc(paquete.nombre) + "</b>. Tú recibirías <b>" + dinero(paquete.pago) + " COP</b> (el 70 %).",
+      "<b>" + esc(emp.negocio) + "</b> quiere trabajar contigo. ¿Aceptas la campaña?",
       "Objetivo del negocio: " + esc(emp.objetivo || "—"),
-    ], [["Aceptar", enlace("aceptar")], ["Rechazar", enlace("rechazar")]]);
+    ], [["Aceptar solicitud", enlace("aceptar")], ["Rechazar", enlace("rechazar")]],
+    { etiqueta: "CREADORES", detalles: [
+      ["Negocio", emp.negocio], ["Sector", emp.sector], ["Paquete", paquete.nombre],
+      ["Tú recibirías", dinero(paquete.pago) + " COP (70 %)"],
+    ] });
   }
 
-  // 3) Aviso para ti
-  avisarEquipo("Nueva solicitud " + fila.id, emp.negocio + " → " + cre.nombre + " · " + paquete.nombre + " · " + dinero(paquete.precio));
+  // 3) Aviso para el equipo
+  avisarEquipo("Nueva solicitud " + fila.id, emp.negocio + " envió una solicitud a " + cre.nombre + ".", detalles.concat([["Solicitud", fila.id]]));
 
   return { ok: true, id: fila.id };
 }
@@ -426,80 +436,153 @@ function mostrarInteres(p) {
 
   if (emp.correo) {
     enviarCorreo(emp.correo, cre.nombre + " quiere trabajar contigo", "¡Un creador se interesó en tu negocio!", [
-      "<b>" + esc(cre.nombre) + "</b> (" + esc(cre.usuario_red) + " en " + esc(cre.red) + ", " + esc(cre.seguidores) + " seguidores) quiere crear contenido para <b>" + esc(emp.negocio) + "</b>.",
+      "<b>" + esc(cre.nombre) + "</b> quiere crear contenido para <b>" + esc(emp.negocio) + "</b>.",
       "Entra a Hand in Hand, regístrate con este mismo correo y elige a este creador para enviarle tu solicitud.",
-    ]);
+    ], null, { etiqueta: "EMPRENDEDORES", detalles: [["Creador", cre.nombre], ["Perfil", cre.usuario_red + " · " + cre.red], ["Seguidores", cre.seguidores], ["Categoría", cre.nicho]] });
   }
   // Confirmación para el creador
   if (cre.correo) {
     enviarCorreo(cre.correo, "Registramos tu interés en " + emp.negocio, "¡Listo, avisamos al negocio!", [
       "Le contamos a <b>" + esc(emp.negocio) + "</b> (" + esc(emp.sector) + ") que te interesa trabajar con ellos.",
       "Si el negocio te elige, te llegará un correo con los botones para aceptar o rechazar la campaña.",
-    ]);
+    ], null, { etiqueta: "CREADORES", detalles: [["Negocio", emp.negocio], ["Sector", emp.sector]] });
   }
-  avisarEquipo("Interés de creador", cre.nombre + " → " + emp.negocio);
+  avisarEquipo("Interés de creador", cre.nombre + " mostró interés en " + emp.negocio + ".", [["Creador", cre.nombre], ["Negocio", emp.negocio]]);
   return { ok: true };
 }
 
 // Página que ve el creador al pulsar Aceptar o Rechazar en el correo
 function paginaRespuesta(p) {
   const id = String(p.id || "");
-  if (p.t !== firmar(id)) return pagina("Enlace no válido", "Este enlace no es válido o fue modificado.");
+  if (p.t !== firmar(id)) return pagina("Enlace no válido", "Este enlace no es válido o fue modificado.", false);
 
   const h = hojaDe("Solicitudes");
   const titulos = h.getRange(1, 1, 1, h.getLastColumn()).getValues()[0].map((x) => String(x).trim());
   const fila = leerTabla("Solicitudes").filter((f) => f.id === id)[0];
-  if (!fila) return pagina("No encontramos la solicitud", "Puede que ya no exista.");
-  if (fila.estado !== "enviada") return pagina("Ya respondiste", "Esta solicitud ya está marcada como «" + esc(fila.estado) + "».");
+  if (!fila) return pagina("No encontramos la solicitud", "Puede que ya no exista.", false);
+  if (fila.estado !== "enviada") return pagina("Ya respondiste", "Esta solicitud ya está marcada como «" + esc(fila.estado) + "».", false);
 
   const acepta = p.r === "aceptar";
   const estado = acepta ? "aceptada" : "rechazada";
   h.getRange(fila._fila, titulos.indexOf("estado") + 1).setValue(estado);
 
   if (fila.correo_emprendedor) {
-    enviarCorreo(
-      fila.correo_emprendedor,
-      acepta ? "¡" + fila.creador.replace(/ \(.*$/, "") + " aceptó tu solicitud!" : "Tu solicitud no fue aceptada",
-      acepta ? "¡Solicitud aceptada!" : "El creador no pudo esta vez",
-      acepta
-        ? ["Tu solicitud de <b>" + esc(fila.paquete) + "</b> fue aceptada. Te escribiremos por WhatsApp para coordinar los detalles."]
-        : ["El creador no pudo tomar esta campaña. Entra de nuevo a Hand in Hand y elige otro creador de tu categoría."]
-    );
+    const nom = fila.creador.replace(/ \(.*$/, "");
+    const det = [["Creador", nom], ["Paquete", fila.paquete], ["Estado", acepta ? "Aceptada" : "No aceptada"]];
+    if (acepta) {
+      enviarCorreo(fila.correo_emprendedor, "¡" + nom + " aceptó tu solicitud!", "¡Solicitud aceptada!", [
+        "<b>" + esc(nom) + "</b> aceptó tu solicitud de <b>" + esc(fila.paquete) + "</b>.",
+        "Te escribiremos por WhatsApp para coordinar los detalles de la campaña.",
+      ], null, { etiqueta: "EMPRENDEDORES", detalles: det });
+    } else {
+      enviarCorreo(fila.correo_emprendedor, "Tu solicitud no fue aceptada", "El creador no pudo esta vez", [
+        "<b>" + esc(nom) + "</b> no pudo tomar esta campaña.",
+        "Entra de nuevo a Hand in Hand y elige otro creador de tu categoría.",
+      ], null, { etiqueta: "EMPRENDEDORES", detalles: det });
+    }
   }
-  avisarEquipo("Solicitud " + id + " " + estado, fila.emprendimiento + " · " + fila.creador);
+  avisarEquipo("Solicitud " + id + " " + estado, "El creador " + (acepta ? "aceptó" : "rechazó") + " la solicitud.", [["Negocio", fila.emprendimiento], ["Creador", fila.creador], ["Paquete", fila.paquete], ["Estado", estado]]);
   return pagina(acepta ? "¡Aceptaste la solicitud!" : "Solicitud rechazada",
-    acepta ? "Avisamos al negocio. Te escribiremos por WhatsApp para coordinar." : "Avisamos al negocio. Gracias por responder.");
+    acepta ? "Avisamos al negocio. Te escribiremos por WhatsApp para coordinar." : "Avisamos al negocio. Gracias por responder.", acepta);
 }
 
-function pagina(titulo, texto) {
+const COL = {
+  fondo: "#E3E4EA", tarjeta: "#F6F7FB", oscuro: "#00171F", teal: "#005260",
+  verde: "#70A312", lima: "#B5EA3C", cian: "#00E4E8", menta: "#C5DFDF", texto: "#1d2b30", gris: "#4f6a70",
+};
+const FUENTE = "'Inter',Helvetica,Arial,sans-serif";
+const CURSIVA = "'Dancing Script','Brush Script MT','Segoe Script',cursive";
+
+// Marca "Hand in Hand" como en la página
+function marca(acento) {
+  return 'Hand<span style="font:700 0.86em ' + CURSIVA + ';letter-spacing:0;color:' + acento + '">in</span>Hand';
+}
+
+// Página que ve el creador al pulsar Aceptar o Rechazar en el correo
+function pagina(titulo, texto, ok) {
+  const color = ok === false ? "#B3261E" : COL.verde;
+  const icono = ok === false ? "✕" : "✓";
   return HtmlService.createHtmlOutput(
-    '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>' +
-    '<body style="margin:0;background:#E3E4EA;font-family:Helvetica,Arial,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center">' +
-    '<div style="max-width:420px;margin:20px;background:#fff;border-radius:24px;padding:36px;text-align:center">' +
-    '<div style="font-size:13px;font-weight:800;letter-spacing:2px;color:#005260">HAND IN HAND</div>' +
-    '<h1 style="color:#00473F;margin:14px 0 10px">' + titulo + '</h1><p style="color:#4f6a70;line-height:1.5;margin:0">' + texto + '</p></div></body></html>'
+    '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"></head>' +
+    '<body style="margin:0;background:' + COL.fondo + ';font-family:' + FUENTE + ';display:flex;min-height:100vh;align-items:center;justify-content:center">' +
+    '<div style="width:100%;max-width:460px;margin:20px;border-radius:28px;overflow:hidden;background:' + COL.tarjeta + ';box-shadow:0 18px 40px rgba(0,23,31,.18)">' +
+      '<div style="background:#003D33;background-image:linear-gradient(180deg,#00513F,#002B26);padding:30px 32px">' +
+        '<div style="font-weight:800;font-size:13px;letter-spacing:2px;color:#C8F5DC">SANTA MARTA</div>' +
+        '<div style="font-weight:900;font-size:40px;letter-spacing:-2px;color:' + COL.fondo + ';margin-top:4px">' + marca(COL.lima) + '</div>' +
+      '</div>' +
+      '<div style="padding:34px 32px 38px;text-align:center">' +
+        '<div style="width:72px;height:72px;border-radius:50%;background:' + color + ';color:#fff;font-size:38px;line-height:72px;margin:0 auto 18px;font-weight:700">' + icono + '</div>' +
+        '<h1 style="color:' + COL.teal + ';margin:0 0 10px;font-size:26px;line-height:1.2">' + titulo + '</h1>' +
+        '<p style="color:' + COL.gris + ';line-height:1.6;margin:0;font-size:16px">' + texto + '</p>' +
+      '</div>' +
+      '<div style="background:' + COL.teal + ';padding:16px;text-align:center;font:700 22px ' + CURSIVA + ';color:' + COL.cian + '">Gracias por confiar en nosotros</div>' +
+    '</div></body></html>'
   ).setTitle("Hand in Hand");
 }
 
-function avisarEquipo(asunto, texto) {
-  try { MailApp.sendEmail(Session.getEffectiveUser().getEmail(), "Hand in Hand: " + asunto, texto); } catch (err) {}
+// Aviso interno para el equipo (mismo diseño que los demás correos)
+function avisarEquipo(asunto, texto, detalles) {
+  try {
+    enviarCorreo(Session.getEffectiveUser().getEmail(), "Hand in Hand: " + asunto, asunto, [esc(texto)], null,
+      { etiqueta: "AVISO PARA EL EQUIPO", detalles: detalles, pie: "Este aviso es solo para el equipo de Hand in Hand." });
+  } catch (err) {}
 }
 
-// Correo sencillo con los colores de la página (lineas ya vienen con HTML seguro)
-function enviarCorreo(para, asunto, titulo, lineas, botones) {
+// Correo con el diseño de la página. "lineas" ya viene con HTML seguro.
+// extra: { etiqueta, detalles: [[nombre, valor], ...], pie }
+function enviarCorreo(para, asunto, titulo, lineas, botones, extra) {
   try {
-    const f = "Helvetica,Arial,sans-serif";
-    const btn = (botones || []).map((b, i) =>
-      '<a href="' + b[1] + '" style="display:inline-block;margin:6px 6px 0 0;padding:12px 22px;border-radius:999px;text-decoration:none;font:700 15px ' + f +
-      ';background:' + (i === 0 ? "#B5EA3C" : "#C5DFDF") + ';color:#00171F">' + b[0] + '</a>').join("");
+    extra = extra || {};
+    const etiqueta = extra.etiqueta || "HAND IN HAND";
+    const filas = (extra.detalles || []).filter((d) => d[1] !== "" && d[1] != null).map((d) =>
+      '<tr><td style="padding:6px 0;font:600 14px ' + FUENTE + ';color:' + COL.gris + ';width:120px;vertical-align:top">' + esc(d[0]) + '</td>' +
+      '<td style="padding:6px 0;font:700 15px ' + FUENTE + ';color:' + COL.texto + '">' + esc(d[1]) + '</td></tr>').join("");
+
+    const caja = filas
+      ? '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:' + COL.menta + ';border-radius:16px;margin:20px 0 4px"><tr><td style="padding:16px 22px">' +
+        '<div style="font:700 26px ' + CURSIVA + ';color:' + COL.teal + ';margin-bottom:4px">Detalles</div>' +
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' + filas + '</table></td></tr></table>'
+      : "";
+
+    const btns = (botones || []).map((b, i) =>
+      '<td style="padding:0 12px 12px 0"><a href="' + b[1] + '" style="display:inline-block;padding:15px 34px;border-radius:999px;text-decoration:none;font:800 17px ' + FUENTE + ';' +
+      (i === 0 ? 'background:' + COL.lima + ';color:#1F3A07;border:2px solid ' + COL.lima : 'background:#ffffff;color:' + COL.teal + ';border:2px solid ' + COL.teal) +
+      '">' + (i === 0 ? "✓ " : "") + b[0] + '</a></td>').join("");
+    const zonaBotones = btns
+      ? '<table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0 4px"><tr>' + btns + '</tr></table>' +
+        '<p style="font:400 13px/1.5 ' + FUENTE + ';color:' + COL.gris + ';margin:8px 0 0">Pulsa uno de los botones para responder. No necesitas iniciar sesión.</p>'
+      : "";
+
     const html =
-      '<div style="background:#E3E4EA;padding:24px 12px;font-family:' + f + '"><div style="max-width:560px;margin:0 auto">' +
-      '<div style="background:#003D33;border-radius:24px 24px 0 0;padding:26px 30px"><div style="font:800 13px ' + f + ';letter-spacing:2px;color:#C8F5DC">HAND IN HAND</div>' +
-      '<div style="font:800 26px/1.2 ' + f + ';color:#E3E4EA;margin-top:8px">' + titulo + '</div></div>' +
-      '<div style="background:#F6F7FB;border-radius:0 0 24px 24px;padding:26px 30px;color:#1d2b30;font-size:16px;line-height:1.6">' +
-      lineas.map((l) => '<p style="margin:0 0 12px">' + l + '</p>').join("") + btn +
-      '<p style="margin:18px 0 0;font-size:12px;color:#4f6a70">Hand in Hand · Santa Marta · equipoquipitosoficial@gmail.com</p></div></div></div>';
-    MailApp.sendEmail({ to: para, subject: asunto, name: "Hand in Hand", htmlBody: html, body: lineas.join("\n").replace(/<[^>]+>/g, "") });
+      '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"></head>' +
+      '<body style="margin:0;padding:0;background:' + COL.fondo + '">' +
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:' + COL.fondo + '"><tr><td align="center" style="padding:28px 12px">' +
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px">' +
+        '<tr><td style="background:#003D33;background-image:linear-gradient(180deg,#00513F,#002B26);border-radius:24px 24px 0 0;padding:34px 32px 30px">' +
+          '<div style="font:800 14px ' + FUENTE + ';letter-spacing:2px;color:#C8F5DC">' + esc(etiqueta) + '</div>' +
+          '<div style="font:900 44px/1.05 ' + FUENTE + ';letter-spacing:-2px;color:' + COL.fondo + ';margin-top:6px">' + marca(COL.lima) + '</div>' +
+          '<div style="font:400 16px ' + FUENTE + ';color:' + COL.fondo + ';margin-top:8px">Estamos aquí para darte una mano</div>' +
+        '</td></tr>' +
+        '<tr><td style="background:' + COL.tarjeta + ';padding:32px 32px 30px">' +
+          '<div style="font:700 32px/1.15 ' + CURSIVA + ';color:' + COL.verde + '">' + titulo + '</div>' +
+          lineas.map((l) => '<p style="font:400 16px/1.6 ' + FUENTE + ';color:' + COL.texto + ';margin:14px 0 0">' + l + '</p>').join("") +
+          caja + zonaBotones +
+        '</td></tr>' +
+        '<tr><td style="background:' + COL.teal + ';padding:24px 32px;border-radius:0 0 24px 24px;text-align:center">' +
+          '<div style="font:700 28px ' + CURSIVA + ';color:' + COL.cian + '">¡Gracias por confiar en nosotros!</div>' +
+          '<div style="font:400 14px/1.6 ' + FUENTE + ';color:#d9ecec;margin-top:6px">¿Dudas? Escríbenos a ' +
+          '<a href="mailto:equipoquipitosoficial@gmail.com" style="color:' + COL.lima + ';font-weight:600;text-decoration:none">equipoquipitosoficial@gmail.com</a></div>' +
+        '</td></tr>' +
+        '<tr><td style="padding:16px 10px;text-align:center;font:400 12px/1.5 ' + FUENTE + ';color:' + COL.gris + '">' +
+          esc(extra.pie || "Hand in Hand · Santa Marta, Colombia. Usamos tus datos solo para gestionar campañas.") +
+        '</td></tr>' +
+      '</table></td></tr></table></body></html>';
+
+    const plano = lineas.join("\n").replace(/<[^>]+>/g, "") +
+      (botones || []).map((b) => "\n" + b[0] + ": " + b[1]).join("");
+    MailApp.sendEmail({ to: para, subject: asunto, name: "Hand in Hand", htmlBody: html, body: plano });
   } catch (err) {
     // Si el correo falla, la solicitud ya quedó guardada
   }
