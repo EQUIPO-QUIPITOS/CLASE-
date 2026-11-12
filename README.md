@@ -54,9 +54,11 @@ Hand in Hand atiende **cualquier** micro o pequeño emprendimiento de Santa Mart
 
 | Categoría principal | Negocios | Creadores afines |
 |---|---|---|
-| Moda | Ropa y accesorios | Moda y estilo |
-| Comida | Restaurantes y comida | Comida y gastronomía |
-| Maquillaje | Belleza y cuidado personal | Belleza y maquillaje |
+| Moda | Ropa, calzado, joyería y artesanías | Moda y ropa, estilo y outfits, accesorios |
+| Comida | Restaurantes, cafés, postres y bares | Comida y gastronomía, cafés y postres |
+| Maquillaje | Maquillaje, cuidado de piel y estética | Maquillaje, cuidado de piel, peinados y uñas |
+
+Los creadores «generales» pueden promocionar cualquier categoría, y por eso aparecen en las tres.
 
 Los demás sectores (cafés, hoteles, turismo, artesanías, etc.) siguen disponibles en el formulario de registro.
 
@@ -104,10 +106,11 @@ Se valida primero de forma manual, sin construir la plataforma completa.
 | Registro | Una página con dos pestañas: "Soy emprendedor" (verde) y "Soy un creador" (azul), con listas desplegables (`registro.html`) |
 | Base de datos | Los registros llegan a una hoja de cálculo de Google mediante Google Apps Script (`Code.gs`) |
 | Correo de bienvenida | Cada persona registrada recibe un correo de agradecimiento con los colores de la página, y el equipo recibe un aviso |
-| Curaduría | 18 nano influencers verificados manualmente (cifra por confirmar), empezando por las categorías de moda, comida y maquillaje |
-| Emparejamiento | Manual: el equipo cruza cada emprendimiento con creadores afines y coordina por WhatsApp |
+| Curaduría | 13 nano influencers de Santa Marta verificados manualmente (hasta 10.000 seguidores): 5 de moda, 4 de maquillaje, 1 de comida y 3 generales, que pueden promocionar cualquier categoría |
+| Emparejamiento | Automático en el registro: al registrarse, el emprendedor ve los creadores verificados de su categoría (los especializados primero y los generales después), elige uno y un paquete, y envía la solicitud. El creador ve los emprendimientos de su categoría y pulsa «Me interesa». El equipo coordina el resto por WhatsApp |
+| Solicitudes | Cada solicitud se guarda en la pestaña `Solicitudes` con el precio, el 70 % del creador y la comisión del 30 %. El emprendedor recibe un correo de confirmación y el creador recibe uno con los botones «Aceptar» y «Rechazar», que actualizan el estado en la hoja |
 | Trazabilidad | Código único y enlace UTM por creador, con tablero en Sheets + Looker Studio |
-| Piloto | 9 emprendimientos (cifra por confirmar), una campaña cada uno, durante 4 semanas |
+| Piloto | 7 emprendimientos de Santa Marta (3 de moda, 3 de comida y 1 de maquillaje), una campaña cada uno, durante 4 semanas |
 
 ### Registro y base de datos
 
@@ -119,6 +122,9 @@ Cada formulario guarda una fila en su pestaña de la hoja. El script ubica cada 
 |---|---|
 | Emprendimientos | `id`, `fecha`, `negocio`, `sector`, `ciudad` (municipio), `presupuesto`, `objetivo`, `tiempo_disponible`, `url_destino`, `whatsapp`, `correo`, `estado` |
 | Creadores | `id`, `fecha`, `nombre`, `red`, `usuario_red`, `seguidores`, `nicho`, `ciudad` (municipio), `tarifa`, `whatsapp`, `correo`, `verificado`, `estado` |
+| Solicitudes | `fecha`, `id`, `emprendimiento`, `correo_emprendedor`, `creador`, `paquete`, `precio`, `pago_creador`, `comision_hih`, `estado`, `clientes_nuevos`, `ventas_generadas` |
+
+Solo aparecen en las recomendaciones los registros con `verificado` en `si` y ciudad Santa Marta. Las categorías se guardan con el formato `Categoría: subcategoría` (por ejemplo, `Moda: moda y ropa`).
 
 ### Hipótesis a validar
 1. Los emprendimientos pequeños están dispuestos a pagar por campañas con retorno medible.
