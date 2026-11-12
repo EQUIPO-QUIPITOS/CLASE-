@@ -107,8 +107,10 @@ Se valida primero de forma manual, sin construir la plataforma completa.
 | Base de datos | Los registros llegan a una hoja de cálculo de Google mediante Google Apps Script (`Code.gs`) |
 | Correo de bienvenida | Cada persona registrada recibe un correo de agradecimiento con los colores de la página, y el equipo recibe un aviso |
 | Curaduría | 13 nano influencers de Santa Marta verificados manualmente (hasta 10.000 seguidores): 5 de moda, 4 de maquillaje, 1 de comida y 3 generales, que pueden promocionar cualquier categoría |
-| Emparejamiento | Automático en el registro: al registrarse, el emprendedor ve los creadores verificados de su categoría (los especializados primero y los generales después), elige uno y un paquete, y envía la solicitud. El creador ve los emprendimientos de su categoría y pulsa «Me interesa». El equipo coordina el resto por WhatsApp |
-| Solicitudes | Cada solicitud se guarda en la pestaña `Solicitudes` con el precio, el 70 % del creador y la comisión del 30 %. El emprendedor recibe un correo de confirmación y el creador recibe uno con los botones «Aceptar» y «Rechazar», que actualizan el estado en la hoja |
+| Emparejamiento | Automático, sin intermediarios. **Emprendedor:** al registrarse ve los creadores verificados de su categoría, con foto (los especializados primero y los generales después), elige uno y un paquete, y envía la solicitud. **Creador:** al registrarse ve los emprendimientos de su categoría y pulsa «Me interesa»; el negocio recibe un correo con los tres paquetes y, al elegir uno, la solicitud llega al creador. El equipo coordina la campaña después por WhatsApp |
+| Solicitudes | Cada solicitud se guarda en la pestaña `Solicitudes` con el precio, el 70 % del creador y la comisión del 30 %. Estados: `interés del creador` → `enviada` → `aceptada` o `rechazada`. El creador responde con los botones «Aceptar» y «Rechazar» de su correo, sin iniciar sesión, y el emprendedor recibe un correo con la respuesta. Los precios y los enlaces firmados viven en el servidor, no en la página |
+| Correos | Todos con el diseño de Hand in Hand: bienvenida, confirmación al emprendedor, solicitud al creador con botones, respuesta al emprendedor y aviso interno al equipo |
+| Modo demostración | Interruptor `MODO_DEMO` en `Code.gs`, solo para que los jurados prueben el MVP solos. Encendido, la solicitud del emprendedor se acepta al instante y el creador que pulsa «Me interesa» recibe la solicitud del negocio con los botones. Los correos y la página avisan que es una demostración. Apagado, todo es real |
 | Trazabilidad | Código único y enlace UTM por creador, con tablero en Sheets + Looker Studio |
 | Piloto | 7 emprendimientos de Santa Marta (3 de moda, 3 de comida y 1 de maquillaje), una campaña cada uno, durante 4 semanas |
 
@@ -125,6 +127,20 @@ Cada formulario guarda una fila en su pestaña de la hoja. El script ubica cada 
 | Solicitudes | `fecha`, `id`, `emprendimiento`, `correo_emprendedor`, `creador`, `paquete`, `precio`, `pago_creador`, `comision_hih`, `estado`, `clientes_nuevos`, `ventas_generadas` |
 
 Solo aparecen en las recomendaciones los registros con `verificado` en `si` y ciudad Santa Marta. Las categorías se guardan con el formato `Categoría: subcategoría` (por ejemplo, `Moda: moda y ropa`).
+
+### Cómo probar el flujo del MVP
+
+1. **Emprendedor:** en `registro.html`, «Soy emprendedor» → completar el formulario (Moda, Comida o Maquillaje) → ver los creadores recomendados → elegir uno y un paquete → «Enviar solicitud».
+2. **Creador:** el correo del creador recibe la solicitud con los botones «Aceptar» y «Rechazar».
+3. **Resultado:** el emprendedor recibe un correo con la respuesta y la pestaña `Solicitudes` muestra el estado `aceptada` o `rechazada`.
+4. **Desde el lado del creador:** «Soy un creador» → completar el formulario → «Me interesa» en un emprendimiento → el negocio elige un paquete desde su correo → el creador acepta o rechaza.
+
+### Límites del MVP
+
+- No hay inicio de sesión: las recomendaciones se ven justo después de registrarse, y para elegir otro creador más tarde hay que registrarse de nuevo.
+- El tablero de seguimiento no es en vivo, y `clientes_nuevos` y `ventas_generadas` se llenan a mano.
+- Los correos salen desde una cuenta de Gmail y pueden caer en spam la primera vez; la página lo avisa.
+- Los creadores y los emprendimientos de la hoja los verificó el equipo uno por uno (columna `verificado`).
 
 ### Hipótesis a validar
 1. Los emprendimientos pequeños están dispuestos a pagar por campañas con retorno medible.
@@ -159,10 +175,11 @@ Un año de proyección no basta para decir si el negocio es viable a largo plazo
 
 ```
 ├── assets/
-│   └── config.js    configuración (API_URL del Apps Script)
+│   ├── config.js    configuración (API_URL del Apps Script)
+│   └── musica.mp3   música del video de la portada
 ├── index.html       página de inicio, con sus estilos, el video con música y el tutorial guiado
 ├── registro.html    formularios de emprendimientos y creadores, con sus estilos y el envío de datos
-├── Code.gs          copia del Google Apps Script (guarda registros y envía el correo de bienvenida)
+├── Code.gs          copia del Google Apps Script (guarda registros, recomienda, gestiona solicitudes y envía los correos)
 └── README.md        este documento
 ```
 
