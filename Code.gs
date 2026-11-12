@@ -35,6 +35,7 @@ function doPost(e) {
 //  - crear_solicitud: el emprendedor elige creador y paquete
 //  - mostrar_interes: el creador dice "me interesa"
 //  - responder: el creador acepta o rechaza desde el correo
+//  - elegir: el emprendedor elige paquete desde el correo del interés del creador
 function doGet(e) {
   const p = (e && e.parameter) || {};
   try {
@@ -42,6 +43,7 @@ function doGet(e) {
     if (p.action === "crear_solicitud") return responder(crearSolicitud(p));
     if (p.action === "mostrar_interes") return responder(mostrarInteres(p));
     if (p.action === "responder") return paginaRespuesta(p);
+    if (p.action === "elegir") return paginaElegir(p);
     return responder({ ok: true, mensaje: "El servicio está activo" });
   } catch (err) {
     return responder({ ok: false, error: String(err) });
@@ -427,18 +429,23 @@ function mostrarInteres(p) {
   const ya = leerTabla("Solicitudes").some((f) => f.estado === "interés del creador" && f.creador === marca && f.emprendimiento === emp.negocio);
   if (ya) return { ok: true, repetido: true };
 
-  agregarFila("Solicitudes", "S", {
+  const interes = agregarFila("Solicitudes", "S", {
     emprendimiento: emp.negocio,
     correo_emprendedor: emp.correo,
     creador: marca,
     estado: "interés del creador",
   });
+  const base = ScriptApp.getService().getUrl();
+  const enlaceElegir = (clave) => base + "?action=elegir&id=" + interes.id + "&p=" + clave + "&t=" + firmar(interes.id);
+  const botonesPaquete = Object.keys(PAQUETES).map((k) => [PAQUETES[k].nombre + " · " + dinero(PAQUETES[k].precio), enlaceElegir(k)]);
 
   if (emp.correo) {
     enviarCorreo(emp.correo, cre.nombre + " quiere trabajar contigo", "¡Un creador se interesó en tu negocio!", [
       "<b>" + esc(cre.nombre) + "</b> quiere crear contenido para <b>" + esc(emp.negocio) + "</b>.",
-      "Entra a Hand in Hand, regístrate con este mismo correo y elige a este creador para enviarle tu solicitud.",
-    ], null, { etiqueta: "EMPRENDEDORES", detalles: [["Creador", cre.nombre], ["Perfil", cre.usuario_red + " · " + cre.red], ["Seguidores", cre.seguidores], ["Categoría", cre.nicho]] });
+      "Si quieres trabajar con " + esc(cre.nombre) + ", elige un paquete y le enviamos tu solicitud al instante.",
+    ], botonesPaquete, { etiqueta: "EMPRENDEDORES", sinCheck: true,
+      notaBotones: "Al elegir un paquete, el creador recibe tu solicitud y puede aceptarla. No necesitas iniciar sesión.",
+      detalles: [["Creador", cre.nombre], ["Perfil", cre.usuario_red + " · " + cre.red], ["Seguidores", cre.seguidores], ["Categoría", cre.nicho]] });
   }
   // Confirmación para el creador
   if (cre.correo) {
@@ -499,6 +506,25 @@ function marca(acento) {
 }
 
 // Página que ve el creador al pulsar Aceptar o Rechazar en el correo
+// El emprendedor eligió un paquete desde el correo del interés del creador
+function paginaElegir(p) {
+  const id = String(p.id || "");
+  if (p.t !== firmar(id) || !PAQUETES[p.p]) return pagina("Enlace no válido", "Este enlace no es válido o fue modificado.", false);
+  const fila = leerTabla("Solicitudes").filter((f) => f.id === id)[0];
+  if (!fila) return pagina("No encontramos el interés", "Puede que ya no exista.", false);
+  if (fila.estado !== "interés del creador") return pagina("Ya elegiste", "Esta solicitud ya fue enviada al creador.", false);
+  const m = /\((C\d+)\)/.exec(fila.creador || "");
+  if (!m) return pagina("No encontramos al creador", "Intenta elegirlo desde la página.", false);
+
+  const r = crearSolicitud({ correo: fila.correo_emprendedor, creador_id: m[1], paquete: p.p });
+  if (!r.ok) return pagina("No pudimos enviar la solicitud", esc(r.error || "Inténtalo de nuevo."), false);
+
+  const h = hojaDe("Solicitudes");
+  const titulos = h.getRange(1, 1, 1, h.getLastColumn()).getValues()[0].map((x) => String(x).trim());
+  h.getRange(fila._fila, titulos.indexOf("estado") + 1).setValue("interés atendido");
+  return pagina("¡Solicitud enviada!", "Le enviamos tu solicitud de <b>" + esc(PAQUETES[p.p].nombre) + "</b> a " + esc(fila.creador.replace(/ \(.*$/, "")) + ". Te avisamos por correo apenas responda.", true);
+}
+
 function pagina(titulo, texto, ok) {
   const color = ok === false ? "#B3261E" : COL.verde;
   const icono = ok === false ? "✕" : "✓";
@@ -548,10 +574,10 @@ function enviarCorreo(para, asunto, titulo, lineas, botones, extra) {
     const btns = (botones || []).map((b, i) =>
       '<td style="padding:0 12px 12px 0"><a href="' + b[1] + '" style="display:inline-block;padding:15px 34px;border-radius:999px;text-decoration:none;font:800 17px ' + FUENTE + ';' +
       (i === 0 ? 'background:' + COL.lima + ';color:#1F3A07;border:2px solid ' + COL.lima : 'background:#ffffff;color:' + COL.teal + ';border:2px solid ' + COL.teal) +
-      '">' + (i === 0 ? "✓ " : "") + b[0] + '</a></td>').join("");
+      '">' + (i === 0 && !extra.sinCheck ? "✓ " : "") + b[0] + '</a></td>').join("");
     const zonaBotones = btns
       ? '<table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0 4px"><tr>' + btns + '</tr></table>' +
-        '<p style="font:400 13px/1.5 ' + FUENTE + ';color:' + COL.gris + ';margin:8px 0 0">Pulsa uno de los botones para responder. No necesitas iniciar sesión.</p>'
+        '<p style="font:400 13px/1.5 ' + FUENTE + ';color:' + COL.gris + ';margin:8px 0 0">' + esc(extra.notaBotones || "Pulsa uno de los botones para responder. No necesitas iniciar sesión.") + '</p>'
       : "";
 
     const html =
