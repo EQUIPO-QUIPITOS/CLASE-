@@ -446,7 +446,7 @@ footer a{color:var(--teal);font-weight:600}
           }else{
             b.disabled=true;b.textContent="Enviando…";
             api({action:"mostrar_interes",correo:data.correo,emprendimiento_id:it.id}).then(function(r){
-              if(!r.ok)throw new Error(r.error);b.textContent="¡Listo! El negocio recibió tu interés";
+              if(!r.ok)throw new Error(r.error);b.textContent=r.demo?"¡Listo! Revisa tu correo: el negocio te envió una solicitud":"¡Listo! El negocio recibió tu interés";
             }).catch(function(){b.disabled=false;b.textContent="Reintentar"});
           }
         });
@@ -477,8 +477,11 @@ footer a{color:var(--teal);font-weight:600}
       send.disabled=true;send.textContent="Enviando…";err.hidden=true;
       api({action:"crear_solicitud",correo:data.correo,creador_id:creator.id,paquete:chosen.k}).then(function(r){
         if(!r.ok)throw new Error(r.error);
-        box.innerHTML='<h3 class="mt-title">¡Solicitud enviada!</h3><p class="mt-sub">Le pedimos a <b>'+esc(creator.nombre)+'</b> la campaña «'+chosen.n+'» ('+money(chosen.p)+'). Te enviamos un correo de confirmación y te avisamos apenas responda.</p>'+
-          '<ul class="mt-track"><li class="done">Solicitud enviada</li><li>Creador acepta</li><li>Contenido en producción</li><li>Publicado y medido</li></ul>';
+        box.innerHTML=r.demo
+          ?'<h3 class="mt-title">¡Solicitud aceptada!</h3><p class="mt-sub"><b>'+esc(creator.nombre)+'</b> aceptó la campaña «'+chosen.n+'» ('+money(chosen.p)+'). Te enviamos un correo con los detalles.</p><p class="mt-sub"><i>Modo demostración: en la operación real, el creador responde desde su correo.</i></p>'+
+            '<ul class="mt-track"><li class="done">Solicitud enviada</li><li class="done">Creador acepta</li><li>Contenido en producción</li><li>Publicado y medido</li></ul>'
+          :'<h3 class="mt-title">¡Solicitud enviada!</h3><p class="mt-sub">Le pedimos a <b>'+esc(creator.nombre)+'</b> la campaña «'+chosen.n+'» ('+money(chosen.p)+'). Te enviamos un correo de confirmación y te avisamos apenas responda.</p>'+
+            '<ul class="mt-track"><li class="done">Solicitud enviada</li><li>Creador acepta</li><li>Contenido en producción</li><li>Publicado y medido</li></ul>';
       }).catch(function(e){
         send.disabled=false;send.textContent="Enviar solicitud";err.hidden=false;err.textContent="No se pudo enviar la solicitud. Inténtalo de nuevo.";
       });
