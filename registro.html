@@ -428,7 +428,7 @@ footer a{color:var(--teal);font-weight:600}
       }
       box.innerHTML=(esEmp
         ?'<h3 class="mt-title">Según lo que elegiste, estos creadores son los más acordes a tu negocio</h3><p class="mt-sub">Creadores verificados de Santa Marta en '+esc(cat)+'. Elige uno para continuar.</p>'
-        :'<h3 class="mt-title">Estos emprendimientos de Santa Marta buscan creadores de '+esc(cat)+'</h3><p class="mt-sub">Pulsa «Me interesa» y le avisamos al negocio.</p>')
+        :'<h3 class="mt-title">Estos emprendimientos de Santa Marta buscan creadores de '+esc(cat)+'</h3><p class="mt-sub">Pulsa «Me interesa» y le enviamos un correo al negocio para que te elija y te envíe su solicitud.</p>')
         +'<div class="mt-grid"></div><div class="mt-step" hidden></div>';
       var grid=box.querySelector(".mt-grid");
       res.items.forEach(function(it){
@@ -446,7 +446,7 @@ footer a{color:var(--teal);font-weight:600}
           }else{
             b.disabled=true;b.textContent="Enviando…";
             api({action:"mostrar_interes",correo:data.correo,emprendimiento_id:it.id}).then(function(r){
-              if(!r.ok)throw new Error(r.error);b.textContent="¡Listo! Avisamos al negocio";
+              if(!r.ok)throw new Error(r.error);b.textContent="¡Listo! El negocio recibió tu interés";
             }).catch(function(){b.disabled=false;b.textContent="Reintentar"});
           }
         });
