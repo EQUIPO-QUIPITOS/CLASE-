@@ -292,26 +292,34 @@ function esSi(v) { return String(v || "").trim().toLowerCase() === "si"; }
 function enSantaMarta(v) { return String(v || "").toLowerCase().indexOf("santa marta") >= 0; }
 function minusculas(v) { return String(v || "").trim().toLowerCase(); }
 
-// Lista de creadores (si pide un emprendedor) o de emprendimientos (si pide un creador)
+// Lista de creadores (si pide un emprendedor) o de emprendimientos (si pide un creador).
+// Los creadores "General" sirven para cualquier categoría: salen después de los especializados.
 function recomendar(p) {
   const categoria = String(p.categoria || "").trim();
   const sub = String(p.sub || "").trim();
-  if (CATEGORIAS.indexOf(categoria) < 0) return { ok: true, items: [], sinCategoria: true };
-
   const paraEmprendedor = p.tipo === "emprendedor";
+  const creadorGeneral = !paraEmprendedor && categoria === "General";
+  if (CATEGORIAS.indexOf(categoria) < 0 && !creadorGeneral) return { ok: true, items: [], sinCategoria: true };
+
   const filas = leerTabla(paraEmprendedor ? "Creadores" : "Emprendimientos");
   const campo = paraEmprendedor ? "nicho" : "sector";
 
   const items = filas
-    .filter((f) => esSi(f.verificado) && enSantaMarta(f.ciudad) && categoriaDe(f[campo]) === categoria)
-    .map((f) => {
-      const afin = String(f[campo]).trim() === sub;
-      return paraEmprendedor
-        ? { id: f.id, nombre: f.nombre, red: f.red, usuario: f.usuario_red, seguidores: f.seguidores, area: f.nicho, afin: afin }
-        : { id: f.id, nombre: f.negocio, area: f.sector, objetivo: f.objetivo, presupuesto: f.presupuesto, afin: afin };
+    .filter((f) => {
+      if (!esSi(f.verificado) || !enSantaMarta(f.ciudad)) return false;
+      const cat = categoriaDe(f[campo]);
+      if (creadorGeneral) return CATEGORIAS.indexOf(cat) >= 0;
+      return cat === categoria || (paraEmprendedor && cat === "General");
     })
-    .sort((a, b) => (b.afin - a.afin) || (numero(b.seguidores) - numero(a.seguidores)))
-    .slice(0, 6);
+    .map((f) => {
+      const general = categoriaDe(f[campo]) === "General";
+      const afin = !general && String(f[campo]).trim() === sub;
+      return paraEmprendedor
+        ? { id: f.id, nombre: f.nombre, red: f.red, usuario: f.usuario_red, seguidores: f.seguidores, area: f.nicho, afin: afin, general: general }
+        : { id: f.id, nombre: f.negocio, area: f.sector, objetivo: f.objetivo, presupuesto: f.presupuesto, afin: afin, general: false };
+    })
+    .sort((a, b) => (b.afin - a.afin) || (a.general - b.general) || (numero(b.seguidores) - numero(a.seguidores)))
+    .slice(0, 8);
 
   return { ok: true, items: items };
 }
@@ -420,6 +428,13 @@ function mostrarInteres(p) {
     enviarCorreo(emp.correo, cre.nombre + " quiere trabajar contigo", "¡Un creador se interesó en tu negocio!", [
       "<b>" + esc(cre.nombre) + "</b> (" + esc(cre.usuario_red) + " en " + esc(cre.red) + ", " + esc(cre.seguidores) + " seguidores) quiere crear contenido para <b>" + esc(emp.negocio) + "</b>.",
       "Entra a Hand in Hand, regístrate con este mismo correo y elige a este creador para enviarle tu solicitud.",
+    ]);
+  }
+  // Confirmación para el creador
+  if (cre.correo) {
+    enviarCorreo(cre.correo, "Registramos tu interés en " + emp.negocio, "¡Listo, avisamos al negocio!", [
+      "Le contamos a <b>" + esc(emp.negocio) + "</b> (" + esc(emp.sector) + ") que te interesa trabajar con ellos.",
+      "Si el negocio te elige, te llegará un correo con los botones para aceptar o rechazar la campaña.",
     ]);
   }
   avisarEquipo("Interés de creador", cre.nombre + " → " + emp.negocio);
