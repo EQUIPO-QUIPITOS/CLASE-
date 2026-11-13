@@ -260,6 +260,24 @@ function probarCorreos() {
 // Cámbiala por cualquier frase tuya (solo tú debes conocerla).
 const SECRETO = "quipitos 2026";
 
+// MODO DEMOSTRACIÓN (para que los jurados prueben solos el 19 de noviembre).
+//  - false: todo es real; el creador responde desde su correo.
+//  - true : el emprendedor que envía una solicitud la ve aceptada al instante, y el creador
+//           que pulsa «Me interesa» recibe de inmediato la solicitud del negocio con los botones
+//           Aceptar / Rechazar. Los correos avisan que es una demostración.
+const MODO_DEMO = false;
+const NOTA_DEMO = "Modo demostración: en la operación real, el creador responde desde su correo y el negocio elige el paquete.";
+const PAQUETE_DEMO = "feed";
+
+// Cambia el estado de una fila de Solicitudes por su id
+function marcarEstado(id, estado) {
+  const fila = leerTabla("Solicitudes").filter((f) => f.id === id)[0];
+  if (!fila) return;
+  const h = hojaDe("Solicitudes");
+  const titulos = h.getRange(1, 1, 1, h.getLastColumn()).getValues()[0].map((x) => String(x).trim());
+  h.getRange(fila._fila, titulos.indexOf("estado") + 1).setValue(estado);
+}
+
 const CATEGORIAS = ["Comida", "Moda", "Maquillaje"];
 
 // Los precios viven aquí, no en la página: así nadie puede cambiarlos desde el navegador
@@ -368,9 +386,11 @@ function crearSolicitud(p) {
   const emp = ultimaPorCorreo("Emprendimientos", p.correo);
   if (!emp) return { ok: false, error: "No encontramos tu registro" };
 
-  const cre = leerTabla("Creadores").filter((f) => f.id === p.creador_id && esSi(f.verificado))[0];
+  const demoInteres = MODO_DEMO && p.origen === "interes";
+  const cre = leerTabla("Creadores").filter((f) => f.id === p.creador_id && (esSi(f.verificado) || demoInteres))[0];
   if (!cre) return { ok: false, error: "Ese creador no está disponible" };
 
+  const aceptaSola = MODO_DEMO && p.origen !== "interes";
   const fila = agregarFila("Solicitudes", "S", {
     emprendimiento: emp.negocio,
     correo_emprendedor: emp.correo,
@@ -379,7 +399,7 @@ function crearSolicitud(p) {
     precio: paquete.precio,
     pago_creador: paquete.pago,
     comision_hih: paquete.comision,
-    estado: "enviada",
+    estado: aceptaSola ? "aceptada" : "enviada",
   });
 
   const base = ScriptApp.getService().getUrl();
@@ -394,18 +414,27 @@ function crearSolicitud(p) {
     ["Hand in Hand (30 %)", dinero(paquete.comision) + " COP"],
   ];
 
-  // 1) Confirmación para el emprendedor
-  enviarCorreo(emp.correo, "Tu solicitud fue enviada: " + cre.nombre, "¡Tu solicitud va en camino!", [
-    "Le enviaste una solicitud a <b>" + esc(cre.nombre) + "</b> (" + esc(cre.usuario_red) + ").",
-    "Te avisamos por correo apenas el creador responda.",
-  ], null, { etiqueta: "EMPRENDEDORES", detalles: detalles });
+  // 1) Correo para el emprendedor
+  if (aceptaSola) {
+    enviarCorreo(emp.correo, "¡" + cre.nombre + " aceptó tu solicitud!", "¡Solicitud aceptada!", [
+      "<b>" + esc(cre.nombre) + "</b> aceptó tu solicitud de <b>" + esc(paquete.nombre) + "</b>.",
+      "Te escribiremos por WhatsApp para coordinar los detalles de la campaña.",
+      "<i>" + esc(NOTA_DEMO) + "</i>",
+    ], null, { etiqueta: "EMPRENDEDORES", detalles: detalles.concat([["Estado", "Aceptada"]]) });
+  } else {
+    enviarCorreo(emp.correo, "Tu solicitud fue enviada: " + cre.nombre, "¡Tu solicitud va en camino!", [
+      "Le enviaste una solicitud a <b>" + esc(cre.nombre) + "</b> (" + esc(cre.usuario_red) + ").",
+      "Te avisamos por correo apenas el creador responda.",
+    ], null, { etiqueta: "EMPRENDEDORES", detalles: detalles });
+  }
 
-  // 2) Aviso al creador con botones para aceptar o rechazar
-  if (cre.correo) {
+  // 2) Aviso al creador con botones para aceptar o rechazar (no en la aceptación automática)
+  if (cre.correo && !aceptaSola) {
     enviarCorreo(cre.correo, "Nueva solicitud de " + emp.negocio, "¡Tienes una solicitud!", [
       "<b>" + esc(emp.negocio) + "</b> quiere trabajar contigo. ¿Aceptas la campaña?",
       "Objetivo del negocio: " + esc(emp.objetivo || "—"),
-    ], [["Aceptar solicitud", enlace("aceptar")], ["Rechazar", enlace("rechazar")]],
+    ].concat(demoInteres ? ["<i>" + esc(NOTA_DEMO) + " Paquete elegido automáticamente: " + esc(paquete.nombre) + ".</i>"] : []),
+    [["Aceptar solicitud", enlace("aceptar")], ["Rechazar", enlace("rechazar")]],
     { etiqueta: "CREADORES", detalles: [
       ["Negocio", emp.negocio], ["Sector", emp.sector], ["Paquete", paquete.nombre],
       ["Tú recibirías", dinero(paquete.pago) + " COP (70 %)"],
@@ -415,7 +444,7 @@ function crearSolicitud(p) {
   // 3) Aviso para el equipo
   avisarEquipo("Nueva solicitud " + fila.id, emp.negocio + " envió una solicitud a " + cre.nombre + ".", detalles.concat([["Solicitud", fila.id]]));
 
-  return { ok: true, id: fila.id };
+  return { ok: true, id: fila.id, demo: aceptaSola };
 }
 
 // El creador pulsa "Me interesa" en un emprendimiento
@@ -435,6 +464,14 @@ function mostrarInteres(p) {
     creador: marca,
     estado: "interés del creador",
   });
+  // Modo demostración: el negocio "responde" solo con un paquete y el creador recibe los botones
+  if (MODO_DEMO) {
+    const r = crearSolicitud({ correo: emp.correo, creador_id: cre.id, paquete: PAQUETE_DEMO, origen: "interes" });
+    marcarEstado(interes.id, "interés atendido");
+    avisarEquipo("Interés de creador", cre.nombre + " mostró interés en " + emp.negocio + " (modo demostración).", [["Creador", cre.nombre], ["Negocio", emp.negocio]]);
+    return { ok: r.ok, error: r.error, demo: true };
+  }
+
   const base = ScriptApp.getService().getUrl();
   const enlaceElegir = (clave) => base + "?action=elegir&id=" + interes.id + "&p=" + clave + "&t=" + firmar(interes.id);
   const botonesPaquete = Object.keys(PAQUETES).map((k) => [PAQUETES[k].nombre + " · " + dinero(PAQUETES[k].precio), enlaceElegir(k)]);
@@ -516,7 +553,7 @@ function paginaElegir(p) {
   const m = /\((C\d+)\)/.exec(fila.creador || "");
   if (!m) return pagina("No encontramos al creador", "Intenta elegirlo desde la página.", false);
 
-  const r = crearSolicitud({ correo: fila.correo_emprendedor, creador_id: m[1], paquete: p.p });
+  const r = crearSolicitud({ correo: fila.correo_emprendedor, creador_id: m[1], paquete: p.p, origen: "interes" });
   if (!r.ok) return pagina("No pudimos enviar la solicitud", esc(r.error || "Inténtalo de nuevo."), false);
 
   const h = hojaDe("Solicitudes");
@@ -610,6 +647,16 @@ function enviarCorreo(para, asunto, titulo, lineas, botones, extra) {
       (botones || []).map((b) => "\n" + b[0] + ": " + b[1]).join("");
     MailApp.sendEmail({ to: para, subject: asunto, name: "Hand in Hand", htmlBody: html, body: plano });
   } catch (err) {
-    // Si el correo falla, la solicitud ya quedó guardada
+    // Si el correo falla, la solicitud ya quedó guardada; el error se ve en "Ejecuciones"
+    console.error("No se pudo enviar el correo a " + para + ": " + err);
+    return String(err);
   }
+}
+
+// Prueba rápida: en el editor elige "probarCorreo" arriba y pulsa Ejecutar.
+// Cambia el correo de abajo por el que quieres revisar.
+function probarCorreo() {
+  const destino = "j0j0itspeaak@gmail.com";
+  const err = enviarCorreo(destino, "Prueba de Hand in Hand", "¡Funciona!", ["Si ves este correo, el envío funciona."], null, { etiqueta: "PRUEBA" });
+  Logger.log(err ? "ERROR: " + err : "Correo enviado a " + destino + ". Cuotas restantes hoy: " + MailApp.getRemainingDailyQuota());
 }
