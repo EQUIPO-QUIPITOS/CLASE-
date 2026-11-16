@@ -480,7 +480,7 @@ footer a{color:var(--teal);font-weight:600}
         box.innerHTML=r.demo
           ?'<h3 class="mt-title">¡Solicitud aceptada!</h3><p class="mt-sub"><b>'+esc(creator.nombre)+'</b> aceptó la campaña «'+chosen.n+'» ('+money(chosen.p)+'). Te enviamos un correo con los detalles.</p><p class="mt-sub"><i>Modo demostración: en la operación real, el creador responde desde su correo.</i></p>'+
             '<ul class="mt-track"><li class="done">Solicitud enviada</li><li class="done">Creador acepta</li><li>Contenido en producción</li><li>Publicado y medido</li></ul>'
-          :'<h3 class="mt-title">¡Solicitud enviada!</h3><p class="mt-sub">Le pedimos a <b>'+esc(creator.nombre)+'</b> la campaña «'+chosen.n+'» ('+money(chosen.p)+'). Te enviamos un correo de confirmación y te avisamos apenas responda.</p>'+
+          :'<h3 class="mt-title">¡Solicitud enviada!</h3><p class="mt-sub">Le pedimos a <b>'+esc(creator.nombre)+'</b> la campaña «'+chosen.n+'» ('+money(chosen.p)+'). Te enviamos un correo de confirmación y te avisamos apenas responda. Si no lo ves en unos minutos, revisa tu carpeta de spam o promociones.</p>'+
             '<ul class="mt-track"><li class="done">Solicitud enviada</li><li>Creador acepta</li><li>Contenido en producción</li><li>Publicado y medido</li></ul>';
       }).catch(function(e){
         send.disabled=false;send.textContent="Enviar solicitud";err.hidden=false;err.textContent="No se pudo enviar la solicitud. Inténtalo de nuevo.";
