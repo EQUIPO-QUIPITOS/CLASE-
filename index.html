@@ -634,6 +634,28 @@ footer{margin-top:5rem}
 .d-tri{right:1.2rem;top:42%;width:0;height:0;border-left:1.3rem solid transparent;border-right:1.3rem solid transparent;border-bottom:2.2rem solid rgba(181,234,60,.55);transform:rotate(12deg)}
 .d-dots{left:34%;bottom:.4rem;width:7rem;height:3.6rem;background-image:radial-gradient(rgba(255,255,255,.45) .14rem,transparent .16rem);background-size:.9rem .9rem}
 @media(max-width:55.99rem){.hero-info{padding:2rem 1rem}.d-ring.r1{right:0}}
+.faq{position:relative;isolation:isolate}
+.faq>*:not(.fq-deco){position:relative;z-index:1}
+.fq-deco{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fq-deco span{position:absolute;display:block}
+.f-glow{border-radius:50%;filter:blur(10px)}
+.f-glow.fg1{width:22rem;height:22rem;left:-9rem;top:4rem;background:radial-gradient(circle,rgba(0,228,232,.26),transparent 68%)}
+.f-glow.fg2{width:22rem;height:22rem;right:-9rem;bottom:2rem;background:radial-gradient(circle,rgba(181,234,60,.30),transparent 68%)}
+.f-ring{border-radius:50%;border:.22rem solid rgba(0,82,96,.35)}
+.f-ring.fr1{width:8rem;height:8rem;left:2%;top:34%}
+.f-ring.fr2{width:3.4rem;height:3.4rem;right:6%;top:12%;border-color:rgba(112,163,18,.7);border-width:.18rem}
+.f-ring.fr3{width:5rem;height:5rem;right:3%;bottom:14%;border-color:rgba(0,228,232,.55)}
+.f-sq{border-radius:.9rem;transform:rotate(18deg)}
+.f-sq.fs1{width:4.4rem;height:4.4rem;left:6%;top:8%;background:linear-gradient(135deg,rgba(181,234,60,.9),rgba(112,163,18,.35))}
+.f-sq.fs2{width:2.4rem;height:2.4rem;right:4%;top:46%;background:rgba(0,228,232,.55);transform:rotate(-14deg)}
+.f-sq.fs3{width:3rem;height:3rem;left:3%;bottom:8%;background:linear-gradient(135deg,rgba(0,82,96,.7),rgba(0,228,232,.35));transform:rotate(-20deg)}
+.f-tri{width:0;height:0;border-left:1.3rem solid transparent;border-right:1.3rem solid transparent;border-bottom:2.2rem solid rgba(181,234,60,.65)}
+.f-tri.ft1{left:9%;top:58%;transform:rotate(14deg)}
+.f-tri.ft2{right:9%;bottom:34%;transform:rotate(-16deg);border-bottom-color:rgba(0,228,232,.55)}
+.f-dots{width:7rem;height:4rem;background-image:radial-gradient(rgba(0,82,96,.5) .14rem,transparent .16rem);background-size:.9rem .9rem}
+.f-dots.fd1{left:1%;top:22%}
+.f-dots.fd2{right:2%;top:70%}
+@media(max-width:60rem){.fq-deco{opacity:.45}}
 </style>
 </head>
 <body>
@@ -1067,6 +1089,13 @@ document.getElementById("pv").addEventListener("click",function(e){if(e.target==
 </section>
 
 <section class="wrap faq" id="preguntas">
+  <div class="fq-deco" aria-hidden="true">
+    <span class="f-glow fg1"></span><span class="f-glow fg2"></span>
+    <span class="f-ring fr1"></span><span class="f-ring fr2"></span><span class="f-ring fr3"></span>
+    <span class="f-sq fs1"></span><span class="f-sq fs2"></span><span class="f-sq fs3"></span>
+    <span class="f-tri ft1"></span><span class="f-tri ft2"></span>
+    <span class="f-dots fd1"></span><span class="f-dots fd2"></span>
+  </div>
   <h2 class="hd">Preguntas frecuentes</h2>
   <div class="faq-list">
     <details>
