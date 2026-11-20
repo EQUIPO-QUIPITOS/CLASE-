@@ -24,6 +24,7 @@ function doPost(e) {
     guardarFila(config, data);
     avisar(config, data);          // correo para ti
     darBienvenida(config, data);   // correo para quien se registró
+    respuestaAutomaticaDemo(config, data); // solo en MODO_DEMO: respuesta automática para los jurados
     return responder({ ok: true });
   } catch (err) {
     return responder({ ok: false, error: String(err) });
@@ -112,12 +113,19 @@ function darBienvenida(config, data) {
       to: data.correo,
       subject: asunto,
       name: "Hand in Hand",
-      htmlBody: plantillaBienvenida(esCreador, nombre, data),
-      body: textoPlano(esCreador, nombre), // para correos que no muestran diseño
+      htmlBody: conAvisoSpam(plantillaBienvenida(esCreador, nombre, data)),
+      body: textoPlano(esCreador, nombre) + (MODO_DEMO ? "\n\nModo demostración: si no ves los siguientes correos, revisa la carpeta de spam o promociones." : ""), // para correos que no muestran diseño
     });
   } catch (err) {
     // Si el correo falla, el registro ya quedó guardado
   }
+}
+
+// En modo demostración, avisa dentro del correo que revisen el spam
+function conAvisoSpam(html) {
+  if (!MODO_DEMO) return html;
+  const nota = '<p style="margin:16px auto;max-width:560px;text-align:center;font:600 14px Helvetica,Arial,sans-serif;color:#4f6a70">Modo demostración: si no ves los siguientes correos de Hand in Hand, revisa la carpeta de <b>spam</b> o <b>promociones</b>.</p>';
+  return html.indexOf("</body>") >= 0 ? html.replace("</body>", nota + "</body>") : html + nota;
 }
 
 function plantillaBienvenida(esCreador, nombre, data) {
@@ -140,12 +148,12 @@ function plantillaBienvenida(esCreador, nombre, data) {
     ? [
         ["01", "Revisamos tu perfil", "Verificamos tu cuenta para garantizar confianza a los negocios."],
         ["02", "Te proponemos campañas", "Te escribimos por WhatsApp con emprendimientos afines a tu contenido."],
-        ["03", "Creas y mides", "Recibes tu código y enlace únicos para mostrar los resultados que generas."],
+        ["03", "Creas y publicas", "Cuando un negocio acepta, coordinamos contigo el día y la hora, y publicas la campaña en tus redes."],
       ]
     : [
         ["01", "Revisamos tu registro", "Analizamos tu negocio y el objetivo de tu campaña."],
         ["02", "Te emparejamos", "Elegimos creadores afines a tu público y coordinamos contigo por WhatsApp."],
-        ["03", "Ves tus resultados", "Cada creador tiene su propio código y enlace para que veas cuántos clientes trajo."],
+        ["03", "Te acompañamos", "Cuando el creador acepta, fijamos el día y la hora, y un integrante del equipo los acompaña en tu local."],
       ];
 
   const resumen = esCreador
@@ -265,9 +273,82 @@ const SECRETO = "quipitos 2026";
 //  - true : el emprendedor que envía una solicitud la ve aceptada al instante, y el creador
 //           que pulsa «Me interesa» recibe de inmediato la solicitud del negocio con los botones
 //           Aceptar / Rechazar. Los correos avisan que es una demostración.
-const MODO_DEMO = false;
-const NOTA_DEMO = "Modo demostración: en la operación real, el creador responde desde su correo y el negocio elige el paquete.";
+const MODO_DEMO = true;
+const NOTA_DEMO = "Modo demostración: en la operación real, el creador responde desde su correo y el negocio elige el paquete. Si no ves nuestros correos, revisa la carpeta de spam o promociones.";
 const PAQUETE_DEMO = "feed";
+
+/* =====================================================================
+   RESPUESTA AUTOMÁTICA (solo con MODO_DEMO = true)
+   Pensada para los jurados: con solo registrarse reciben, sin hacer nada más,
+   el correo del siguiente paso del proceso.
+   - Emprendedor: el sistema elige solo al creador verificado más afín y el paquete según su
+     presupuesto, y le llega el correo "¡Solicitud aceptada!" con el valor.
+   - Creador: le llega una solicitud de ejemplo de un negocio de su categoría, con los
+     botones Aceptar / Rechazar. No se le escribe a ningún negocio real.
+   ===================================================================== */
+
+// Paquete que se elige solo según el presupuesto mensual del formulario
+function paqueteSegunPresupuesto(texto) {
+  const t = String(texto || "").toLowerCase();
+  if (t.indexOf("más de 1.000.000") >= 0 || t.indexOf("mas de 1.000.000") >= 0) return "completo";
+  if (t.indexOf("500.000 a 1.000.000") >= 0) return "feed";
+  return "basica";
+}
+
+function respuestaAutomaticaDemo(config, data) {
+  if (!MODO_DEMO) return;
+  try {
+    if (config.tipo === "emprendedor") {
+      const emp = ultimaPorCorreo("Emprendimientos", data.correo);
+      if (!emp) return;
+      const rec = recomendar({ tipo: "emprendedor", categoria: categoriaDe(emp.sector), sub: String(emp.sector || "").trim() });
+      const cre = rec.items && rec.items[0];
+      if (!cre) {
+        avisarEquipo("Demo sin creador disponible", emp.negocio + " se registró pero no hay un creador verificado de su categoría.", [["Negocio", emp.negocio], ["Sector", emp.sector]]);
+        return;
+      }
+      crearSolicitud({ correo: emp.correo, creador_id: cre.id, paquete: paqueteSegunPresupuesto(emp.presupuesto), origen: "registro" });
+    } else {
+      propuestaDemoCreador(data.correo);
+    }
+  } catch (err) {
+    // Si falla la respuesta automática, el registro y la bienvenida ya quedaron hechos
+  }
+}
+
+// El creador recién registrado recibe una solicitud de ejemplo con los botones Aceptar / Rechazar
+function propuestaDemoCreador(correo) {
+  const cre = ultimaPorCorreo("Creadores", correo);
+  if (!cre || !cre.correo) return;
+  const cat = categoriaDe(cre.nicho);
+  const emps = leerTabla("Emprendimientos").filter((f) => esSi(f.verificado) && enSantaMarta(f.ciudad));
+  const emp = emps.filter((f) => categoriaDe(f.sector) === cat)[0] || emps[0];
+  if (!emp) return;
+  const paquete = PAQUETES[PAQUETE_DEMO];
+  // correo_emprendedor vacío a propósito: así no se le escribe al negocio real
+  const fila = agregarFila("Solicitudes", "S", {
+    emprendimiento: emp.negocio,
+    correo_emprendedor: "",
+    creador: cre.nombre + " (" + cre.id + ")",
+    paquete: paquete.nombre,
+    precio: paquete.precio,
+    pago_creador: paquete.pago,
+    comision_hih: paquete.comision,
+    estado: "enviada",
+  });
+  const base = ScriptApp.getService().getUrl();
+  const enlace = (r) => base + "?action=responder&id=" + fila.id + "&r=" + r + "&t=" + firmar(fila.id);
+  enviarCorreo(cre.correo, "Nueva solicitud de " + emp.negocio, "¡Tienes una solicitud!", [
+    "<b>" + esc(emp.negocio) + "</b> quiere trabajar contigo. ¿Aceptas la campaña?",
+    "Objetivo del negocio: " + esc(emp.objetivo || "—"),
+    "<i>" + esc(NOTA_DEMO) + " Este es un ejemplo y no se le escribe al negocio.</i>",
+  ], [["Aceptar solicitud", enlace("aceptar")], ["Rechazar", enlace("rechazar")]],
+  { etiqueta: "CREADORES", detalles: [
+    ["Negocio", emp.negocio], ["Sector", emp.sector], ["Paquete", paquete.nombre],
+    ["Tú recibirías", dinero(paquete.pago) + " COP (70 %)"],
+  ] });
+  avisarEquipo("Propuesta demo a creador", cre.nombre + " recibió una solicitud de ejemplo de " + emp.negocio + ".", [["Creador", cre.nombre], ["Negocio", emp.negocio]]);
+}
 
 // Cambia el estado de una fila de Solicitudes por su id
 function marcarEstado(id, estado) {
@@ -464,12 +545,35 @@ function mostrarInteres(p) {
     creador: marca,
     estado: "interés del creador",
   });
-  // Modo demostración: el negocio "responde" solo con un paquete y el creador recibe los botones
+  // Modo demostración: el negocio "acepta" solo y el creador recibe al instante el correo de aceptación.
+  // No se le escribe al negocio real: correo_emprendedor queda vacío a propósito.
   if (MODO_DEMO) {
-    const r = crearSolicitud({ correo: emp.correo, creador_id: cre.id, paquete: PAQUETE_DEMO, origen: "interes" });
+    const paquete = PAQUETES[PAQUETE_DEMO];
+    const sol = agregarFila("Solicitudes", "S", {
+      emprendimiento: emp.negocio,
+      correo_emprendedor: "",
+      creador: marca,
+      paquete: paquete.nombre,
+      precio: paquete.precio,
+      pago_creador: paquete.pago,
+      comision_hih: paquete.comision,
+      estado: "aceptada",
+    });
     marcarEstado(interes.id, "interés atendido");
-    avisarEquipo("Interés de creador", cre.nombre + " mostró interés en " + emp.negocio + " (modo demostración).", [["Creador", cre.nombre], ["Negocio", emp.negocio]]);
-    return { ok: r.ok, error: r.error, demo: true };
+    if (cre.correo) {
+      enviarCorreo(cre.correo, "¡" + emp.negocio + " aceptó trabajar contigo!", "¡Solicitud aceptada!", [
+        "<b>" + esc(emp.negocio) + "</b> vio tu interés y aceptó trabajar contigo en <b>" + esc(paquete.nombre) + "</b>.",
+        "Te escribiremos por WhatsApp para coordinar el día, la hora y el lugar de la campaña.",
+        "<i>" + esc(NOTA_DEMO) + "</i>",
+      ], null, { etiqueta: "CREADORES", detalles: [
+        ["Negocio", emp.negocio], ["Sector", emp.sector], ["Paquete", paquete.nombre],
+        ["Valor de la campaña", dinero(paquete.precio) + " COP"],
+        ["Tú recibes (70 %)", dinero(paquete.pago) + " COP"],
+        ["Estado", "Aceptada"],
+      ] });
+    }
+    avisarEquipo("Interés de creador", cre.nombre + " mostró interés en " + emp.negocio + " y se aceptó automáticamente (modo demostración).", [["Creador", cre.nombre], ["Negocio", emp.negocio], ["Solicitud", sol.id]]);
+    return { ok: true, demo: true };
   }
 
   const base = ScriptApp.getService().getUrl();
